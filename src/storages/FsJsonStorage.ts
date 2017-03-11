@@ -1,10 +1,10 @@
 import { IStorage } from './IStorage';
 import * as Fs from 'fs';
 
-export class FsJsonStrategy implements IStorage {
+export class FsJsonStorage implements IStorage {
 
     private fileName: string = "cache.json";
-
+ 
     constructor() {
         if (!Fs.existsSync(this.fileName)) {
             Fs.writeFileSync(this.fileName, JSON.stringify({}));

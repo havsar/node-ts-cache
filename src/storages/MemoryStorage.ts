@@ -1,7 +1,6 @@
 import { IStorage } from './IStorage';
-import * as Fs from 'fs';
 
-export class FsJsonStrategy implements IStorage {
+export class MemoryStorage implements IStorage {
 
     private memCache: any = {};
 

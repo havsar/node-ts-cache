@@ -13,10 +13,16 @@ export function Cache(cachingStrategy: AbstractBaseStrategy, options: object) {
                 return entry;
             }
 
-            return Promise.resolve(originalMethod.apply(this, arguments)).then(function (result) {
-                cachingStrategy.setItem(cacheKey, result, options);
-                return result;
-            });
+            const result = originalMethod.apply(this, arguments);
+            if (result && result.then) {
+                return result.then(function (result) {
+                    cachingStrategy.setItem(cacheKey, result, options);
+                    return result;
+                });
+            }
+
+            cachingStrategy.setItem(cacheKey, result, options);
+            return result;
         };
 
         return descriptor;

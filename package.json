@@ -4,7 +4,7 @@
   "description": "Extensible Typescript and Decorators based caching module.",
   "main": "src/index.js",
   "scripts": {
-    "test": "test"
+    "test": "node_modules/.bin/mocha src/**/*.spec.js"
   },
   "repository": {
     "type": "git",
@@ -33,7 +33,9 @@
   },
   "homepage": "https://github.com/havsar/node-ts-cache#readme",
   "devDependencies": {
+    "@types/mocha": "^2.2.40",
     "@types/node": "^7.0.8",
+    "mocha": "^3.2.0",
     "typescript": "^2.2.1"
   }
 }

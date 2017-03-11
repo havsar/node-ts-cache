@@ -9,16 +9,19 @@ export class ExpiringCacher extends AbstractBaseStrategy {
 
     public getItem<T>(key: string): T {
         const item = this.storage.getItem(key);
-        if (item && Date.now() > item.createdAt + item.ttl) {
+        if (item && Date.now() > item.options.createdAt + item.options.ttl) {
             this.storage.setItem(key, undefined);
             return undefined;
         }
         return item ? item.content : undefined;
     }
 
-    public setItem(key: string, content: any, options: object): void {
+    public setItem(key: string, content: any, options: any): void {
         this.storage.setItem(key, {
-            options: options,
+            options: {
+                ttl: options.ttl,
+                createdAt: Date.now()
+            },
             content: content
         });
     }
