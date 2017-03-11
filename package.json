@@ -1,7 +1,7 @@
 {
   "name": "node-ts-cache",
   "version": "1.0.0",
-  "description": "Typescript and decorators based caching module",
+  "description": "Extensible Typescript and Decorators based caching module.",
   "main": "index.js",
   "scripts": {
     "test": "test"
