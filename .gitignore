@@ -1,0 +1,10 @@
+.idea
+node_modules
+.vscode
+**/.baseDir.ts
+.tscache
+**.tmp.txt
+npm-debug.log
+.git
+**/*.js
+**/*.js.map
