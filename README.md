@@ -1,2 +1,2 @@
 # node-ts-cache
-Extentable Typescript and Decorators based caching module
+## Extensible Typescript and Decorators based caching module.
