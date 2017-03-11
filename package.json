@@ -1,0 +1,35 @@
+{
+  "name": "node-ts-cache",
+  "version": "1.0.0",
+  "description": "Typescript and decorators based caching module",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/havsar/node-ts-cache.git"
+  },
+  "keywords": [
+    "node",
+    "nodejs",
+    "cache",
+    "typescript",
+    "ts",
+    "caching",
+    "memcache",
+    "memory-cache",
+    "redis-cache",
+    "redis",
+    "cache",
+    "file-cache",
+    "node-cache",
+    "ts-cache"
+  ],
+  "author": "Himmet Avsar <avsar.himmet1@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/havsar/node-ts-cache/issues"
+  },
+  "homepage": "https://github.com/havsar/node-ts-cache#readme"
+}
