@@ -20,7 +20,7 @@ yarn add node-ts-cache
 ```
 
 # Usage
-## With decoratots
+## With decorator
 ```ts
 import { Cache, ExpirationStrategy, MemoryStorage } from "node-ts-cache";
 
@@ -35,7 +35,7 @@ class MyService {
 }
 ```
 
-## Manual
+## Directly
 ```ts
 import { ExpirationStrategy, MemoryStorage } from "node-ts-cache";
 
