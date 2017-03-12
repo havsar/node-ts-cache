@@ -4,7 +4,7 @@
   "description": "Simple and extensible caching module supporting decorators",
   "main": "src/index.js",
   "scripts": {
-    "test": "node_modules/.bin/mocha src/**/*.spec.js",
+    "test": "mocha src/**/*.spec.js",
     "prepublish": "tsc -p .",
     "dev": "tsc -w -p ."
   },

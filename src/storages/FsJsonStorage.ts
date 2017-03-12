@@ -2,12 +2,10 @@ import { IStorage } from './IStorage';
 import * as Fs from 'fs';
 
 export class FsJsonStorage implements IStorage {
-
-    private fileName: string = "cache.json";
  
-    constructor() {
-        if (!Fs.existsSync(this.fileName)) {
-            Fs.writeFileSync(this.fileName, JSON.stringify({}));
+    constructor(public jsonFilePath: string) {
+        if (!Fs.existsSync(this.jsonFilePath)) {
+            Fs.writeFileSync(this.jsonFilePath, JSON.stringify({}));
         }
     }
 
@@ -22,11 +20,11 @@ export class FsJsonStorage implements IStorage {
     }
 
     private setCache(newCache: any): void {
-        Fs.writeFileSync(this.fileName, JSON.stringify(newCache));
+        Fs.writeFileSync(this.jsonFilePath, JSON.stringify(newCache));
     }
 
     private getCache(): any {
-        return JSON.parse(Fs.readFileSync(this.fileName).toString());
+        return JSON.parse(Fs.readFileSync(this.jsonFilePath).toString());
     }
 
 }
