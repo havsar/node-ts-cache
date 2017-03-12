@@ -1,5 +1,7 @@
 # Simple and extensible caching module supporting decorators
 
+[![NPM](https://nodei.co/npm/node-ts-cache.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/node-ts-cache/)
+
 <!-- TOC depthTo:1 -->
 
 - [Simple and extensible caching module supporting decorators](#simple-and-extensible-caching-module-supporting-decorators)
