@@ -1,7 +1,7 @@
 import { IStorage } from '../storages/IStorage';
 import { AbstractBaseStrategy } from './AbstractBaseStrategy';
 
-export class ExpiringCacher extends AbstractBaseStrategy {
+export class ExpirationStrategy extends AbstractBaseStrategy {
 
     constructor(storage: IStorage) {
         super(storage);

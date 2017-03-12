@@ -1,7 +1,7 @@
 import { IStorage } from './storages/IStorage';
 import { AbstractBaseStrategy } from './strategies/AbstractBaseStrategy';
 
-export function Cache(cachingStrategy: AbstractBaseStrategy, options: object) {
+export function Cache(cachingStrategy: AbstractBaseStrategy, options: object): Function {
     return function (target: any, methodName: string, descriptor: PropertyDescriptor) {
         var originalMethod = descriptor.value;
 

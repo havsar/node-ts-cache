@@ -1,6 +1,6 @@
 import { MemoryStorage } from '../storages/MemoryStorage';
 import * as Assert from "assert";
-import { ExpiringCacher } from './ExpiringCacher';
+import { ExpirationStrategy } from './ExpirationStrategy';
 
 interface ITestType {
     user: {
@@ -15,7 +15,7 @@ const data: ITestType = {
 
 describe("ExpiringCacher", () => {
     it("Should set cache item correctly", done => {
-        const cacher = new ExpiringCacher(new MemoryStorage());
+        const cacher = new ExpirationStrategy(new MemoryStorage());
 
         cacher.setItem(key, data, { ttl: 10 * 1000 });
         const entry = cacher.getItem<ITestType>(key);
@@ -26,7 +26,7 @@ describe("ExpiringCacher", () => {
     });
 
     it("Should return no item if cache expires istantly", done => {
-        const cacher = new ExpiringCacher(new MemoryStorage());
+        const cacher = new ExpirationStrategy(new MemoryStorage());
 
         cacher.setItem(key, data, { ttl: 0 });
         setTimeout(() => {
@@ -37,7 +37,7 @@ describe("ExpiringCacher", () => {
     });
 
     it("Should return no item if cache expires normally", done => {
-        const cacher = new ExpiringCacher(new MemoryStorage());
+        const cacher = new ExpirationStrategy(new MemoryStorage());
 
         cacher.setItem(key, data, { ttl: 50 });
         setTimeout(() => {

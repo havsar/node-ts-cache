@@ -1,11 +1,14 @@
 {
   "name": "node-ts-cache",
   "version": "1.0.0",
-  "description": "Extensible Typescript and Decorators based caching module.",
+  "description": "Simple and extensible caching module supporting decorators",
   "main": "src/index.js",
   "scripts": {
-    "test": "node_modules/.bin/mocha src/**/*.spec.js"
+    "test": "node_modules/.bin/mocha src/**/*.spec.js",
+    "prepublish": "tsc -p .",
+    "dev": "tsc -w -p ."
   },
+  "types": "./main.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/havsar/node-ts-cache.git"
@@ -32,7 +35,7 @@
     "url": "https://github.com/havsar/node-ts-cache/issues"
   },
   "homepage": "https://github.com/havsar/node-ts-cache#readme",
-  "devDependencies": {
+  "dependencies": {
     "@types/mocha": "^2.2.40",
     "@types/node": "^7.0.8",
     "mocha": "^3.2.0",

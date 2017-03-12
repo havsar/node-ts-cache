@@ -1,10 +1,10 @@
 import { MemoryStorage } from './storages/MemoryStorage';
-import { ExpiringCacher } from './strategies/ExpiringCacher';
+import { ExpirationStrategy } from './strategies/ExpirationStrategy';
 import * as Assert from "assert";
 import * as Fs from "fs";
 import { Cache } from './CacheDecorator';
 
-const cacher = new ExpiringCacher(new MemoryStorage());
+const cacher = new ExpirationStrategy(new MemoryStorage());
 const data = ["user", "max", "test"];
 
 class TestClassOne {
