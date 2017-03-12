@@ -60,7 +60,7 @@ class MyService {
 # @Cache
 Makes it possible to easy cache a method response.
 
-Parameters: `@Cache(strategy, options)`*
+`@Cache(strategy, options)`
 - *`strategy`*: A caching strategy (ExpirationStrategy)
 - *`options`*: Options passed to the strategy for this particular method (TTL)
 
