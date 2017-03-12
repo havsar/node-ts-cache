@@ -17,7 +17,7 @@ describe("ExpirationStrategy", () => {
     it("Should set cache item correctly", async () => {
         const cacher = new ExpirationStrategy(new MemoryStorage());
 
-        await cacher.setItem(key, data, { ttl: 10 * 1000 });
+        await cacher.setItem(key, data, { ttl: 10 });
         const entry = await cacher.getItem<ITestType>(key);
 
         Assert.deepStrictEqual(entry, data);
@@ -26,7 +26,7 @@ describe("ExpirationStrategy", () => {
     it("Should return no item if cache expires istantly", async () => {
         const cacher = new ExpirationStrategy(new MemoryStorage());
 
-        await cacher.setItem(key, data, { ttl: -1 });
+        await cacher.setItem(key, data, { ttl: 10 });
         const entry = await cacher.getItem<ITestType>(key);
         Assert.deepStrictEqual(entry, undefined);
     });

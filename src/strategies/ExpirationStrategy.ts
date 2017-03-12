@@ -27,7 +27,7 @@ export class ExpirationStrategy extends AbstractBaseStrategy {
     public async setItem(key: string, content: any, options: any): Promise<void> {
         await this.storage.setItem(key, {
             options: {
-                ttl: options.ttl,
+                ttl: options.ttl * 1000,
                 createdAt: Date.now()
             },
             content: content

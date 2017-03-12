@@ -8,12 +8,12 @@ const cacher = new ExpirationStrategy(new MemoryStorage());
 const data = ["user", "max", "test"];
 
 class TestClassOne {
-    @Cache(cacher, { ttl: 10000 })
+    @Cache(cacher, { ttl: 10 })
     public getUsers(): string[] {
         return data;
     }
 
-    @Cache(cacher, { ttl: 10000 })
+    @Cache(cacher, { ttl: 10 })
     public getUsersPromise(): Promise<string[]> {
         return Promise.resolve(data);
     }
@@ -21,7 +21,7 @@ class TestClassOne {
 }
 
 class TestClassTwo {
-    @Cache(cacher, { ttl: 100000 })
+    @Cache(cacher, { ttl: 10 })
     public async getUsers(): Promise<string[]> {
         return data;
     }

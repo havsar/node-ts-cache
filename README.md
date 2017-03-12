@@ -30,7 +30,7 @@ const myStrategy = new ExpirationStrategy(new MemoryStorage());
 
 class MyService {
     
-    @Cache(myStrategy, { ttl: 10000 })
+    @Cache(myStrategy, { ttl: 10 })
     public getUsers(): Promise<string[]> {
         return ["Max", "User"];
     }
@@ -64,7 +64,7 @@ Makes it possible to easy cache a method response.
 
 `@Cache(strategy, options)`
 - *`strategy`*: A caching strategy (ExpirationStrategy)
-- *`options`*: Options passed to the strategy for this particular method (TTL)
+- *`options`*: Options passed to the strategy for this particular method (TTL in seconds)
 
 *Note: @Cache always converts the method response to a promise because caching might be async.* 
 
