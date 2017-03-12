@@ -5,7 +5,6 @@
   "main": "src/index.js",
   "scripts": {
     "test": "mocha src/**/*.spec.js",
-    "prepublish": "tsc -p .",
     "dev": "tsc -w -p ."
   },
   "types": "index.d.ts",
@@ -36,8 +35,10 @@
   },
   "homepage": "https://github.com/havsar/node-ts-cache#readme",
   "dependencies": {
+    "@types/bluebird": "^3.5.0",
     "@types/mocha": "^2.2.40",
     "@types/node": "^7.0.8",
+    "bluebird": "^3.5.0",
     "mocha": "^3.2.0",
     "typescript": "^2.2.1"
   }

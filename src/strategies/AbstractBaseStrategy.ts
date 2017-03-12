@@ -4,6 +4,7 @@ export abstract class AbstractBaseStrategy {
 
     constructor(protected storage: IStorage) { }
 
-    public abstract getItem<T>(key: string): T;
-    public abstract setItem(key: string, content: any, options: object): void;
+    public async abstract getItem<T>(key: string): Promise<T>;
+    public async abstract setItem(key: string, content: any, options: object): Promise<void>;
+    public async abstract clear(): Promise<void>;
 }

@@ -13,37 +13,21 @@ const data: ITestType = {
     user: { name: "test" }
 };
 
-describe("ExpiringCacher", () => {
-    it("Should set cache item correctly", done => {
+describe("ExpirationStrategy", () => {
+    it("Should set cache item correctly", async () => {
         const cacher = new ExpirationStrategy(new MemoryStorage());
 
-        cacher.setItem(key, data, { ttl: 10 * 1000 });
-        const entry = cacher.getItem<ITestType>(key);
+        await cacher.setItem(key, data, { ttl: 10 * 1000 });
+        const entry = await cacher.getItem<ITestType>(key);
 
         Assert.deepStrictEqual(entry, data);
-
-        done();
     });
 
-    it("Should return no item if cache expires istantly", done => {
+    it("Should return no item if cache expires istantly", async () => {
         const cacher = new ExpirationStrategy(new MemoryStorage());
 
-        cacher.setItem(key, data, { ttl: 0 });
-        setTimeout(() => {
-            const entry = cacher.getItem<ITestType>(key);
-            Assert.deepStrictEqual(entry, undefined);
-            done();
-        }, 1);
-    });
-
-    it("Should return no item if cache expires normally", done => {
-        const cacher = new ExpirationStrategy(new MemoryStorage());
-
-        cacher.setItem(key, data, { ttl: 50 });
-        setTimeout(() => {
-            const entry = cacher.getItem<ITestType>(key);
-            Assert.deepStrictEqual(entry, undefined);
-            done();
-        }, 51);
+        await cacher.setItem(key, data, { ttl: -1 });
+        const entry = await cacher.getItem<ITestType>(key);
+        Assert.deepStrictEqual(entry, undefined);
     });
 });

@@ -1,30 +1,40 @@
-import { IStorage } from './IStorage';
-import * as Fs from 'fs';
+import { IStorage } from "./IStorage";
+import * as Bluebird from "bluebird";
+
+const Fs = <any>Bluebird.promisifyAll(require("fs"));;
 
 export class FsJsonStorage implements IStorage {
- 
+
     constructor(public jsonFilePath: string) {
         if (!Fs.existsSync(this.jsonFilePath)) {
-            Fs.writeFileSync(this.jsonFilePath, JSON.stringify({}));
+            this.createEmptyCache();
         }
     }
 
-    public getItem(key: string): any {
-        return this.getCache()[key];
+    public async getItem<T>(key: string): Promise<T> {
+        return (await this.getCacheObject())[key];
     }
 
-    public setItem(key: string, content: any): void {
-        const cache = this.getCache();
+    public async setItem(key: string, content: object): Promise<void> {
+        const cache = await this.getCacheObject();
         cache[key] = content;
-        this.setCache(cache);
+        await this.setCache(cache);
     }
 
-    private setCache(newCache: any): void {
-        Fs.writeFileSync(this.jsonFilePath, JSON.stringify(newCache));
+    public async clear(): Promise<void> {
+        await this.createEmptyCache();
     }
 
-    private getCache(): any {
-        return JSON.parse(Fs.readFileSync(this.jsonFilePath).toString());
+    private createEmptyCache(): void {
+        Fs.writeFileSync(this.jsonFilePath, JSON.stringify({}));
+    }
+
+    private async setCache(newCache: any): Promise<void> {
+        await Fs.writeFileAsync(this.jsonFilePath, JSON.stringify(newCache));
+    }
+
+    private async getCacheObject(): Promise<any> {
+        return JSON.parse((await Fs.readFileAsync(this.jsonFilePath)).toString());
     }
 
 }

@@ -6,12 +6,16 @@ export class MemoryStorage implements IStorage {
 
     constructor() { }
 
-    public getItem(key: string): any {
+    public async getItem<T>(key: string): Promise<T> {
         return this.memCache[key];
     }
 
-    public setItem(key: string, content: any): void {
+    public async setItem(key: string, content: any): Promise<void> {
         this.memCache[key] = content;
+    }
+
+    public async clear(): Promise<void> {
+        this.memCache = {};
     }
 
 }

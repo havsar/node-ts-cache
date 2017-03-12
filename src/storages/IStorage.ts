@@ -1,4 +1,5 @@
 export interface IStorage {
-    getItem(key: string): any;
-    setItem(key: string, content: any): void;
+    getItem<T>(key: string): Promise<T>;
+    setItem(key: string, content: any): Promise<void>;
+    clear(): Promise<void>;
 }
