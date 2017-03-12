@@ -5,6 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "mocha src/**/*.spec.js",
+    "prepublish": "tsc -p .",
     "dev": "tsc -w -p ."
   },
   "types": "index.d.ts",

@@ -1,0 +1,11 @@
+.git*
+.DS_Store
+node_modules
+npm-debug.log
+coffeelint.json
+.editorconfig
+.idea
+.vscode
+**/.baseDir.ts
+.tscache
+**.tmp.txt
