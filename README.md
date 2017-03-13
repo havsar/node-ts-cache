@@ -1,10 +1,13 @@
-# Simple and extensible caching module supporting decorators
+[![TRAVIS](https://travis-ci.org/havsar/node-ts-cache.svg?branch=master)](https://travis-ci.org/havsar/node-ts-cache.svg?branch=master)
 
 [![NPM](https://nodei.co/npm/node-ts-cache.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/node-ts-cache/)
 
+# node-ts-cache
+Simple and extensible caching module supporting decorators
+
 <!-- TOC depthTo:1 -->
 
-- [Simple and extensible caching module supporting decorators](#simple-and-extensible-caching-module-supporting-decorators)
+- [node-ts-cache](#node-ts-cache)
 - [Install](#install)
 - [Usage](#usage)
 - [@Cache](#cache)
