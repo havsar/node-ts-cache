@@ -9,3 +9,4 @@ coffeelint.json
 **/.baseDir.ts
 .tscache
 **.tmp.txt
+secret.json
