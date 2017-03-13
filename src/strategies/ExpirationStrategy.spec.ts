@@ -26,7 +26,7 @@ describe("ExpirationStrategy", () => {
     it("Should return no item if cache expires istantly", async () => {
         const cacher = new ExpirationStrategy(new MemoryStorage());
 
-        await cacher.setItem(key, data, { ttl: 10 });
+        await cacher.setItem(key, data, { ttl: -1 });
         const entry = await cacher.getItem<ITestType>(key);
         Assert.deepStrictEqual(entry, undefined);
     });
