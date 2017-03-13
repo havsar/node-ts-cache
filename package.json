@@ -7,7 +7,7 @@
     "test": "mocha src/**/*.spec.js",
     "prepublish": "tsc -p .",
     "dev": "tsc -w -p .",
-    "build": "tsc -p ."
+    "typescript": "tsc -p ."
   },
   "types": "index.d.ts",
   "repository": {

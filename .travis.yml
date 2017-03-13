@@ -7,7 +7,7 @@ branches:
   - master
 
 before_script:
-  - npm build
+  - npm run typescript
 
 cache:
   directories:
