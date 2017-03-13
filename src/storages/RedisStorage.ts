@@ -14,10 +14,20 @@ export class RedisStorage implements IStorage {
     }
 
     public async getItem<T>(key: string): Promise<T> {
-        return this.client.getAsync(key);
+        const entry = await this.client.getAsync(key);
+        let finalItem = entry;
+        try {
+            finalItem = JSON.parse(entry);
+        } catch (error) { }
+        return finalItem;
     }
 
     public async setItem(key: string, content: any): Promise<void> {
+        if (typeof content === "object") {
+            content = JSON.stringify(content);
+        } else if (content === undefined) {
+            return this.client.delAsync(key);
+        }
         return this.client.setAsync(key, content);
     }
 
