@@ -1,4 +1,4 @@
-[![TRAVIS](https://travis-ci.org/havsar/node-ts-cache.svg?branch=master)](https://travis-ci.org/havsar/node-ts-cache.svg?branch=master)
+[![TRAVIS](https://travis-ci.org/havsar/node-ts-cache.svg?branch=master)](https://travis-ci.org/havsar/node-ts-cache)
 
 [![NPM](https://nodei.co/npm/node-ts-cache.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/node-ts-cache/)
 
