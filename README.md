@@ -1,4 +1,7 @@
-[![TRAVIS](https://travis-ci.org/havsar/node-ts-cache.svg?branch=master)](https://travis-ci.org/havsar/node-ts-cache)
+[![Travis CI](https://img.shields.io/travis/havsar/node-ts-cache.svg)](https://travis-ci.org/havsar/node-ts-cache) 
+[![David](https://img.shields.io/david/havsar/node-ts-cache.svg)](https://david-dm.org/havsar/node-ts-cache)
+[![npm](https://img.shields.io/npm/v/node-ts-cache.svg)](https://www.npmjs.org/package/node-ts-cache)
+[![The MIT License](https://img.shields.io/npm/l/node-ts-cache.svg)](http://opensource.org/licenses/MIT)
 
 [![NPM](https://nodei.co/npm/node-ts-cache.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/node-ts-cache/)
 
@@ -11,6 +14,8 @@ Simple and extensible caching module supporting decorators
 - [Install](#install)
 - [Usage](#usage)
 - [@Cache](#cache)
+- [Strategies](#strategies)
+- [Storages](#storages)
 - [Test](#test)
 
 <!-- /TOC -->
@@ -33,7 +38,7 @@ const myStrategy = new ExpirationStrategy(new MemoryStorage());
 
 class MyService {
     
-    @Cache(myStrategy, { ttl: 10 })
+    @Cache(myStrategy, { ttl: 60 })
     public getUsers(): Promise<string[]> {
         return ["Max", "User"];
     }
@@ -55,7 +60,7 @@ class MyService {
         }
 
         const newUsers = ["Max", "User"];
-        await myCache.setItem("users", newUsers);
+        await myCache.setItem("users", newUsers, {  ttl: 60});
 
         return newUsers;
     }
@@ -63,13 +68,25 @@ class MyService {
 ```
 
 # @Cache
-Makes it possible to easy cache a method response.
+Caches function response using the given options. Works with different strategies and storages. Uses all arguments to build an unique key.
 
 `@Cache(strategy, options)`
-- *`strategy`*: A caching strategy (ExpirationStrategy)
-- *`options`*: Options passed to the strategy for this particular method (TTL in seconds)
+- *`strategy`*: A supported caching [Strategy](#strategies)
+- *`options`*: Options passed to the strategy for this particular method
 
 *Note: @Cache always converts the method response to a promise because caching might be async.* 
+
+# Strategies
+## ExpirationStrategy
+Cached items expire after a given amount of time.
+`Options`
+ - *`ttl`*: Number of seconds to expire the cachte item
+
+# Storages
+### MemoryStorage()
+### FsJsonStorage(`fileName: string`)
+### RedisStorage(`host: string, port: number, password: string`)
+
 
 # Test
 ```bash
