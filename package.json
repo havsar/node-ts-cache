@@ -4,10 +4,10 @@
   "description": "Simple and extensible caching module supporting decorators",
   "main": "src/index.js",
   "scripts": {
-    "test": "mocha **/*.spec.js",
-    "prepublish": "tsc -p .",
-    "dev": "tsc -w -p .",
-    "typescript": "tsc -p ."
+    "test": "npm run build && mocha **/*.spec.js",
+    "tdd": "tsc -w -p .",
+    "build": "tsc -p .",
+    "prepublish": "tsc -p ."
   },
   "types": "index.d.ts",
   "repository": {
@@ -37,13 +37,15 @@
   },
   "homepage": "https://github.com/havsar/node-ts-cache#readme",
   "dependencies": {
+    "bluebird": "^3.5.0",
+    "redis": "^2.7.0"
+  },
+  "devDependencies": {
     "@types/bluebird": "^3.5.0",
     "@types/mocha": "^2.2.40",
     "@types/node": "^7.0.8",
     "@types/redis": "^0.12.36",
-    "bluebird": "^3.5.0",
     "mocha": "^3.2.0",
-    "redis": "^2.7.0",
     "typescript": "^2.2.1"
   }
 }
