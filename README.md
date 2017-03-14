@@ -83,9 +83,9 @@ Cached items expire after a given amount of time.
  - *`ttl`*: Number of seconds to expire the cachte item
 
 # Storages
-### MemoryStorage()
-### FsJsonStorage(`fileName: string`)
-### RedisStorage(`host: string, port: number, password: string`)
+#### MemoryStorage()
+#### FsJsonStorage(`fileName: string`)
+#### RedisStorage(`host: string, port: number, password: string`)
 
 
 # Test
