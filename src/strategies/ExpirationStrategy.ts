@@ -1,12 +1,18 @@
+import * as Lodash from "lodash";
 import { IStorage } from '../storages/IStorage';
 import { AbstractBaseStrategy } from './AbstractBaseStrategy';
 
 interface IExpiringCacheItem {
     content: any;
-    options: {
+    meta: {
         createdAt: number;
         ttl: number;
     }
+}
+
+interface IOptions {
+    ttl?: number;
+    isLazy?: boolean;
 }
 
 export class ExpirationStrategy extends AbstractBaseStrategy {
@@ -17,16 +23,23 @@ export class ExpirationStrategy extends AbstractBaseStrategy {
 
     public async getItem<T>(key: string): Promise<T> {
         const item = await this.storage.getItem<IExpiringCacheItem>(key);
-        if (item && Date.now() > item.options.createdAt + item.options.ttl) {
+        if (item && this.isItemExpired(item)) {
             await this.storage.setItem(key, undefined);
             return undefined;
         }
         return item ? item.content : undefined;
     }
+    
+    public async setItem(key: string, content: any, options: IOptions): Promise<void> {
+        options = Lodash.merge({ ttl: 60, isLazy: true }, options);
 
-    public async setItem(key: string, content: any, options: any): Promise<void> {
+        if (!options.isLazy) {
+            setTimeout(() => {
+                this.unsetKey(key);
+            }, options.ttl);
+        }
         await this.storage.setItem(key, {
-            options: {
+            meta: {
                 ttl: options.ttl * 1000,
                 createdAt: Date.now()
             },
@@ -36,5 +49,12 @@ export class ExpirationStrategy extends AbstractBaseStrategy {
 
     public async clear(): Promise<void> {
         this.storage.clear();
+    }
+
+    private isItemExpired(item: IExpiringCacheItem): boolean {
+        return Date.now() > item.meta.createdAt + item.meta.ttl;
+    }
+    private async unsetKey(key: string): Promise<void> {
+        await this.storage.setItem(key, undefined);
     }
 }

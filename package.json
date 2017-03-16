@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "mocha --recursive src/",
-    "tdd": "tsc -w -p .",
+    "tdd": "mocha -w --recursive src/",
     "build": "tsc -p .",
     "prepublish": "tsc -p ."
   },
@@ -37,7 +37,9 @@
   },
   "homepage": "https://github.com/havsar/node-ts-cache#readme",
   "dependencies": {
+    "@types/lodash": "^4.14.55",
     "bluebird": "^3.5.0",
+    "lodash": "^4.17.4",
     "redis": "^2.7.0"
   },
   "devDependencies": {

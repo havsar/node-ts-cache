@@ -15,7 +15,7 @@ export class FsJsonStorage implements IStorage {
         return (await this.getCacheObject())[key];
     }
 
-    public async setItem(key: string, content: object): Promise<void> {
+    public async setItem(key: string, content: any): Promise<void> {
         const cache = await this.getCacheObject();
         cache[key] = content;
         await this.setCache(cache);
