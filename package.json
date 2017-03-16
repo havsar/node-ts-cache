@@ -37,12 +37,12 @@
   },
   "homepage": "https://github.com/havsar/node-ts-cache#readme",
   "dependencies": {
-    "@types/lodash": "^4.14.55",
     "bluebird": "^3.5.0",
     "lodash": "^4.17.4",
     "redis": "^2.7.0"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.55",
     "@types/bluebird": "^3.5.0",
     "@types/mocha": "^2.2.40",
     "@types/node": "^7.0.8",
