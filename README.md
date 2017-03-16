@@ -8,13 +8,15 @@
 # node-ts-cache
 Simple and extensible caching module supporting decorators
 
-<!-- TOC depthTo:1 -->
+<!-- TOC depthTo:2 -->
 
 - [node-ts-cache](#node-ts-cache)
 - [Install](#install)
 - [Usage](#usage)
-- [@Cache](#cache)
+    - [With decorator](#with-decorator)
+    - [Directly](#directly)
 - [Strategies](#strategies)
+    - [ExpirationStrategy](#expirationstrategy)
 - [Storages](#storages)
 - [Test](#test)
 
@@ -31,6 +33,14 @@ yarn add node-ts-cache
 
 # Usage
 ## With decorator
+Caches function response using the given options. Works with different strategies and storages. Uses all arguments to build an unique key.
+
+`@Cache(strategy, options)`
+- `strategy`: A supported caching [Strategy](#strategies)
+- `options`: Options passed to the strategy for this particular method
+
+*Note: @Cache always converts the method response to a promise because caching might be async.* 
+
 ```ts
 import { Cache, ExpirationStrategy, MemoryStorage } from "node-ts-cache";
 
@@ -60,27 +70,19 @@ class MyService {
         }
 
         const newUsers = ["Max", "User"];
-        await myCache.setItem("users", newUsers, {  ttl: 60});
+        await myCache.setItem("users", newUsers, {  ttl: 60 });
 
         return newUsers;
     }
 }
 ```
 
-# @Cache
-Caches function response using the given options. Works with different strategies and storages. Uses all arguments to build an unique key.
-
-`@Cache(strategy, options)`
-- *`strategy`*: A supported caching [Strategy](#strategies)
-- *`options`*: Options passed to the strategy for this particular method
-
-*Note: @Cache always converts the method response to a promise because caching might be async.* 
-
 # Strategies
 ## ExpirationStrategy
 Cached items expire after a given amount of time.
-`Options`
- - *`ttl`*: Number of seconds to expire the cachte item
+
+ - `ttl`: *(Default: 60)* Number of seconds to expire the cachte item
+ - `isLazy`: *(Default: true)* If true, expired cache entries will be deleted on touch. If false, entries will be deleted after the given *ttl*.
 
 # Storages
 #### MemoryStorage()
