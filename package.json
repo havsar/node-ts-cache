@@ -4,10 +4,11 @@
   "description": "Simple and extensible caching module supporting decorators",
   "main": "src/index.js",
   "scripts": {
-    "test": "mocha --recursive src/",
-    "tdd": "mocha -w --recursive src/",
+    "test": "mocha src/**/*.spec.js",
+    "tdd": "mocha -w src/**/*.spec.js",
     "build": "tsc -p .",
-    "prepublish": "tsc -p ."
+    "prepublish": "tsc -p .",
+    "dev": "tsc -p . -w"
   },
   "types": "index.d.ts",
   "repository": {

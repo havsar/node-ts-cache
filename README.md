@@ -49,7 +49,7 @@ const myStrategy = new ExpirationStrategy(new MemoryStorage());
 class MyService {
     
     @Cache(myStrategy, { ttl: 60 })
-    public getUsers(): Promise<string[]> {
+    public async getUsers(): Promise<string[]> {
         return ["Max", "User"];
     }
 }
@@ -83,6 +83,7 @@ Cached items expire after a given amount of time.
 
  - `ttl`: *(Default: 60)* Number of seconds to expire the cachte item
  - `isLazy`: *(Default: true)* If true, expired cache entries will be deleted on touch. If false, entries will be deleted after the given *ttl*.
+ - `isCachedForver`: *(Default: false)* If true, cache entry has no expiration.
 
 # Storages
 #### MemoryStorage()
