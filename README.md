@@ -26,10 +26,6 @@ Simple and extensible caching module supporting decorators
 ```bash
 npm install --save node-ts-cache
 ```
-or
-```bash
-yarn add node-ts-cache
-```
 
 # Usage
 ## With decorator
