@@ -6,8 +6,10 @@
   "scripts": {
     "test": "mocha src/**/*.spec.js",
     "tdd": "mocha -w src/**/*.spec.js",
+    "tdd-debug-brk": "mocha --inspect-brk src/**/*.spec.js",
     "build": "tsc -p .",
     "prepublish": "tsc -p .",
+    "prepare": "tsc -p .",
     "dev": "tsc -p . -w"
   },
   "types": "index.d.ts",
@@ -38,17 +40,17 @@
   },
   "homepage": "https://github.com/havsar/node-ts-cache#readme",
   "dependencies": {
-     "@types/lodash": "^4.14.55",
-    "@types/bluebird": "^3.5.0",
+    "@types/bluebird": "^3.5.5",
+    "@types/lodash": "^4.14.55",
     "@types/mocha": "^2.2.40",
-    "@types/node": "^7.0.8",
+    "@types/node": "^4.2.2",
     "@types/redis": "^0.12.36",
     "bluebird": "^3.5.0",
     "lodash": "^4.17.4",
-    "redis": "^2.7.0"
+    "redis": "^2.7.0",
+    "typescript": "^2.2.1"
   },
   "devDependencies": {
-    "mocha": "^3.2.0",
-    "typescript": "^2.2.1"
+    "mocha": "^3.2.0"
   }
 }

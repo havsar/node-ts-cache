@@ -1,13 +1,23 @@
 {
-    "compilerOptions": {
-        "target": "es2015",
-        "module": "commonjs",
-        "sourceMap": true,
-        "experimentalDecorators": true,
-        "typeRoots": [
-            "node_modules/@types"
-        ],
-        "allowJs": false
-    },
-    "compileOnSave": true
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "lib": [
+      "es2015.promise",
+      "es5"
+    ],
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "allowJs": false,
+    "rootDir": "src"
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "compileOnSave": true
 }

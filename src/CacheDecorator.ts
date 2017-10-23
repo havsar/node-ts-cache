@@ -6,15 +6,15 @@ export function Cache(cachingStrategy: AbstractBaseStrategy, options: object): F
         var originalMethod = descriptor.value;
         const className = target.constructor.name;
 
-        descriptor.value = async function () {
-            const cacheKey = `${className}:${methodName}:${JSON.stringify(arguments)}`;
+        descriptor.value = async function (...args) {
+            const cacheKey = `${className}:${methodName}:${JSON.stringify(args)}`;
 
             const entry = await cachingStrategy.getItem(cacheKey);
             if (entry) {
                 return entry;
             }
 
-            const methodCall = originalMethod.apply(this, arguments);
+            const methodCall = originalMethod.apply(this, args);
             let methodResult;
             if (methodCall && methodCall.then) {
                 methodResult = await methodCall;

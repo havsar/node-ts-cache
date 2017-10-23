@@ -8,12 +8,12 @@ const cacher = new ExpirationStrategy(new MemoryStorage());
 const data = ["user", "max", "test"];
 
 class TestClassOne {
-    @Cache(cacher, { ttl: 10 })
+    @Cache(cacher, { ttl: 1000 })
     public getUsers(): string[] {
         return data;
     }
 
-    @Cache(cacher, { ttl: 10 })
+    @Cache(cacher, { ttl: 1000 })
     public getUsersPromise(): Promise<string[]> {
         return Promise.resolve(data);
     }
@@ -41,7 +41,7 @@ describe("CacheDecorator", () => {
         const users = await myClass.getUsers();
 
         Assert.equal(data, users);
-        Assert.equal(await cacher.getItem<string[]>("TestClassOne:getUsers:{}"), data);
+        Assert.equal(await cacher.getItem<string[]>("TestClassOne:getUsers:[]"), data);
     });
 
     it("Should cache Promise response correctly", async () => {
@@ -50,7 +50,7 @@ describe("CacheDecorator", () => {
 
         await myClass.getUsersPromise().then(async response => {
             Assert.equal(data, response);
-            Assert.equal(await cacher.getItem<string[]>("TestClassOne:getUsersPromise:{}"), data);
+            Assert.equal(await cacher.getItem<string[]>("TestClassOne:getUsersPromise:[]"), data);
         });
     });
 
@@ -60,6 +60,6 @@ describe("CacheDecorator", () => {
 
         const users = await myClass.getUsers();
         Assert.equal(data, users);
-        Assert.equal(await cacher.getItem<string[]>("TestClassTwo:getUsers:{}"), data);
+        Assert.equal(await cacher.getItem<string[]>("TestClassTwo:getUsers:[]"), data);
     });
 });

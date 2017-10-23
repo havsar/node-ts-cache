@@ -10,3 +10,5 @@ coffeelint.json
 .tscache
 **.tmp.txt
 secret.json
+src/**/*.spec.js
+src/**/*.spec.ts
