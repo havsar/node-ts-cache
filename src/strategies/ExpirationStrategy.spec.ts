@@ -1,6 +1,6 @@
-import { MemoryStorage } from '../storages/MemoryStorage';
+import {MemoryStorage} from '../storages/MemoryStorage';
 import * as Assert from "assert";
-import { ExpirationStrategy } from './ExpirationStrategy';
+import {ExpirationStrategy} from './ExpirationStrategy';
 
 interface ITestType {
     user: {
@@ -9,14 +9,14 @@ interface ITestType {
 }
 
 const data: ITestType = {
-    user: { name: "test" }
+    user: {name: "test"}
 };
 
 describe("ExpirationStrategy", () => {
     it("Should set cache item correctly with isLazy", async () => {
         const cacher = new ExpirationStrategy(new MemoryStorage());
 
-        await cacher.setItem("test", data, { ttl: 10 });
+        await cacher.setItem("test", data, {ttl: 10});
         const entry = await cacher.getItem<ITestType>("test");
 
         Assert.deepStrictEqual(entry, data);
@@ -25,7 +25,7 @@ describe("ExpirationStrategy", () => {
     it("Should return no item if cache expires istantly with isLazy", async () => {
         const cacher = new ExpirationStrategy(new MemoryStorage());
 
-        await cacher.setItem("test", data, { ttl: -1 });
+        await cacher.setItem("test", data, {ttl: -1});
         const entry = await cacher.getItem<ITestType>("test");
         Assert.deepStrictEqual(entry, undefined);
     });
@@ -33,9 +33,9 @@ describe("ExpirationStrategy", () => {
     it("Should not find cache item after ttl with isLazy disabled", async () => {
         const cacher = new ExpirationStrategy(new MemoryStorage());
 
-        await cacher.setItem("test", data, { ttl: 0.001, isLazy: false });
-        await wait(10);   
- 
+        await cacher.setItem("test", data, {ttl: 0.001, isLazy: false});
+        await wait(10);
+
         const entry = await cacher.getItem<ITestType>("test");
         Assert.deepStrictEqual(entry, undefined);
     });
@@ -43,7 +43,7 @@ describe("ExpirationStrategy", () => {
     it("Should ignore isLazy and ttl options if isCachedForever option is provided and cache forever", async () => {
         const cacher = new ExpirationStrategy(new MemoryStorage());
 
-        await cacher.setItem("test", data, { ttl: 0, isLazy: false, isCachedForever: true });
+        await cacher.setItem("test", data, {ttl: 0, isLazy: false, isCachedForever: true});
         await wait(10);
 
         const entry = await cacher.getItem<ITestType>("test");
@@ -52,7 +52,7 @@ describe("ExpirationStrategy", () => {
 });
 
 function wait(ms: number): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<void>((resolve, _reject) => {
         setTimeout(() => {
             resolve();
         }, ms);

@@ -1,5 +1,6 @@
-import { IStorage } from "./IStorage";
+import {IStorage} from "./IStorage";
 import * as Bluebird from "bluebird";
+
 const redis = require("redis");
 
 Bluebird.promisifyAll(redis.RedisClient.prototype);
@@ -10,7 +11,7 @@ export class RedisStorage implements IStorage {
     private client: any;
 
     constructor(private host: string, private port: number, password: string) {
-        this.client = redis.createClient(port, host, { password: password });
+        this.client = redis.createClient(this.port, this.host, {password: password});
     }
 
     public async getItem<T>(key: string): Promise<T> {
@@ -18,7 +19,8 @@ export class RedisStorage implements IStorage {
         let finalItem = entry;
         try {
             finalItem = JSON.parse(entry);
-        } catch (error) { }
+        } catch (error) {
+        }
         return finalItem;
     }
 

@@ -4,8 +4,8 @@
   "description": "Simple and extensible caching module supporting decorators",
   "main": "src/index.js",
   "scripts": {
-    "test": "mocha src/**/*.spec.js",
-    "tdd": "mocha -w src/**/*.spec.js",
+    "test": "mocha src/*.spec.js src/**/*.spec.js",
+    "tdd": "mocha -w src/*.spec.js src/**/*.spec.js",
     "tdd-debug-brk": "mocha --inspect-brk src/**/*.spec.js",
     "build": "tsc -p .",
     "prepublish": "tsc -p .",

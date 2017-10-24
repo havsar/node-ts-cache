@@ -1,19 +1,18 @@
-import { MemoryStorage } from './storages/MemoryStorage';
-import { ExpirationStrategy } from './strategies/ExpirationStrategy';
+import {MemoryStorage} from './storages/MemoryStorage';
+import {ExpirationStrategy} from './strategies/ExpirationStrategy';
 import * as Assert from "assert";
-import * as Fs from "fs";
-import { Cache } from './CacheDecorator';
+import {Cache} from './CacheDecorator';
 
 const cacher = new ExpirationStrategy(new MemoryStorage());
 const data = ["user", "max", "test"];
 
 class TestClassOne {
-    @Cache(cacher, { ttl: 1000 })
+    @Cache(cacher, {ttl: 1000})
     public getUsers(): string[] {
         return data;
     }
 
-    @Cache(cacher, { ttl: 1000 })
+    @Cache(cacher, {ttl: 1000})
     public getUsersPromise(): Promise<string[]> {
         return Promise.resolve(data);
     }
@@ -21,7 +20,7 @@ class TestClassOne {
 }
 
 class TestClassTwo {
-    @Cache(cacher, { ttl: 10 })
+    @Cache(cacher, {ttl: 10})
     public async getUsers(): Promise<string[]> {
         return data;
     }
@@ -31,6 +30,7 @@ describe("CacheDecorator", () => {
     it("Should decorate function with ExpiringCacher correctly", done => {
         cacher.clear();
         const myClass = new TestClassOne();
+        myClass.getUsersPromise();
         done();
     });
 
