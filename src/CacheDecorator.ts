@@ -1,6 +1,6 @@
 import {AbstractBaseStrategy} from './strategies/AbstractBaseStrategy';
 
-export function Cache(cachingStrategy: AbstractBaseStrategy, options: object): Function {
+export function Cache(cachingStrategy: AbstractBaseStrategy, options: any): Function {
     return function (target: any, methodName: string, descriptor: PropertyDescriptor) {
         var originalMethod = descriptor.value;
         const className = target.constructor.name;
