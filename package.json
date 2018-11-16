@@ -1,6 +1,6 @@
 {
   "name": "node-ts-cache",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Simple and extensible caching module supporting decorators",
   "main": "src/index.js",
   "scripts": {
@@ -40,16 +40,16 @@
   },
   "homepage": "https://github.com/havsar/node-ts-cache#readme",
   "dependencies": {
-    "@types/bluebird": "3.5.5",
-    "@types/lodash": "^4.14.55",
-    "@types/mocha": "^2.2.40",
-    "@types/node": "^4.2.2",
-    "@types/redis": "^0.12.36",
     "bluebird": "3.5.0",
     "lodash": "^4.17.4",
     "redis": "^2.7.0"
   },
   "devDependencies": {
+    "@types/bluebird": "3.5.5",
+    "@types/lodash": "^4.14.55",
+    "@types/mocha": "^2.2.40",
+    "@types/node": "^4.2.2",
+    "@types/redis": "^0.12.36",
     "mocha": "^3.2.0",
     "typescript": "^2.1.6"
   }
