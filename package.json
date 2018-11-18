@@ -40,17 +40,20 @@
   },
   "homepage": "https://github.com/havsar/node-ts-cache#readme",
   "dependencies": {
-    "@types/bluebird": "3.5.5",
-    "@types/lodash": "^4.14.55",
-    "@types/mocha": "^2.2.40",
-    "@types/node": "^4.2.2",
-    "@types/redis": "^0.12.36",
-    "bluebird": "3.5.0",
-    "lodash": "^4.17.4",
+    "bluebird": "^3.5.3",
+    "lodash": "^4.17.11",
     "redis": "^2.7.0"
   },
   "devDependencies": {
-    "mocha": "^3.2.0",
-    "typescript": "^2.1.6"
+    "@types/bluebird": "^3.5.24",
+    "@types/lodash": "^4.14.118",
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^10.12.9",
+    "@types/redis": "^2.8.7",
+    "@types/sinon": "^5.0.5",
+    "mocha": "^5.2.0",
+    "sinon": "^7.1.1",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.1.6"
   }
 }

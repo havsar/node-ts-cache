@@ -1,7 +1,7 @@
-import {IStorage} from "./IStorage";
-import * as Bluebird from "bluebird";
+import { IStorage } from './IStorage';
+import * as Bluebird from 'bluebird';
 
-const redis = require("redis");
+const redis = require('redis');
 
 Bluebird.promisifyAll(redis.RedisClient.prototype);
 Bluebird.promisifyAll(redis.Multi.prototype);
@@ -25,7 +25,7 @@ export class RedisStorage implements IStorage {
     }
 
     public async setItem(key: string, content: any): Promise<void> {
-        if (typeof content === "object") {
+        if (typeof content === 'object') {
             content = JSON.stringify(content);
         } else if (content === undefined) {
             return this.client.delAsync(key);

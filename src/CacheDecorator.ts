@@ -1,8 +1,8 @@
-import {AbstractBaseStrategy} from './strategies/AbstractBaseStrategy';
+import { AbstractBaseStrategy } from './strategies/AbstractBaseStrategy';
 
 export function Cache(cachingStrategy: AbstractBaseStrategy, options: any): Function {
     return function (target: any, methodName: string, descriptor: PropertyDescriptor) {
-        var originalMethod = descriptor.value;
+        const originalMethod = descriptor.value;
         const className = target.constructor.name;
 
         descriptor.value = async function (...args: any[]) {
@@ -26,5 +26,5 @@ export function Cache(cachingStrategy: AbstractBaseStrategy, options: any): Func
         };
 
         return descriptor;
-    }
+    };
 }

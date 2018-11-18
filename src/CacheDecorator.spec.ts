@@ -1,18 +1,18 @@
-import {MemoryStorage} from './storages/MemoryStorage';
-import {ExpirationStrategy} from './strategies/ExpirationStrategy';
-import * as Assert from "assert";
-import {Cache} from './CacheDecorator';
+import { MemoryStorage } from './storages/MemoryStorage';
+import { ExpirationStrategy } from './strategies/ExpirationStrategy';
+import * as Assert from 'assert';
+import { Cache } from './CacheDecorator';
 
-const cacher = new ExpirationStrategy(new MemoryStorage());
-const data = ["user", "max", "test"];
+const strategy = new ExpirationStrategy(new MemoryStorage());
+const data = ['user', 'max', 'test'];
 
 class TestClassOne {
-    @Cache(cacher, {ttl: 1000})
+    @Cache(strategy, {ttl: 1000})
     public getUsers(): string[] {
         return data;
     }
 
-    @Cache(cacher, {ttl: 1000})
+    @Cache(strategy, {ttl: 1000})
     public getUsersPromise(): Promise<string[]> {
         return Promise.resolve(data);
     }
@@ -20,46 +20,48 @@ class TestClassOne {
 }
 
 class TestClassTwo {
-    @Cache(cacher, {ttl: 10})
+    @Cache(strategy, {ttl: 20000})
     public async getUsers(): Promise<string[]> {
-        return data;
+        return new Promise<string[]>(resolve => {
+            setTimeout(() => resolve(data), 500);
+        });
     }
 }
 
-describe("CacheDecorator", () => {
-    it("Should decorate function with ExpiringCacher correctly", done => {
-        cacher.clear();
-        const myClass = new TestClassOne();
-        myClass.getUsersPromise();
-        done();
+describe('CacheDecorator', () => {
+
+    beforeEach(async () => {
+        await strategy.clear();
     });
 
-    it("Should cache function call correctly", async () => {
-        cacher.clear();
+    it('Should decorate function with ExpirationStrategy correctly', async () => {
+        const myClass = new TestClassOne();
+        await myClass.getUsersPromise();
+    });
+
+    it('Should cache function call correctly', async () => {
         const myClass = new TestClassOne();
 
         const users = await myClass.getUsers();
 
-        Assert.equal(data, users);
-        Assert.equal(await cacher.getItem<string[]>("TestClassOne:getUsers:[]"), data);
+        Assert.strictEqual(data, users);
+        Assert.strictEqual(await strategy.getItem<string[]>('TestClassOne:getUsers:[]'), data);
     });
 
-    it("Should cache Promise response correctly", async () => {
-        cacher.clear();
+    it('Should cache Promise response correctly', async () => {
         const myClass = new TestClassOne();
 
         await myClass.getUsersPromise().then(async response => {
-            Assert.equal(data, response);
-            Assert.equal(await cacher.getItem<string[]>("TestClassOne:getUsersPromise:[]"), data);
+            Assert.strictEqual(data, response);
+            Assert.strictEqual(await strategy.getItem<string[]>('TestClassOne:getUsersPromise:[]'), data);
         });
     });
 
-    it("Should cache async respone correctly", async () => {
-        cacher.clear();
+    it('Should cache async response correctly', async () => {
         const myClass = new TestClassTwo();
 
         const users = await myClass.getUsers();
-        Assert.equal(data, users);
-        Assert.equal(await cacher.getItem<string[]>("TestClassTwo:getUsers:[]"), data);
+        Assert.strictEqual(data, users);
+        Assert.strictEqual(await strategy.getItem<string[]>('TestClassTwo:getUsers:[]'), data);
     });
 });

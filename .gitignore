@@ -9,3 +9,4 @@ npm-debug.log
 **/*.js
 **/*.js.map
 secret.json
+node-ts-cache*.tgz

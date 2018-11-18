@@ -1,6 +1,6 @@
-import * as Lodash from "lodash";
-import {IStorage} from '../storages/IStorage';
-import {AbstractBaseStrategy} from './AbstractBaseStrategy';
+import * as Lodash from 'lodash';
+import { IStorage } from '../storages/IStorage';
+import { AbstractBaseStrategy } from './AbstractBaseStrategy';
 
 interface IExpiringCacheItem {
     content: any;
@@ -52,7 +52,7 @@ export class ExpirationStrategy extends AbstractBaseStrategy {
     }
 
     public async clear(): Promise<void> {
-        this.storage.clear();
+        await this.storage.clear();
     }
 
     private isItemExpired(item: IExpiringCacheItem): boolean {

@@ -8,6 +8,6 @@ describe("MemoryStorage", () => {
         const key = "test";
 
         await storage.setItem(key, content); 
-        Assert.equal(await storage.getItem(key), content);
+        Assert.strictEqual(await storage.getItem(key), content);
     });
 });

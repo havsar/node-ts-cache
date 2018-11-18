@@ -1,11 +1,11 @@
-import * as Assert from "assert";
-import * as Fs from "fs";
-import {FsJsonStorage} from './FsJsonStorage';
+import * as Assert from 'assert';
+import * as Fs from 'fs';
+import { FsJsonStorage } from './FsJsonStorage';
 
-const cacheFile = "cache.json";
+const cacheFile = 'cache.json';
 
-describe("FsJsonStorage", () => {
-    it("Should create file on storage construction", done => {
+describe('FsJsonStorage', () => {
+    it('Should create file on storage construction', done => {
         const storage = new FsJsonStorage(cacheFile);
         storage.clear();
 
@@ -15,22 +15,22 @@ describe("FsJsonStorage", () => {
         done();
     });
 
-    it("Should be empty cache file on storage construction", done => {
+    it('Should be empty cache file on storage construction', done => {
         const storage = new FsJsonStorage(cacheFile);
         storage.clear();
 
         const cache = Fs.readFileSync(cacheFile).toString();
 
-        Assert.equal(cache, "{}");
+        Assert.strictEqual(cache, '{}');
 
         Fs.unlinkSync(cacheFile);
         done();
     });
 
-    it("Should add cache item correctly", async () => {
+    it('Should add cache item correctly', async () => {
         const storage = new FsJsonStorage(cacheFile);
-        const cacheKey = "test";
-        const content = {username: "test", password: "test"};
+        const cacheKey = 'test';
+        const content = {username: 'test', password: 'test'};
 
         await storage.setItem(cacheKey, content);
         const cache = JSON.parse(Fs.readFileSync(cacheFile).toString());

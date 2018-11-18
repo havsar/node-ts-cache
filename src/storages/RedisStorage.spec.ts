@@ -22,7 +22,7 @@
 //         await storage.setItem(key, value);
 //         const resp = await storage.getItem(key);
 
-//         Assert.equal(resp, value);
+//         Assert.strictEqual(resp, value);
 //     });
 
 //     it("Should return undefined if key not found", async () => {
@@ -31,6 +31,6 @@
 
 //         const item = await storage.getItem(key);
 
-//         Assert.equal(item, undefined);
+//         Assert.strictEqual(item, undefined);
 //     });
 // });

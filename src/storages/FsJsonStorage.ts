@@ -1,7 +1,7 @@
-import {IStorage} from "./IStorage";
-import * as Bluebird from "bluebird";
+import { IStorage } from './IStorage';
+import * as Bluebird from 'bluebird';
 
-const Fs = <any>Bluebird.promisifyAll(require("fs"));
+const Fs = Bluebird.promisifyAll(require('fs'));
 
 export class FsJsonStorage implements IStorage {
 
