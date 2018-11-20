@@ -1,4 +1,3 @@
-import * as Lodash from 'lodash';
 import { IStorage } from '../storages/IStorage';
 import { AbstractBaseStrategy } from './AbstractBaseStrategy';
 
@@ -32,7 +31,7 @@ export class ExpirationStrategy extends AbstractBaseStrategy {
     }
 
     public async setItem(key: string, content: any, options: IOptions): Promise<void> {
-        options = Lodash.merge({ttl: 60, isLazy: true, isCachedForever: false}, options);
+        options = { ttl: 60, isLazy: true, isCachedForever: false, ...options }
 
         let meta = {};
 
