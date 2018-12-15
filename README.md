@@ -82,9 +82,16 @@ Cached items expire after a given amount of time.
  - `isCachedForver`: *(Default: false)* If true, cache entry has no expiration.
 
 # Storages
+
+*Note: For specific storages, client libraries must be installed:*
+
+| Storage      | Needed client library |
+|--------------|:---------------------:|
+| RedisStorage |  `npm install redis`  |
+
 #### MemoryStorage()
 #### FsJsonStorage(`fileName: string`)
-#### RedisStorage(`host: string, port: number, password: string`)
+#### RedisStorage(`clientOpts:` [RedisClientOptions](https://github.com/NodeRedis/node_redis#options-object-properties))
 
 
 # Test

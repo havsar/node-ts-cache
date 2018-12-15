@@ -1,27 +1,28 @@
 import { IStorage } from './IStorage';
 import * as Bluebird from 'bluebird';
+import * as Redis from 'redis';
+import { ClientOpts } from 'redis';
+import { RedisClient } from '../custom';
 
-const redis = require('redis');
-
-Bluebird.promisifyAll(redis.RedisClient.prototype);
-Bluebird.promisifyAll(redis.Multi.prototype);
+Bluebird.promisifyAll(Redis.RedisClient.prototype);
+Bluebird.promisifyAll(Redis.Multi.prototype);
 
 export class RedisStorage implements IStorage {
 
-    private client: any;
+    private client: RedisClient;
 
-    constructor(private host: string, private port: number, password: string) {
-        this.client = redis.createClient(this.port, this.host, {password: password});
+    constructor(private redisOptions: ClientOpts) {
+        this.client = Redis.createClient(this.redisOptions);
     }
 
     public async getItem<T>(key: string): Promise<T> {
-        const entry = await this.client.getAsync(key);
+        const entry: any = await this.client.getAsync(key);
         let finalItem = entry;
         try {
             finalItem = JSON.parse(entry);
         } catch (error) {
         }
-        return finalItem;
+        return finalItem || undefined;
     }
 
     public async setItem(key: string, content: any): Promise<void> {
