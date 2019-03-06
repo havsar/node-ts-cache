@@ -91,7 +91,7 @@ Cached items expire after a given amount of time.
 
 #### MemoryStorage()
 #### FsJsonStorage(`fileName: string`)
-#### RedisStorage(`clientOpts:` [RedisClientOptions](https://github.com/NodeRedis/node_redis#options-object-properties))
+#### RedisStorage(`clientOpts:` [RedisClientOptions](https://github.com/NodeRedis/node_redis#options-object-properties), failSafeMode: boolean)
 
 
 # Test
