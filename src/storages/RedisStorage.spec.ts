@@ -9,7 +9,8 @@ const clientMock = {
     flushdbAsync: Sinon.fake(),
     setItem: Sinon.fake(),
     delAsync: Sinon.fake(),
-    getAsync: Sinon.fake()
+    getAsync: Sinon.fake(),
+    on: (event: string, listener: Function) => { event === 'connect' ? listener() : '' }
 };
 
 const RedisMock = {
