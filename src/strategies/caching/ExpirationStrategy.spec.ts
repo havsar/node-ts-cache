@@ -1,4 +1,4 @@
-import {MemoryStorage} from '../storages/MemoryStorage';
+import {MemoryStorage} from '../../storages/MemoryStorage';
 import * as Assert from "assert";
 import {ExpirationStrategy} from './ExpirationStrategy';
 

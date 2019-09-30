@@ -1,4 +1,4 @@
-import { IStorage } from '../storages/IStorage';
+import { IStorage } from '../../storages/IStorage';
 import { AbstractBaseStrategy } from './AbstractBaseStrategy';
 
 interface IExpiringCacheItem {

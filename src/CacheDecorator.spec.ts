@@ -1,5 +1,5 @@
 import { MemoryStorage } from './storages/MemoryStorage';
-import { ExpirationStrategy } from './strategies/ExpirationStrategy';
+import { ExpirationStrategy } from './strategies/caching/ExpirationStrategy';
 import * as Assert from 'assert';
 import { Cache } from './CacheDecorator';
 

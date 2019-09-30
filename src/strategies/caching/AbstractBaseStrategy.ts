@@ -1,4 +1,4 @@
-import { IStorage } from '../storages/IStorage';
+import { IStorage } from '../../storages/IStorage';
 
 export abstract class AbstractBaseStrategy {
 
