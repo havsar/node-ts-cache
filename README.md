@@ -51,6 +51,31 @@ class MyService {
 }
 ```
 
+Cache decorator generates cache key according to class name, class method and args (with JSON.stringify).
+If you want another key creation logic you can bypass key creation strategy to the Cache decorator.
+
+```ts
+import { Cache, ExpirationStrategy, MemoryStorage, IKeyStrategy } from "node-ts-cache";
+
+class MyKeyStrategy implements IKeyStrategy {
+   public getKey(className: string, methodName: string, args: any[]): Promise<string> | string {
+        // Here you can implement your own way of creating cache keys
+        return `foo bar baz`;
+   }
+}
+
+const myStrategy = new ExpirationStrategy(new MemoryStorage());
+const myKeyStrategy = new MyKeyStrategy();
+
+class MyService {
+    
+    @Cache(myStrategy, myKeyStrategy, { ttl: 60 })
+    public async getUsers(): Promise<string[]> {
+        return ["Max", "User"];
+    }
+}
+```
+
 ## Directly
 ```ts
 import { ExpirationStrategy, MemoryStorage } from "node-ts-cache";
