@@ -1,6 +1,7 @@
 import { IStorage } from '../../storages/IStorage';
+import { ICacheStrategy } from './ICacheStrategy';
 
-export abstract class AbstractBaseStrategy {
+export abstract class AbstractBaseStrategy implements ICacheStrategy {
 
     constructor(protected storage: IStorage) { }
 

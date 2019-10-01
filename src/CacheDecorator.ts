@@ -1,13 +1,13 @@
 import { AbstractBaseStrategy } from './strategies/caching/AbstractBaseStrategy';
-import {AbstractBaseKeyStrategy} from './strategies/key/AbstractBaseStrategy';
-import {JSONStringifyStrategy} from './strategies/key/JSONStringifyStrategy';
+import { JSONStringifyKeyStrategy } from './strategies/key/JSONStringifyStrategy';
+import { IKeyStrategy } from './strategies/key/IKeyStrategy';
 
-const DefaultKeyStrategy = JSONStringifyStrategy;
+const DefaultKeyStrategy = JSONStringifyKeyStrategy;
 
 function Cache(cachingStrategy: AbstractBaseStrategy, options: any): Function;
 function Cache(
     cachingStrategy: AbstractBaseStrategy,
-    keyStrategy: AbstractBaseKeyStrategy,
+    keyStrategy: IKeyStrategy,
     options: any
 ): Function;
 function Cache(
@@ -16,10 +16,10 @@ function Cache(
     return function (target: any, methodName: string, descriptor: PropertyDescriptor) {
         const cachingStrategy = args[0];
 
-        let keyStrategy: AbstractBaseKeyStrategy;
+        let keyStrategy: IKeyStrategy;
         let options: any;
 
-        if (args[1] instanceof AbstractBaseKeyStrategy) {
+        if (args[1].getKey) {
             keyStrategy = args[1];
             options = args[2];
         } else {
@@ -54,4 +54,4 @@ function Cache(
     };
 }
 
-export {Cache};
+export { Cache };
