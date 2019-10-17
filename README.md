@@ -79,7 +79,7 @@ Cached items expire after a given amount of time.
 
  - `ttl`: *(Default: 60)* Number of seconds to expire the cachte item
  - `isLazy`: *(Default: true)* If true, expired cache entries will be deleted on touch. If false, entries will be deleted after the given *ttl*.
- - `isCachedForver`: *(Default: false)* If true, cache entry has no expiration.
+ - `isCachedForever`: *(Default: false)* If true, cache entry has no expiration.
 
 # Storages
 
