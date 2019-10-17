@@ -2,7 +2,7 @@
   "name": "node-ts-cache",
   "version": "3.1.0",
   "description": "Simple and extensible caching module supporting decorators",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "mocha src/*.spec.js src/**/*.spec.js",
     "tdd": "mocha -w src/*.spec.js src/**/*.spec.js",
@@ -32,6 +32,9 @@
     "file-cache",
     "node-cache",
     "ts-cache"
+  ],
+  "files": [
+    "dist"
   ],
   "author": "Himmet Avsar <avsar.himmet1@gmail.com>",
   "license": "MIT",

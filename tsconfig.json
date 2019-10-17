@@ -16,11 +16,9 @@
     ],
     "sourceMap": true,
     "experimentalDecorators": true,
-    "typeRoots": [
-      "node_modules/@types"
-    ],
     "allowJs": false,
-    "rootDir": "src"
+    "outDir": "./dist",
+    "rootDir": "./src"
   },
   "exclude": [
     "node_modules"
