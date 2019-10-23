@@ -1,4 +1,4 @@
-import * as Redis from 'redis';
+import * as Redis from 'redis'
 
 interface RedisClient extends Redis.RedisClient {
     getAsync?(arg: string): Promise<string>;

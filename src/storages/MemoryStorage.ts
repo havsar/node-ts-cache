@@ -1,21 +1,22 @@
-import { IStorage } from './IStorage';
+import { IStorage } from './IStorage'
 
 export class MemoryStorage implements IStorage {
 
-    private memCache: any = {};
+    private memCache: any = {}
 
-    constructor() { }
+    constructor() {
+    }
 
     public async getItem<T>(key: string): Promise<T> {
-        return this.memCache[key];
+        return this.memCache[key]
     }
 
     public async setItem(key: string, content: any): Promise<void> {
-        this.memCache[key] = content;
+        this.memCache[key] = content
     }
 
     public async clear(): Promise<void> {
-        this.memCache = {};
+        this.memCache = {}
     }
 
 }
