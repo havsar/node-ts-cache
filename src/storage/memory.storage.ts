@@ -1,6 +1,6 @@
-import { IStorage } from './IStorage'
+import { StorageTypes } from './storage.types'
 
-export class MemoryStorage implements IStorage {
+export class MemoryStorage implements StorageTypes {
 
     private memCache: any = {}
 

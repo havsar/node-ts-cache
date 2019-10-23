@@ -20,7 +20,10 @@
       "node_modules/@types"
     ],
     "allowJs": false,
-    "rootDir": "src"
+    "rootDirs": [
+      "src",
+      "test"
+    ]
   },
   "exclude": [
     "node_modules"

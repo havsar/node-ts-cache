@@ -1,7 +1,9 @@
-import { IKeyStrategy } from './IKeyStrategy'
+import { IKeyStrategy } from '../../index'
 
-export class JSONStringifyKeyStrategy implements IKeyStrategy {
+class JSONStringifyKeyStrategy implements IKeyStrategy {
     public getKey(className: string, methodName: string, args: any[]): Promise<string> | string {
         return `${className}:${methodName}:${JSON.stringify(args)}`
     }
 }
+
+export { JSONStringifyKeyStrategy }

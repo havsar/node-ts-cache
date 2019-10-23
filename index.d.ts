@@ -1,1 +1,1 @@
-export { Cache, RedisStorage, ExpirationStrategy, FsJsonStorage, MemoryStorage } from './src';
+export { Cache, RedisStorage, ExpirationStrategy, FsJsonStorage, MemoryStorage } from './src'

@@ -1,7 +1,7 @@
-import { RedisStorage } from './RedisStorage'
 import * as Proxyquire from 'proxyquire'
 import * as Sinon from 'sinon'
 import * as Assert from 'assert'
+import { RedisStorage } from '../src'
 
 Proxyquire.noCallThru()
 
@@ -21,7 +21,7 @@ const RedisMock = {
         prototype: {}
     }
 }
-const MockRedisStorage: typeof RedisStorage = Proxyquire.load('./RedisStorage', {
+const MockRedisStorage: typeof RedisStorage = Proxyquire.load('../src/storage/redis.storage', {
     'redis': RedisMock
 }).RedisStorage
 
@@ -68,7 +68,7 @@ describe('RedisStorage', () => {
                 prototype: {}
             }
         }
-        const MockRedisFailStorage: typeof RedisStorage = Proxyquire.load('./RedisStorage', {
+        const MockRedisFailStorage: typeof RedisStorage = Proxyquire.load('../src/storage/redis.storage', {
             'redis': RedisMock
         }).RedisStorage
 

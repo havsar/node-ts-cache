@@ -1,4 +1,4 @@
-import { IStorage } from './IStorage'
+import { StorageTypes } from './storage.types'
 import * as Bluebird from 'bluebird'
 import * as Redis from 'redis'
 import { ClientOpts } from 'redis'
@@ -7,7 +7,7 @@ import { RedisClient } from '../custom'
 Bluebird.promisifyAll(Redis.RedisClient.prototype)
 Bluebird.promisifyAll(Redis.Multi.prototype)
 
-export class RedisStorage implements IStorage {
+export class RedisStorage implements StorageTypes {
 
     private client: RedisClient
 

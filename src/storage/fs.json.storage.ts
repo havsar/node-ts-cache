@@ -1,9 +1,9 @@
-import { IStorage } from './IStorage'
+import { StorageTypes } from './storage.types'
 import * as Bluebird from 'bluebird'
 
 const Fs = Bluebird.promisifyAll(require('fs'))
 
-export class FsJsonStorage implements IStorage {
+export class FsJsonStorage implements StorageTypes {
 
     constructor(public jsonFilePath: string) {
         if (!Fs.existsSync(this.jsonFilePath)) {

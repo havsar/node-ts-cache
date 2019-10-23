@@ -1,8 +1,5 @@
-import { MemoryStorage } from './storages/MemoryStorage'
-import { ExpirationStrategy } from './strategies/caching/ExpirationStrategy'
 import * as Assert from 'assert'
-import { Cache } from './CacheDecorator'
-import { IKeyStrategy } from './strategies/key/IKeyStrategy'
+import { Cache, ExpirationStrategy, IKeyStrategy, MemoryStorage } from '../src'
 
 const strategy = new ExpirationStrategy(new MemoryStorage())
 const data = ['user', 'max', 'test']
