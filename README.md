@@ -69,7 +69,7 @@ const myKeyStrategy = new MyKeyStrategy();
 
 class MyService {
     
-    @Cache(myStrategy, myKeyStrategy, { ttl: 60 })
+    @Cache(myStrategy, { ttl: 60 }, myKeyStrategy)
     public async getUsers(): Promise<string[]> {
         return ["Max", "User"];
     }
