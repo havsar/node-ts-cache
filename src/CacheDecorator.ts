@@ -1,12 +1,16 @@
-import { AbstractBaseStrategy } from './strategies/AbstractBaseStrategy'
+import { IKeyStrategy } from './strategies/key/IKeyStrategy'
+import { AbstractBaseStrategy } from './strategies/caching/AbstractBaseStrategy'
+import { JSONStringifyKeyStrategy } from './strategies/key/JSONStringifyStrategy'
 
-export function Cache(cachingStrategy: AbstractBaseStrategy, options: any): Function {
+const defaultKeyStrategy = new JSONStringifyKeyStrategy()
+
+export function Cache(cachingStrategy: AbstractBaseStrategy, options: any, keyStrategy: IKeyStrategy = defaultKeyStrategy): Function {
     return function (target: any, methodName: string, descriptor: PropertyDescriptor) {
         const originalMethod = descriptor.value
         const className = target.constructor.name
 
         descriptor.value = async function (...args: any[]) {
-            const cacheKey = `${className}:${methodName}:${JSON.stringify(args)}`
+            const cacheKey = await keyStrategy.getKey(className, methodName, args)
 
             const entry = await cachingStrategy.getItem(cacheKey)
             if (entry) {
@@ -14,6 +18,7 @@ export function Cache(cachingStrategy: AbstractBaseStrategy, options: any): Func
             }
 
             const methodCall = originalMethod.apply(this, args)
+
             let methodResult
             if (methodCall && methodCall.then) {
                 methodResult = await methodCall
@@ -22,6 +27,7 @@ export function Cache(cachingStrategy: AbstractBaseStrategy, options: any): Func
             }
 
             await cachingStrategy.setItem(cacheKey, methodResult, options)
+
             return methodResult
         }
 
