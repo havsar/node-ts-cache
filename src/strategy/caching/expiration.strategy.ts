@@ -15,13 +15,15 @@ interface IOptions {
     isCachedForever?: boolean;
 }
 
+const DEFAULT_TTL = 60;
+
 export class ExpirationStrategy extends AbstractBaseStrategy {
 
     constructor(storage: StorageTypes) {
         super(storage)
     }
 
-    public async getItem<T>(key: string): Promise<T> {
+    public async getItem<T>(key: string): Promise<T | undefined> {
         const item = await this.storage.getItem<IExpiringCacheItem>(key)
         if (item && item.meta && item.meta.ttl && this.isItemExpired(item)) {
             await this.storage.setItem(key, undefined)
@@ -31,20 +33,21 @@ export class ExpirationStrategy extends AbstractBaseStrategy {
     }
 
     public async setItem(key: string, content: any, options: IOptions): Promise<void> {
-        options = {ttl: 60, isLazy: true, isCachedForever: false, ...options}
+        options = {ttl: DEFAULT_TTL, isLazy: true, isCachedForever: false, ...options}
 
         let meta = {}
 
         if (!options.isCachedForever) {
+            const ttl = options.ttl || DEFAULT_TTL
             meta = {
-                ttl: options.ttl * 1000,
+                ttl: ttl * 1000,
                 createdAt: Date.now()
             }
 
             if (!options.isLazy) {
                 setTimeout(() => {
                     this.unsetKey(key)
-                }, options.ttl)
+                }, ttl)
             }
         }
         await this.storage.setItem(key, {meta, content})
