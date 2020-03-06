@@ -6,7 +6,8 @@
     "postinstall": "npm run bootstrap",
     "publish": "lerna publish",
     "build": "lerna run build",
-    "test": "lerna run test"
+    "test": "lerna run test",
+    "prepublishOnly": "npm run test"
   },
   "devDependencies": {
     "lerna": "^3.20.2",
