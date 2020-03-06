@@ -1,16 +1,16 @@
-import { RedisStorage } from './RedisStorage';
-import * as Proxyquire from 'proxyquire';
-import * as Sinon from 'sinon';
-import * as Assert from 'assert';
+import * as Proxyquire from 'proxyquire'
+import * as Sinon from 'sinon'
+import * as Assert from 'assert'
+import { RedisStorage } from '../src'
 
-Proxyquire.noCallThru();
+Proxyquire.noCallThru()
 
 const clientMock = {
     flushdbAsync: Sinon.fake(),
     setItem: Sinon.fake(),
     delAsync: Sinon.fake(),
     getAsync: Sinon.fake()
-};
+}
 
 const RedisMock = {
     createClient: () => clientMock,
@@ -20,37 +20,37 @@ const RedisMock = {
     Multi: {
         prototype: {}
     }
-};
-const MockRedisStorage: typeof RedisStorage = Proxyquire.load('./RedisStorage', {
+}
+const MockRedisStorage: typeof RedisStorage = Proxyquire.load('../src/storage/redis.storage', {
     'redis': RedisMock
-}).RedisStorage;
+}).RedisStorage
 
 const storage = new MockRedisStorage({
     host: 'host',
     port: 123,
     password: 'pass'
-});
+})
 
 describe('RedisStorage', () => {
     it('Should clear Redis without errors', async () => {
-        await storage.clear();
-    });
+        await storage.clear()
+    })
 
     it('Should delete cache item if set to undefined', async () => {
-        await storage.setItem('test', undefined);
+        await storage.setItem('test', undefined)
 
-        Assert.strictEqual(clientMock.delAsync.called, true);
-        Assert.strictEqual(clientMock.delAsync.calledWith('test'), true);
-        Assert.strictEqual(clientMock.setItem.called, false);
-    });
+        Assert.strictEqual(clientMock.delAsync.called, true)
+        Assert.strictEqual(clientMock.delAsync.calledWith('test'), true)
+        Assert.strictEqual(clientMock.setItem.called, false)
+    })
 
 
     it('Should return undefined if cache not hit', async () => {
-        await storage.clear();
-        const item = await storage.getItem('item123');
+        await storage.clear()
+        const item = await storage.getItem('item123')
 
-        Assert.strictEqual(item, undefined);
-    });
+        Assert.strictEqual(item, undefined)
+    })
 
     it('Should throw an Error if connection to redis fails', async () => {
         const clientMock = {
@@ -58,7 +58,7 @@ describe('RedisStorage', () => {
             setItem: Sinon.fake(),
             delAsync: Sinon.fake(),
             getAsync: Sinon.fake()
-        };
+        }
         const RedisMock = {
             createClient: () => clientMock,
             RedisClient: {
@@ -67,28 +67,28 @@ describe('RedisStorage', () => {
             Multi: {
                 prototype: {}
             }
-        };
-        const MockRedisFailStorage: typeof RedisStorage = Proxyquire.load('./RedisStorage', {
+        }
+        const MockRedisFailStorage: typeof RedisStorage = Proxyquire.load('../src/storage/redis.storage', {
             'redis': RedisMock
-        }).RedisStorage;
+        }).RedisStorage
 
         const testStorage = new MockRedisFailStorage({
             host: 'unknown-host',
             port: 123,
             password: 'pass',
             connect_timeout: 1000
-        });
+        })
 
-        const errorMsg = 'Should have thrown an error, but did not';
+        const errorMsg = 'Should have thrown an error, but did not'
         try {
-            await testStorage.clear();
-            await Promise.reject(errorMsg);
+            await testStorage.clear()
+            await Promise.reject(errorMsg)
         } catch (error) {
             if (error === errorMsg) {
-                Assert.fail('It id not throw an error');
+                Assert.fail('It id not throw an error')
             } else {
-                Assert.ok(true);
+                Assert.ok(true)
             }
         }
-    });
-});
+    })
+})

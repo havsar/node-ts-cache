@@ -3,7 +3,7 @@ interface ICacheEntry {
     meta: any;
 }
 
-export interface IStorage {
+export interface StorageTypes {
     getItem<T>(key: string): Promise<T>;
 
     setItem(key: string, content: ICacheEntry): Promise<void>;
