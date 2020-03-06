@@ -1,22 +1,13 @@
 import { StorageTypes } from './storage.types'
-import * as Bluebird from 'bluebird'
-import * as Redis from 'redis'
-import { ClientOpts } from 'redis'
-import { RedisClient } from '../custom'
-
-Bluebird.promisifyAll(Redis.RedisClient.prototype)
-Bluebird.promisifyAll(Redis.Multi.prototype)
+import * as Redis from 'ioredis';
 
 export class RedisStorage implements StorageTypes {
 
-    private client: RedisClient
-
-    constructor(private redisOptions: ClientOpts) {
-        this.client = Redis.createClient(this.redisOptions)
+    constructor(redisOptions: Redis.RedisOptions, private client = new Redis(redisOptions)) {
     }
 
-    public async getItem<T>(key: string): Promise<T> {
-        const entry: any = await this.client.getAsync(key)
+    public async getItem<T>(key: string): Promise<T | undefined>  {
+        const entry: any = await this.client.get(key)
         let finalItem = entry
         try {
             finalItem = JSON.parse(entry)
@@ -29,12 +20,13 @@ export class RedisStorage implements StorageTypes {
         if (typeof content === 'object') {
             content = JSON.stringify(content)
         } else if (content === undefined) {
-            return this.client.delAsync(key)
+            await this.client.del(key)
+            return;
         }
-        return this.client.setAsync(key, content)
+        await this.client.set(key, content)
     }
 
     public async clear(): Promise<void> {
-        return this.client.flushdbAsync()
+        await this.client.flushdb()
     }
 }

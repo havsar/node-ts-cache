@@ -11,7 +11,7 @@ export class FsJsonStorage implements StorageTypes {
         }
     }
 
-    public async getItem<T>(key: string): Promise<T> {
+    public async getItem<T>(key: string): Promise<T | undefined> {
         return (await this.getCacheObject())[key]
     }
 

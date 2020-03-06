@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
     "target": "es5",
+    "declaration": true,
+    "strict": true,
     "module": "commonjs",
     "moduleResolution": "node",
     "noEmitOnError": true,
@@ -17,11 +19,10 @@
     "sourceMap": true,
     "experimentalDecorators": true,
     "allowJs": false,
-    "outDir": "./dist",
-    "rootDir": "./src"
+    "outDir": "./dist"
   },
-  "exclude": [
-    "node_modules"
+  "include": [
+    "src"
   ],
   "compileOnSave": true
 }
