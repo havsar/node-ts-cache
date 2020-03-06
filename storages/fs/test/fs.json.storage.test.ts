@@ -1,6 +1,6 @@
 import * as Assert from 'assert'
 import * as Fs from 'fs'
-import { FsJsonStorage } from '../src'
+import { FsJsonStorage } from '../../../ts-cache/src'
 
 const cacheFile = 'cache.json'
 

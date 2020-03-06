@@ -1,0 +1,37 @@
+{
+  "name": "node-ts-cache-fs-storage",
+  "version": "1.0.0",
+  "description": "FS storage for node-ts-cache",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "mocha -r ts-node/register test/**/*.test.ts",
+    "tdd": "mocha -r ts-node/register -w",
+    "tdd-debug-brk": "mocha -r ts-node/register --inspect-brk",
+    "build": "tsc -p .",
+    "prepublish": "tsc -p .",
+    "clean": "git clean -fdx ts-cache/src",
+    "prepare": "tsc -p .",
+    "dev": "tsc -p . -w"
+  },
+  "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/havsar/node-ts-cache.git"
+  },
+  "files": [
+    "dist"
+  ],
+  "author": "Himmet Avsar <avsar.himmet1@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/havsar/node-ts-cache/issues"
+  },
+  "homepage": "https://github.com/havsar/node-ts-cache#readme",
+  "dependencies": {
+    "node-ts-cache": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/bluebird": "3.5.30"
+  },
+  "optionalDependencies": {}
+}

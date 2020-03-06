@@ -1,5 +1,5 @@
 import * as Assert from 'assert'
-import { Cache, ExpirationStrategy, IKeyStrategy, MemoryStorage } from '../src'
+import { Cache, ExpirationStrategy, IKeyStrategy, MemoryStorage } from '../ts-cache/src'
 
 const strategy = new ExpirationStrategy(new MemoryStorage())
 const data = ['user', 'max', 'test']

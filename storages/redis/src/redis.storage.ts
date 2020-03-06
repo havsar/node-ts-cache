@@ -1,4 +1,4 @@
-import { StorageTypes } from './storage.types'
+import { StorageTypes } from 'node-ts-cache'
 import * as Redis from 'ioredis';
 
 export class RedisStorage implements StorageTypes {

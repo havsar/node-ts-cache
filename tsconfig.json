@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2017",
     "declaration": true,
     "strict": true,
-    "module": "commonjs",
+    "module": "esnext",
     "moduleResolution": "node",
     "noEmitOnError": true,
     "allowUnreachableCode": false,
@@ -22,7 +22,7 @@
     "outDir": "./dist"
   },
   "include": [
-    "src"
+    "ts-cache/src"
   ],
   "compileOnSave": true
 }

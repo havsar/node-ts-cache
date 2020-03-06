@@ -2,7 +2,7 @@
   "extends": "../tsconfig.json",
   "include": [
     "*.ts",
-    "../src/**/*.ts"
+    "../ts-cache/src/**/*.ts"
   ]
 }
 

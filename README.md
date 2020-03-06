@@ -24,7 +24,13 @@ Simple and extensible caching module supporting decorators
 
 # Install
 ```bash
-npm install --save node-ts-cache
+npm install --save node-ts-cache-<storage>-storage
+
+e.g.
+npm install --save node-ts-cache-memory-storage
+npm install --save node-ts-cache-fs-storage
+npm install --save node-ts-cache-redis-storage
+npm install --save node-ts-cache-node-cache-storage
 ```
 
 # Usage
@@ -38,7 +44,8 @@ Caches function response using the given options. Works with different strategie
 *Note: @Cache always converts the method response to a promise because caching might be async.* 
 
 ```ts
-import { Cache, ExpirationStrategy, MemoryStorage } from "node-ts-cache";
+import { Cache, ExpirationStrategy } from "node-ts-cache";
+import { MemoryStorage } from "node-ts-cache-memory-storage";
 
 const myStrategy = new ExpirationStrategy(new MemoryStorage());
 
@@ -55,7 +62,8 @@ Cache decorator generates cache key according to class name, class method and ar
 If you want another key creation logic you can bypass key creation strategy to the Cache decorator.
 
 ```ts
-import { Cache, ExpirationStrategy, MemoryStorage, IKeyStrategy } from "node-ts-cache";
+import { Cache, ExpirationStrategy, IKeyStrategy } from "node-ts-cache";
+import { MemoryStorage } from "node-ts-cache-memory-storage";
 
 class MyKeyStrategy implements IKeyStrategy {
    public getKey(className: string, methodName: string, args: any[]): Promise<string> | string {
@@ -78,7 +86,8 @@ class MyService {
 
 ## Directly
 ```ts
-import { ExpirationStrategy, MemoryStorage } from "node-ts-cache";
+import { ExpirationStrategy } from "node-ts-cache";
+import { MemoryStorage } from "node-ts-cache-memory-storage";
 
 const myCache = new ExpirationStrategy(new MemoryStorage());
 
@@ -108,13 +117,12 @@ Cached items expire after a given amount of time.
 
 # Storages
 
-*Note: For specific storages, client libraries must be installed:*
-
 | Storage      | Needed client library |
 |--------------|:---------------------:|
-| RedisStorage |  `npm install redis`  |
-| NodeCacheStorage |  `npm install node-cache`  |
-
+| FsStorage |  `npm install node-ts-cache-fs-storage`  |
+| MemoryStorage |  `npm install node-ts-cache-memory-storage`  |
+| NodeCacheStorage |  `npm install node-ts-cache-node-cache-storage`  |
+| RedisStorage |  `npm install node-ts-cache-redis-storage`  |
 
 #### MemoryStorage()
 in memory

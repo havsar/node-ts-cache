@@ -1,72 +1,18 @@
 {
-  "name": "node-ts-cache",
-  "version": "4.0.0",
-  "description": "Simple and extensible caching module supporting decorators",
-  "main": "dist/index.js",
+  "name": "root",
+  "private": true,
   "scripts": {
-    "test": "mocha -r ts-node/register test/**/*.test.ts",
-    "tdd": "mocha -r ts-node/register -w",
-    "tdd-debug-brk": "mocha -r ts-node/register --inspect-brk",
-    "build": "tsc -p .",
-    "prepublish": "tsc -p .",
-    "clean": "git clean -fdx src",
-    "prepare": "tsc -p .",
-    "dev": "tsc -p . -w"
-  },
-  "types": "dist/index.d.ts",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/havsar/node-ts-cache.git"
-  },
-  "keywords": [
-    "node",
-    "nodejs",
-    "cache",
-    "typescript",
-    "ts",
-    "caching",
-    "memcache",
-    "memory-cache",
-    "redis-cache",
-    "redis",
-    "cache",
-    "file-cache",
-    "node-cache",
-    "ts-cache"
-  ],
-  "files": [
-    "dist"
-  ],
-  "author": "Himmet Avsar <avsar.himmet1@gmail.com>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/havsar/node-ts-cache/issues"
-  },
-  "homepage": "https://github.com/havsar/node-ts-cache#readme",
-  "dependencies": {
-    "bluebird": "3.5.5"
-  },
-  "peerDependencies": {
-    "ioredis": "^4.16.0",
-    "node-cache": "^5.1.0"
+    "bootstrap": "lerna bootstrap --force-local",
+    "postinstall": "npm run bootstrap",
+    "publish": "lerna publish",
+    "build": "lerna run build"
   },
   "devDependencies": {
-    "@types/node-cache": "^4.2.5",
-    "@types/bluebird": "3.5.27",
-    "@types/ioredis": "^4.14.8",
-    "@types/node": "10.14.17",
-    "@types/redis": "^2.8.13",
-    "@types/mocha": "5.2.5",
-    "ioredis-mock": "^4.19.0",
-    "@types/proxyquire": "1.3.28",
-    "@types/sinon": "5.0.5",
-    "mocha": "5.2.0",
-    "proxyquire": "2.1.3",
-    "sinon": "7.4.2",
-    "ts-node": "8.3.0",
-    "typescript": "3.6.2",
-    "ioredis": "^4.16.0",
-    "node-cache": "^5.1.0"
-  },
-  "optionalDependencies": {}
+    "lerna": "^3.20.2",
+    "@types/node": "13.7.7",
+    "@types/mocha": "7.0.2",
+    "mocha": "7.1.0",
+    "ts-node": "8.6.2",
+    "typescript": "3.8.3"
+  }
 }

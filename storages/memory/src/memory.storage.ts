@@ -1,4 +1,4 @@
-import { StorageTypes } from './storage.types'
+import { StorageTypes } from 'node-ts-cache'
 
 export class MemoryStorage implements StorageTypes {
 

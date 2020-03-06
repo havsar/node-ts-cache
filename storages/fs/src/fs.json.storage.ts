@@ -1,4 +1,4 @@
-import { StorageTypes } from './storage.types'
+import { StorageTypes } from 'node-ts-cache'
 import * as Bluebird from 'bluebird'
 
 const Fs = Bluebird.promisifyAll(require('fs'))
