@@ -113,11 +113,20 @@ Cached items expire after a given amount of time.
 | Storage      | Needed client library |
 |--------------|:---------------------:|
 | RedisStorage |  `npm install redis`  |
+| NodeCacheStorage |  `npm install node-cache`  |
+
 
 #### MemoryStorage()
-#### FsJsonStorage(`fileName: string`)
-#### RedisStorage(`clientOpts:` [RedisClientOptions](https://github.com/NodeRedis/node_redis#options-object-properties))
+in memory
 
+#### FsJsonStorage(`fileName: string`)
+file based
+
+#### RedisStorage(`clientOpts:` [RedisClientOptions](https://github.com/NodeRedis/node_redis#options-object-properties))
+redis backend
+
+#### NodeCacheStorage(`options:` [NodeCacheOptions](https://www.npmjs.com/package/node-cache#options))
+wrapper for [node-cache](https://www.npmjs.com/package/node-cache)
 
 # Test
 ```bash
