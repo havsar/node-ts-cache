@@ -1,6 +1,6 @@
 {
   "name": "node-ts-cache",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "description": "Simple and extensible caching module supporting decorators",
   "main": "dist/index.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "prepare": "tsc -p .",
     "dev": "tsc -p . -w"
   },
-  "types": "index.d.ts",
+  "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/havsar/node-ts-cache.git"
