@@ -4,12 +4,9 @@
   "description": "Simple and extensible caching module supporting decorators",
   "main": "dist/index.js",
   "scripts": {
-    "test": "mocha -r ts-node/register test/**/*.test.ts",
-    "tdd": "mocha -r ts-node/register -w",
-    "tdd-debug-brk": "mocha -r ts-node/register --inspect-brk",
     "build": "tsc -p .",
-    "prepublish": "tsc -p .",
-    "clean": "git clean -fdx ts-cache/src",
+    "prepublishOnly": "tsc -p .",
+    "clean": "git clean -fdx src",
     "prepare": "tsc -p .",
     "dev": "tsc -p . -w"
   },

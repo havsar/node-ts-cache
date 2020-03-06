@@ -1,5 +1,5 @@
 import * as Assert from 'assert'
-import { MemoryStorage } from '../ts-cache/src'
+import { MemoryStorage } from '../src'
 
 describe('MemoryStorage', () => {
     it('Should add cache item correctly', async () => {

@@ -1,8 +1,5 @@
-import * as Proxyquire from 'proxyquire'
 import * as Assert from 'assert'
-import { RedisStorage } from '../ts-cache/src'
-
-Proxyquire.noCallThru()
+import { RedisStorage } from '../src'
 
 // @ts-ignore
 import * as  RedisMock from 'ioredis-mock';

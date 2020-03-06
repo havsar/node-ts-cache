@@ -5,7 +5,8 @@
     "bootstrap": "lerna bootstrap --force-local",
     "postinstall": "npm run bootstrap",
     "publish": "lerna publish",
-    "build": "lerna run build"
+    "build": "lerna run build",
+    "test": "lerna run test"
   },
   "devDependencies": {
     "lerna": "^3.20.2",

@@ -10,3 +10,5 @@ npm-debug.log
 **/*.js.map
 secret.json
 node-ts-cache*.tgz
+dist
+lerna-debug.log
