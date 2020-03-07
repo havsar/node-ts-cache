@@ -6,8 +6,11 @@ const strategy = new ExpirationStrategy(new MemoryStorage())
 const data = ['user', 'max', 'test']
 
 class TestClassOne {
+    callCount = 0;
+
     @Cache(strategy, {ttl: 1000})
     public getUsers(): string[] {
+        this.callCount++;
         return data
     }
 
@@ -81,6 +84,18 @@ describe('CacheDecorator', () => {
 
         Assert.strictEqual(data, users)
         Assert.strictEqual(await strategy.getItem<string[]>('TestClassOne:getUsers:[]'), data)
+    })
+
+    it('Should prevent calling same method several times', async () => {
+        const myClass = new TestClassOne()
+
+        await Promise.all([myClass.getUsers(),myClass.getUsers(),myClass.getUsers()]);
+
+        Assert.strictEqual(myClass.callCount, 1)
+
+        await Promise.all([myClass.getUsers(),myClass.getUsers(),myClass.getUsers()]);
+
+        Assert.strictEqual(myClass.callCount, 1)
     })
 
     it('Should cache Promise response correctly', async () => {
