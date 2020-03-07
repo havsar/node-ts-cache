@@ -1,8 +1,8 @@
 import * as Assert from 'assert'
 import {Cache, ExpirationStrategy, IKeyStrategy} from '../src'
-import {MockedStorage} from "./mocked.storage";
+import { MemoryStorage } from "../src/storage/memory";
 
-const strategy = new ExpirationStrategy(new MockedStorage())
+const strategy = new ExpirationStrategy(new MemoryStorage())
 const data = ['user', 'max', 'test']
 
 class TestClassOne {

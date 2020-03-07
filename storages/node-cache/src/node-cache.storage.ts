@@ -11,7 +11,7 @@ export class NodeCacheStorage implements StorageTypes {
     }
 
     public async getItem<T>(key: string): Promise<T | undefined> {
-        return this.myCache.get(key);
+        return this.myCache.get(key) || undefined;
     }
 
     public async setItem(key: string, content: any): Promise<void> {

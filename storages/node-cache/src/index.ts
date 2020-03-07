@@ -1,1 +1,1 @@
-export { NodeCacheStorage } from './node-cache.storage';
+export { NodeCacheStorage as default } from './node-cache.storage';

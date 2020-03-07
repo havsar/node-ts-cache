@@ -1,7 +1,7 @@
 {
-  "name": "node-ts-cache-fs-storage",
+  "name": "node-ts-cache-redisio-storage",
   "version": "1.0.0",
-  "description": "FS storage for node-ts-cache",
+  "description": "Simple and extensible caching module supporting decorators",
   "main": "dist/index.js",
   "scripts": {
     "test": "mocha -r ts-node/register test/**/*.test.ts",
@@ -18,6 +18,22 @@
     "type": "git",
     "url": "git+https://github.com/havsar/node-ts-cache.git"
   },
+  "keywords": [
+    "node",
+    "nodejs",
+    "cache",
+    "typescript",
+    "ts",
+    "caching",
+    "memcache",
+    "memory-cache",
+    "redis-cache",
+    "redis",
+    "cache",
+    "file-cache",
+    "node-cache",
+    "ts-cache"
+  ],
   "files": [
     "dist"
   ],
@@ -28,10 +44,12 @@
   },
   "homepage": "https://github.com/havsar/node-ts-cache#readme",
   "dependencies": {
-    "node-ts-cache": "^4.0.0"
+    "node-ts-cache": "^4.0.0",
+    "ioredis": "^4.16.0"
   },
   "devDependencies": {
-    "@types/bluebird": "3.5.30"
+    "@types/ioredis": "^4.14.8",
+    "ioredis-mock": "^4.19.0"
   },
   "optionalDependencies": {}
 }

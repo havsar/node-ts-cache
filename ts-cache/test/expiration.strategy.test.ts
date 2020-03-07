@@ -1,6 +1,6 @@
 import * as Assert from 'assert'
 import { ExpirationStrategy } from '../src'
-import { MockedStorage } from './mocked.storage'
+import {MemoryStorage} from "../src/storage/memory";
 
 interface ITestType {
     user: {
@@ -14,7 +14,7 @@ const data: ITestType = {
 
 describe('ExpirationStrategy', () => {
     it('Should set cache item correctly with isLazy', async () => {
-        const cacher = new ExpirationStrategy(new MockedStorage())
+        const cacher = new ExpirationStrategy(new MemoryStorage())
 
         await cacher.setItem('test', data, {ttl: 10})
         const entry = await cacher.getItem<ITestType>('test')
@@ -23,7 +23,7 @@ describe('ExpirationStrategy', () => {
     })
 
     it('Should return no item if cache expires istantly with isLazy', async () => {
-        const cacher = new ExpirationStrategy(new MockedStorage())
+        const cacher = new ExpirationStrategy(new MemoryStorage())
 
         await cacher.setItem('test', data, {ttl: -1})
         const entry = await cacher.getItem<ITestType>('test')
@@ -31,7 +31,7 @@ describe('ExpirationStrategy', () => {
     })
 
     it('Should not find cache item after ttl with isLazy disabled', async () => {
-        const cacher = new ExpirationStrategy(new MockedStorage())
+        const cacher = new ExpirationStrategy(new MemoryStorage())
 
         await cacher.setItem('test', data, {ttl: 0.001, isLazy: false})
         await wait(10)
@@ -41,7 +41,7 @@ describe('ExpirationStrategy', () => {
     })
 
     it('Should ignore isLazy and ttl options if isCachedForever option is provided and cache forever', async () => {
-        const cacher = new ExpirationStrategy(new MockedStorage())
+        const cacher = new ExpirationStrategy(new MemoryStorage())
 
         await cacher.setItem('test', data, {ttl: 0, isLazy: false, isCachedForever: true})
         await wait(10)

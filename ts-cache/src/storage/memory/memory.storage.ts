@@ -1,6 +1,7 @@
-import {StorageTypes} from "../dist";
+import { StorageTypes } from '../storage.types'
 
-export class MockedStorage implements StorageTypes {
+export class MemoryStorage implements StorageTypes {
+
     private memCache: any = {}
 
     constructor() {
@@ -17,4 +18,5 @@ export class MockedStorage implements StorageTypes {
     public async clear(): Promise<void> {
         this.memCache = {}
     }
+
 }

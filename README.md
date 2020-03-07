@@ -24,13 +24,7 @@ Simple and extensible caching module supporting decorators
 
 # Install
 ```bash
-npm install --save node-ts-cache-<storage>-storage
-
-e.g.
-npm install --save node-ts-cache-memory-storage
-npm install --save node-ts-cache-fs-storage
-npm install --save node-ts-cache-redis-storage
-npm install --save node-ts-cache-node-cache-storage
+npm install --save node-ts-cache
 ```
 
 # Usage
@@ -44,8 +38,7 @@ Caches function response using the given options. Works with different strategie
 *Note: @Cache always converts the method response to a promise because caching might be async.* 
 
 ```ts
-import { Cache, ExpirationStrategy } from "node-ts-cache";
-import { MemoryStorage } from "node-ts-cache-memory-storage";
+import { Cache, ExpirationStrategy, MemoryStorage } from "node-ts-cache";
 
 const myStrategy = new ExpirationStrategy(new MemoryStorage());
 
@@ -62,8 +55,7 @@ Cache decorator generates cache key according to class name, class method and ar
 If you want another key creation logic you can bypass key creation strategy to the Cache decorator.
 
 ```ts
-import { Cache, ExpirationStrategy, IKeyStrategy } from "node-ts-cache";
-import { MemoryStorage } from "node-ts-cache-memory-storage";
+import { Cache, ExpirationStrategy, IKeyStrategy, MemoryStorage } from "node-ts-cache";
 
 class MyKeyStrategy implements IKeyStrategy {
    public getKey(className: string, methodName: string, args: any[]): Promise<string> | string {
@@ -86,8 +78,7 @@ class MyService {
 
 ## Directly
 ```ts
-import { ExpirationStrategy } from "node-ts-cache";
-import { MemoryStorage } from "node-ts-cache-memory-storage";
+import { ExpirationStrategy, MemoryStorage } from "node-ts-cache";
 
 const myCache = new ExpirationStrategy(new MemoryStorage());
 
@@ -117,24 +108,67 @@ Cached items expire after a given amount of time.
 
 # Storages
 
-| Storage      | Needed client library |
+| Storage      | Needed library |
 |--------------|:---------------------:|
-| FsStorage |  `npm install node-ts-cache-fs-storage`  |
-| MemoryStorage |  `npm install node-ts-cache-memory-storage`  |
-| NodeCacheStorage |  `npm install node-ts-cache-node-cache-storage`  |
+| FsStorage |  (bundled) |
+| MemoryStorage |  (bundled)  |
 | RedisStorage |  `npm install node-ts-cache-redis-storage`  |
+| RedisIOStorage |  `npm install node-ts-cache-redisio-storage`  |
+| NodeCacheStorage |  `npm install node-ts-cache-node-cache-storage`  |
+| LRUStorage |  `npm install node-ts-lru-storage`  |
 
 #### MemoryStorage()
 in memory
+```
+import { Cache, ExpirationStrategy, MemoryStorage } from "node-ts-cache";
 
+const myStrategy = new ExpirationStrategy(new MemoryStorage());
+```
+    
 #### FsJsonStorage(`fileName: string`)
 file based
+```
+import { Cache, ExpirationStrategy, FileStorage } from "node-ts-cache";
+
+const myStrategy = new ExpirationStrategy(new FileStorage());
+```
 
 #### RedisStorage(`clientOpts:` [RedisClientOptions](https://github.com/NodeRedis/node_redis#options-object-properties))
-redis backend
+redis client backend
+```
+import { Cache, ExpirationStrategy } from "node-ts-cache";
+import RedisStorage from 'node-ts-cache-redis-storage';
+
+const myStrategy = new ExpirationStrategy(new RedisStorage());
+```
+
+
+#### RedisIOStorage(`clientOpts:` [RedisIOClientOptions](https://github.com/NodeRedis/node_redis#options-object-properties))
+redis io client backend
+```
+import { Cache, ExpirationStrategy } from "node-ts-cache";
+import RedisIOStorage from 'node-ts-cache-redisio-storage';
+
+const myStrategy = new ExpirationStrategy(new RedisIOStorage());
+```
 
 #### NodeCacheStorage(`options:` [NodeCacheOptions](https://www.npmjs.com/package/node-cache#options))
 wrapper for [node-cache](https://www.npmjs.com/package/node-cache)
+```
+import { Cache, ExpirationStrategy } from "node-ts-cache";
+import NodeCacheStorage from 'node-ts-cache-node-cache-storage';
+
+const myStrategy = new ExpirationStrategy(new NodeCacheStorage());
+```
+
+#### LRUStorage(`options:` [LRUCacheOptions](https://www.npmjs.com/package/lru-cache#options))
+wrapper for [lru-cache](https://www.npmjs.com/package/lru-cache)
+```
+import { Cache, ExpirationStrategy } from "node-ts-cache";
+import LRUStorage from 'node-ts-cache-lru-storage';
+
+const myStrategy = new ExpirationStrategy(new LRUStorage());
+```
 
 # Test
 ```bash

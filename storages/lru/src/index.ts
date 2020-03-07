@@ -1,1 +1,1 @@
-export { LruStorage } from './lru.storage';
+export { LRUStorage as default } from './LRUStorage';
