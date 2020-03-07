@@ -44,7 +44,7 @@
   "dependencies": {
     "node-cache": "^5.1.0"
   },
-  "devDependencies":{
+  "devDependencies": {
     "node-ts-cache": "^4.0.0",
     "@types/node-cache": "^4.2.5"
   },

@@ -43,6 +43,5 @@
     "url": "https://github.com/havsar/node-ts-cache/issues"
   },
   "homepage": "https://github.com/havsar/node-ts-cache#readme",
-  "dependencies": {
-  }
+  "dependencies": {}
 }

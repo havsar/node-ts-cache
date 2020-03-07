@@ -1,22 +1,19 @@
-import { StorageTypes } from '../storage.types'
+import { StorageTypes } from "../storage.types";
 
 export class MemoryStorage implements StorageTypes {
+  private memCache: any = {};
 
-    private memCache: any = {}
+  constructor() {}
 
-    constructor() {
-    }
+  public async getItem<T>(key: string): Promise<T | undefined> {
+    return this.memCache[key];
+  }
 
-    public async getItem<T>(key: string): Promise<T | undefined> {
-        return this.memCache[key]
-    }
+  public async setItem(key: string, content: any): Promise<void> {
+    this.memCache[key] = content;
+  }
 
-    public async setItem(key: string, content: any): Promise<void> {
-        this.memCache[key] = content
-    }
-
-    public async clear(): Promise<void> {
-        this.memCache = {}
-    }
-
+  public async clear(): Promise<void> {
+    this.memCache = {};
+  }
 }

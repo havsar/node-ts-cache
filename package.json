@@ -16,5 +16,8 @@
     "mocha": "7.1.0",
     "ts-node": "8.6.2",
     "typescript": "3.8.3"
+  },
+  "dependencies": {
+    "prettier": "^1.19.1"
   }
 }

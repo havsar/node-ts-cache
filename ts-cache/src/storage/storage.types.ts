@@ -1,12 +1,12 @@
 interface ICacheEntry {
-    content: any;
-    meta: any;
+  content: any;
+  meta: any;
 }
 
 export interface StorageTypes {
-    getItem<T>(key: string): Promise<T | undefined>;
+  getItem<T>(key: string): Promise<T | undefined>;
 
-    setItem(key: string, content: ICacheEntry | undefined): Promise<void>;
+  setItem(key: string, content: ICacheEntry | undefined): Promise<void>;
 
-    clear(): Promise<void>;
+  clear(): Promise<void>;
 }
