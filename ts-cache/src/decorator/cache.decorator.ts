@@ -1,12 +1,11 @@
 import { JSONStringifyKeyStrategy } from "../strategy/key/json.stringify.strategy";
-import { AbstractBaseStrategy } from "../strategy/caching/abstract.base.strategy";
-import { IKeyStrategy } from "../index";
+import { IKeyStrategy, ICacheStrategy } from "../index";
 
 const defaultKeyStrategy = new JSONStringifyKeyStrategy();
 
 export function Cache(
-  cachingStrategy: AbstractBaseStrategy,
-  options: any,
+  cachingStrategy: ICacheStrategy,
+  options?: any,
   keyStrategy: IKeyStrategy = defaultKeyStrategy
 ): Function {
   return function(

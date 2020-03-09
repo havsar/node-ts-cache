@@ -5,7 +5,7 @@
 
 [![NPM](https://nodei.co/npm/node-ts-cache.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/node-ts-cache/)
 
-# node-ts-cache
+# @hokify/node-ts-cache
 
 Simple and extensible caching module supporting decorators
 
@@ -126,9 +126,9 @@ Cached items expire after a given amount of time.
 | ---------------- | :--------------------------------------------: |
 | FsStorage        |                   (bundled)                    |
 | MemoryStorage    |                   (bundled)                    |
-| RedisStorage     |   `npm install node-ts-cache-redis-storage`    |
-| RedisIOStorage   |  `npm install node-ts-cache-redisio-storage`   |
-| NodeCacheStorage | `npm install node-ts-cache-node-cache-storage` |
+| RedisStorage     |   `npm install @hokify/node-ts-cache-redis-storage`    |
+| RedisIOStorage   |  `npm install @hokify/node-ts-cache-redisio-storage`   |
+| NodeCacheStorage | `npm install @hokify/node-ts-cache-node-cache-storage` |
 | LRUStorage       |       `npm install node-ts-lru-storage`        |
 
 #### MemoryStorage()
@@ -170,7 +170,7 @@ redis io client backend
 import { Cache, ExpirationStrategy } from "@hokify/node-ts-cache";
 import RedisIOStorage from 'node-ts-cache-redisio-storage';
 
-const myStrategy = new ExpirationStrategy(new RedisIOStorage());
+const myStrategy = new RedisIOStorage();
 ```
 
 #### NodeCacheStorage(`options:` [NodeCacheOptions](https://www.npmjs.com/package/node-cache#options))
@@ -181,7 +181,7 @@ wrapper for [node-cache](https://www.npmjs.com/package/node-cache)
 import { Cache, ExpirationStrategy } from "@hokify/node-ts-cache";
 import NodeCacheStorage from 'node-ts-cache-node-cache-storage';
 
-const myStrategy = new ExpirationStrategy(new NodeCacheStorage());
+const myStrategy = new NodeCacheStorage();
 ```
 
 #### LRUStorage(`options:` [LRUCacheOptions](https://www.npmjs.com/package/lru-cache#options))
@@ -192,7 +192,19 @@ wrapper for [lru-cache](https://www.npmjs.com/package/lru-cache)
 import { Cache, ExpirationStrategy } from "@hokify/node-ts-cache";
 import LRUStorage from 'node-ts-cache-lru-storage';
 
-const myStrategy = new ExpirationStrategy(new LRUStorage());
+const myStrategy = new LRUStorage();
+```
+
+
+#### LRURedisStorage(`options:` [LRUCacheOptions](https://www.npmjs.com/package/lru-cache#options), () => Redis.Redis)
+
+wrapper for [lru-cache](https://www.npmjs.com/package/lru-cache) with a remote cache redis backend
+
+```
+import { Cache, ExpirationStrategy } from "@hokify/node-ts-cache";
+import LRUStorage from 'node-ts-cache-lru-redis-storage';
+
+const myStrategy = new LRUStorage({}, () => RedisConnectionInstance);
 ```
 
 # Test

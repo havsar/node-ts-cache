@@ -1,4 +1,4 @@
-# node-ts-cache-node-cache-storage
+# @hokify/node-ts-cache-node-cache-storage
 
 Node-Cache Storage module for node-ts-cache
 

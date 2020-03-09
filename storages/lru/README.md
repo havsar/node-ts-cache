@@ -1,4 +1,4 @@
-# node-ts-cache-lru-storage
+# @hokify/node-ts-cache-lru-storage
 
 LRU Storage module for node-ts-cache
 

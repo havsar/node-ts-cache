@@ -2,11 +2,17 @@ import * as Assert from "assert";
 import { Cache, ExpirationStrategy, IKeyStrategy } from "../src";
 import { MemoryStorage } from "../src/storage/memory";
 
-const strategy = new ExpirationStrategy(new MemoryStorage());
+const storage = new MemoryStorage();
+const strategy = new ExpirationStrategy(storage);
 const data = ["user", "max", "test"];
 
 class TestClassOne {
   callCount = 0;
+
+  @Cache(storage, {}) // beware, no expirationstrategy used, therefore this is never ttled because memory storage cannot do this by its own
+  public directUser(): string[] {
+    return data;
+  }
 
   @Cache(strategy, { ttl: 1000 })
   public getUsers(): string[] {
@@ -91,6 +97,18 @@ describe("CacheDecorator", () => {
     Assert.strictEqual(data, users);
     Assert.strictEqual(
       await strategy.getItem<string[]>("TestClassOne:getUsers:[]"),
+      data
+    );
+  });
+
+  it("Should cache function call correctly via storage", async () => {
+    const myClass = new TestClassOne();
+
+    const users = await myClass.directUser();
+
+    Assert.strictEqual(data, users);
+    Assert.strictEqual(
+      await storage.getItem<string[]>("TestClassOne:directUser:[]"),
       data
     );
   });

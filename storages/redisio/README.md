@@ -1,4 +1,4 @@
-# node-ts-cache-rediusio-storage
+# @hokify/node-ts-cache-rediusio-storage
 RedisIO Storage module for node-ts-cache
 
 ```

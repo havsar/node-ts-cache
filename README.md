@@ -1,4 +1,4 @@
-# node-ts-cache
+# @hokify/node-ts-cache
 Simple and extensible caching module supporting decorators
 
 ## Main package
@@ -12,3 +12,4 @@ This is the main package, it includes a memory and fs storage.
 * [RedisIOStorage](/storages/redisio)
 * [NodeCacheStorage](/storages/node-cache)
 * [LRUStorage](/storages/lru)
+* [LRURedisStorage](/storages/lru-redis)

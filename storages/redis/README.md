@@ -1,4 +1,4 @@
-# node-ts-cache-redius-storage
+# @hokify/node-ts-cache-redius-storage
 
 Redis Storage module for node-ts-cache
 
