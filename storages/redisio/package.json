@@ -1,6 +1,6 @@
 {
   "name": "@hokify/node-ts-cache-redisio-storage",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "publishConfig": {
     "access": "public"
   },
@@ -47,7 +47,7 @@
   },
   "homepage": "https://github.com/havsar/node-ts-cache#readme",
   "dependencies": {
-    "@hokify/node-ts-cache": "^5.1.0",
+    "@hokify/node-ts-cache": "^5.1.1",
     "ioredis": "^4.16.0"
   },
   "devDependencies": {
