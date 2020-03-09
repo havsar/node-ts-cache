@@ -3,6 +3,9 @@
   "version": "3.0.0",
   "description": "Simple and extensible caching module supporting decorators",
   "main": "dist/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "test": "mocha -r ts-node/register test/**/*.test.ts",
     "tdd": "mocha -r ts-node/register -w",

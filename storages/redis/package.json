@@ -1,6 +1,9 @@
 {
   "name": "@hokify/node-ts-cache-redis-storage",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "publishConfig": {
+    "access": "public"
+  },
   "description": "Simple and extensible caching module supporting decorators",
   "main": "dist/index.js",
   "scripts": {
@@ -44,18 +47,18 @@
   },
   "homepage": "https://github.com/havsar/node-ts-cache#readme",
   "dependencies": {
-    "@hokify/node-ts-cache": "^4.0.0",
-    "redis": "^3.0.2",
-    "bluebird": "3.7.2"
+    "@hokify/node-ts-cache": "^5.0.0",
+    "bluebird": "3.7.2",
+    "redis": "^3.0.2"
   },
   "devDependencies": {
-    "@types/redis": "^2.8.16",
     "@types/bluebird": "^3.5.30",
+    "@types/proxyquire": "1.3.28",
+    "@types/redis": "^2.8.16",
+    "@types/sinon": "7.5.2",
     "ioredis-mock": "^4.19.0",
     "proxyquire": "2.1.3",
-    "@types/proxyquire": "1.3.28",
-    "@types/sinon": "7.5.2",
     "sinon": "9.0.0"
   },
-  "optionalDependencies": {}
+  "gitHead": "179ca6def52cbf51e09fc22c09f7313d6356105b"
 }
