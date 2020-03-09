@@ -38,7 +38,7 @@ export function Cache(
               }
             } catch (err) {
               console.warn(
-                "node-ts-cache: reading cache failed",
+                "@hokify/node-ts-cache: reading cache failed",
                 cacheKey,
                 err
               );
@@ -61,7 +61,7 @@ export function Cache(
               await cachingStrategy.setItem(cacheKey, methodResult, options);
             } catch (err) {
               console.warn(
-                "node-ts-cache: writing result to cache failed",
+                "@hokify/node-ts-cache: writing result to cache failed",
                 cacheKey,
                 err
               );

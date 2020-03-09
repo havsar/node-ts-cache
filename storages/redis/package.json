@@ -1,5 +1,5 @@
 {
-  "name": "node-ts-cache-redis-storage",
+  "name": "@hokify/node-ts-cache-redis-storage",
   "version": "1.0.0-pre",
   "publishConfig": {
     "access": "public"
@@ -47,7 +47,7 @@
   },
   "homepage": "https://github.com/havsar/node-ts-cache#readme",
   "dependencies": {
-    "node-ts-cache": "^4.0.0-pre",
+    "@hokify/node-ts-cache": "^5.0.0",
     "bluebird": "3.7.2",
     "redis": "^3.0.2"
   },

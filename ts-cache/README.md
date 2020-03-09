@@ -43,7 +43,7 @@ Caches function response using the given options. Works with different strategie
 _Note: @Cache always converts the method response to a promise because caching might be async._
 
 ```ts
-import { Cache, ExpirationStrategy, MemoryStorage } from "node-ts-cache";
+import { Cache, ExpirationStrategy, MemoryStorage } from "@hokify/node-ts-cache";
 
 const myStrategy = new ExpirationStrategy(new MemoryStorage());
 
@@ -64,7 +64,7 @@ import {
   ExpirationStrategy,
   IKeyStrategy,
   MemoryStorage
-} from "node-ts-cache";
+} from "@hokify/node-ts-cache";
 
 class MyKeyStrategy implements IKeyStrategy {
   public getKey(
@@ -91,7 +91,7 @@ class MyService {
 ## Directly
 
 ```ts
-import { ExpirationStrategy, MemoryStorage } from "node-ts-cache";
+import { ExpirationStrategy, MemoryStorage } from "@hokify/node-ts-cache";
 
 const myCache = new ExpirationStrategy(new MemoryStorage());
 
@@ -136,7 +136,7 @@ Cached items expire after a given amount of time.
 in memory
 
 ```
-import { Cache, ExpirationStrategy, MemoryStorage } from "node-ts-cache";
+import { Cache, ExpirationStrategy, MemoryStorage } from "@hokify/node-ts-cache";
 
 const myStrategy = new ExpirationStrategy(new MemoryStorage());
 ```
@@ -146,7 +146,7 @@ const myStrategy = new ExpirationStrategy(new MemoryStorage());
 file based
 
 ```
-import { Cache, ExpirationStrategy, FileStorage } from "node-ts-cache";
+import { Cache, ExpirationStrategy, FileStorage } from "@hokify/node-ts-cache";
 
 const myStrategy = new ExpirationStrategy(new FileStorage());
 ```
@@ -156,7 +156,7 @@ const myStrategy = new ExpirationStrategy(new FileStorage());
 redis client backend
 
 ```
-import { Cache, ExpirationStrategy } from "node-ts-cache";
+import { Cache, ExpirationStrategy } from "@hokify/node-ts-cache";
 import RedisStorage from 'node-ts-cache-redis-storage';
 
 const myStrategy = new ExpirationStrategy(new RedisStorage());
@@ -167,7 +167,7 @@ const myStrategy = new ExpirationStrategy(new RedisStorage());
 redis io client backend
 
 ```
-import { Cache, ExpirationStrategy } from "node-ts-cache";
+import { Cache, ExpirationStrategy } from "@hokify/node-ts-cache";
 import RedisIOStorage from 'node-ts-cache-redisio-storage';
 
 const myStrategy = new ExpirationStrategy(new RedisIOStorage());
@@ -178,7 +178,7 @@ const myStrategy = new ExpirationStrategy(new RedisIOStorage());
 wrapper for [node-cache](https://www.npmjs.com/package/node-cache)
 
 ```
-import { Cache, ExpirationStrategy } from "node-ts-cache";
+import { Cache, ExpirationStrategy } from "@hokify/node-ts-cache";
 import NodeCacheStorage from 'node-ts-cache-node-cache-storage';
 
 const myStrategy = new ExpirationStrategy(new NodeCacheStorage());
@@ -189,7 +189,7 @@ const myStrategy = new ExpirationStrategy(new NodeCacheStorage());
 wrapper for [lru-cache](https://www.npmjs.com/package/lru-cache)
 
 ```
-import { Cache, ExpirationStrategy } from "node-ts-cache";
+import { Cache, ExpirationStrategy } from "@hokify/node-ts-cache";
 import LRUStorage from 'node-ts-cache-lru-storage';
 
 const myStrategy = new ExpirationStrategy(new LRUStorage());

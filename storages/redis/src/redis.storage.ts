@@ -1,4 +1,4 @@
-import { StorageTypes } from "node-ts-cache";
+import { StorageTypes } from "@hokify/node-ts-cache";
 
 import * as Bluebird from "bluebird";
 import * as Redis from "redis";

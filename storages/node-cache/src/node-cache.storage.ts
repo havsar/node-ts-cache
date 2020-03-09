@@ -1,4 +1,4 @@
-import { StorageTypes } from "node-ts-cache";
+import { StorageTypes } from "@hokify/node-ts-cache";
 
 import * as NodeCache from "node-cache";
 

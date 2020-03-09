@@ -1,5 +1,5 @@
 {
-  "name": "node-ts-cache-lru-storage",
+  "name": "@hokify/node-ts-cache-lru-storage",
   "version": "1.0.0-pre",
   "publishConfig": {
     "access": "public"
@@ -45,7 +45,7 @@
   },
   "homepage": "https://github.com/havsar/node-ts-cache#readme",
   "dependencies": {
-    "node-ts-cache": "^4.0.0-pre",
+    "@hokify/node-ts-cache": "^5.0.0",
     "lru-cache": "^5.1.1"
   },
   "devDependencies": {
