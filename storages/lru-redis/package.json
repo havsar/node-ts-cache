@@ -1,6 +1,6 @@
 {
   "name": "@hokify/node-ts-cache-lru-redis-storage",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "publishConfig": {
     "access": "public"
   },
@@ -50,9 +50,9 @@
     "lru-cache": "^5.1.1"
   },
   "devDependencies": {
-    "ioredis-mock": "^4.19.0",
     "@types/ioredis": "^4.14.8",
-    "@types/lru-cache": "^5.1.0"
+    "@types/lru-cache": "^5.1.0",
+    "ioredis-mock": "^4.19.0"
   },
   "gitHead": "12356d80b38a7b841fa377840f13c37fbe3c9cd3"
 }
