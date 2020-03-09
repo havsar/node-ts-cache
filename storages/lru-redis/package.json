@@ -50,8 +50,9 @@
     "lru-cache": "^5.1.1"
   },
   "devDependencies": {
+    "ioredis-mock": "^4.19.0",
     "@types/ioredis": "^4.14.8",
     "@types/lru-cache": "^5.1.0"
   },
-  "gitHead": "179ca6def52cbf51e09fc22c09f7313d6356105b"
+  "gitHead": "12356d80b38a7b841fa377840f13c37fbe3c9cd3"
 }

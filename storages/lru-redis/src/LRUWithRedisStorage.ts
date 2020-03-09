@@ -27,7 +27,7 @@ export class LRUWithRedisStorage implements StorageTypes {
       }
     }
 
-    return localCache;
+    return localCache || undefined;
   }
 
   public async setItem(key: string, content: any): Promise<void> {

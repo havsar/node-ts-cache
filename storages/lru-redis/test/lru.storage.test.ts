@@ -1,7 +1,18 @@
 import * as Assert from "assert";
-import LRUStorage from "../src";
+import LRURedisStorage from "../src";
 
-const storage = new LRUStorage({});
+
+// @ts-ignore
+import * as RedisMock from "ioredis-mock";
+
+const MockedRedis = new RedisMock({
+  host: "host",
+  port: 123,
+  password: "pass"
+});
+
+
+const storage = new LRURedisStorage({}, () => MockedRedis);
 
 describe("LRUStorage", () => {
   it("Should add cache item correctly", async () => {
