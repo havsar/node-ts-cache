@@ -1,4 +1,4 @@
-import { StorageTypes } from "@hokify/node-ts-cache";
+import { StorageTypes } from "node-ts-cache";
 import * as Redis from "ioredis";
 
 export class RedisIOStorage implements StorageTypes {

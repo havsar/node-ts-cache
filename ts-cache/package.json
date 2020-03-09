@@ -1,6 +1,6 @@
 {
-  "name": "@hokify/node-ts-cache",
-  "version": "3.0.0",
+  "name": "node-ts-cache",
+  "version": "4.0.0-pre",
   "description": "Simple and extensible caching module supporting decorators",
   "main": "dist/index.js",
   "publishConfig": {
@@ -46,5 +46,5 @@
     "url": "https://github.com/havsar/node-ts-cache/issues"
   },
   "homepage": "https://github.com/havsar/node-ts-cache#readme",
-  "dependencies": {}
+  "gitHead": "179ca6def52cbf51e09fc22c09f7313d6356105b"
 }
