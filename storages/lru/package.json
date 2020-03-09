@@ -38,14 +38,14 @@
   "files": [
     "dist"
   ],
-  "author": "Himmet Avsar <avsar.himmet1@gmail.com>",
+  "author": "Simon Tretter <s.tretter@gmail.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/havsar/node-ts-cache/issues"
   },
   "homepage": "https://github.com/havsar/node-ts-cache#readme",
   "dependencies": {
-    "node-ts-cache": "^5.0.1",
+    "node-ts-cache": "^4.0.0-pre",
     "lru-cache": "^5.1.1"
   },
   "devDependencies": {

@@ -47,7 +47,7 @@
   },
   "homepage": "https://github.com/havsar/node-ts-cache#readme",
   "dependencies": {
-    "node-ts-cache": "^5.0.1",
+    "node-ts-cache": "^4.0.0-pre",
     "bluebird": "3.7.2",
     "redis": "^3.0.2"
   },

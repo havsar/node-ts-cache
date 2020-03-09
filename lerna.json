@@ -14,8 +14,7 @@
 	"conventionalCommits": true,
 	"reject-cycles": true,
 	"ignoreChanges": [
-		"**/__tests__/**",
-		"**/*.md",
-		"**/*.tmp"
+		"**/test/**",
+		"**/*.md"
 	]
 }
