@@ -1,6 +1,6 @@
 {
   "name": "@hokify/node-ts-cache-node-cache-storage",
-  "version": "1.0.0-pre",
+  "version": "1.0.0",
   "publishConfig": {
     "access": "public"
   },
@@ -48,7 +48,7 @@
     "node-cache": "^5.1.0"
   },
   "devDependencies": {
-    "@hokify/node-ts-cache": "^5.0.0",
+    "@hokify/node-ts-cache": "^5.1.0",
     "@types/node-cache": "^4.2.5"
   },
   "gitHead": "179ca6def52cbf51e09fc22c09f7313d6356105b"
