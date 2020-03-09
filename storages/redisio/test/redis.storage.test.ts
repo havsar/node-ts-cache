@@ -1,33 +1,32 @@
-import * as Assert from 'assert'
-import RedisIOStorage from '../src'
+import * as Assert from "assert";
+import RedisIOStorage from "../src";
 
 // @ts-ignore
-import * as  RedisMock from 'ioredis-mock';
+import * as RedisMock from "ioredis-mock";
 
 const MockedRedis = new RedisMock({
-    host: 'host',
-    port: 123,
-    password: 'pass'
+  host: "host",
+  port: 123,
+  password: "pass"
 });
 
 const storage = new RedisIOStorage({}, MockedRedis);
 
-describe('RedisIOStorage', () => {
-    it('Should clear Redis without errors', async () => {
-        await storage.clear()
-    })
+describe("RedisIOStorage", () => {
+  it("Should clear Redis without errors", async () => {
+    await storage.clear();
+  });
 
-    it('Should delete cache item if set to undefined', async () => {
-        await storage.setItem('test', undefined)
+  it("Should delete cache item if set to undefined", async () => {
+    await storage.setItem("test", undefined);
 
-        Assert.strictEqual(await storage.getItem('test') , undefined);
-    })
+    Assert.strictEqual(await storage.getItem("test"), undefined);
+  });
 
-    it('Should return undefined if cache not hit', async () => {
-        await storage.clear()
-        const item = await storage.getItem('item123')
+  it("Should return undefined if cache not hit", async () => {
+    await storage.clear();
+    const item = await storage.getItem("item123");
 
-        Assert.strictEqual(item, undefined)
-    })
-})
-
+    Assert.strictEqual(item, undefined);
+  });
+});

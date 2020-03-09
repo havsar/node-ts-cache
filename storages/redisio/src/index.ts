@@ -1,1 +1,1 @@
-export { RedisIOStorage as default } from './redisio.storage';
+export { RedisIOStorage as default } from "./redisio.storage";

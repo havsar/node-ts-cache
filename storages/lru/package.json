@@ -1,5 +1,5 @@
 {
-  "name": "node-ts-cache-lru-storage",
+  "name": "@hokify/node-ts-cache-lru-storage",
   "version": "1.0.0",
   "description": "Simple and extensible caching module supporting decorators",
   "main": "dist/index.js",
@@ -42,7 +42,7 @@
   },
   "homepage": "https://github.com/havsar/node-ts-cache#readme",
   "dependencies": {
-    "node-ts-cache": "^4.0.0",
+    "@hokify/node-ts-cache": "^4.0.0",
     "lru-cache": "^5.1.1"
   },
   "devDependencies": {
