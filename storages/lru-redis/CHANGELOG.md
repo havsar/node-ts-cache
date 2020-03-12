@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.3](https://github.com/havsar/node-ts-cache/compare/@hokify/node-ts-cache-lru-redis-storage@0.1.2...@hokify/node-ts-cache-lru-redis-storage@0.1.3) (2020-03-12)
+
+
+### Bug Fixes
+
+* **lru-redis:** json stringify and parse content ([9d17645](https://github.com/havsar/node-ts-cache/commit/9d176451e2f0bdee600c8b85ea73de100e133571))
+
+
+
+
+
 ## [0.1.2](https://github.com/havsar/node-ts-cache/compare/@hokify/node-ts-cache-lru-redis-storage@0.1.1...@hokify/node-ts-cache-lru-redis-storage@0.1.2) (2020-03-09)
 
 **Note:** Version bump only for package @hokify/node-ts-cache-lru-redis-storage
