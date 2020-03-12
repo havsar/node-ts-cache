@@ -22,6 +22,12 @@ export class LRUWithRedisStorage implements StorageTypes {
       localCache = await this.redis().get(key);
 
       if (localCache) {
+        try {
+          localCache = JSON.parse(localCache);
+        } catch (err) {
+          console.error('lru redis cache failed parsing data', err);
+          localCache = undefined;
+        }
         // if found on central cache, copy it to a local cache
         this.myCache.set(key, localCache);
       }
@@ -32,7 +38,11 @@ export class LRUWithRedisStorage implements StorageTypes {
 
   public async setItem(key: string, content: any): Promise<void> {
     this.myCache.set(key, content);
-    await this.redis().set(key, content);
+    if (this.options?.maxAge) {
+      await this.redis().setex(key, this.options.maxAge, JSON.stringify(content));
+    } else {
+      await this.redis().set(key, JSON.stringify(content));
+    }
   }
 
   public async clear(): Promise<void> {
