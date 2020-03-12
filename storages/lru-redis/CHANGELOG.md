@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.4](https://github.com/havsar/node-ts-cache/compare/@hokify/node-ts-cache-lru-redis-storage@0.1.3...@hokify/node-ts-cache-lru-redis-storage@0.1.4) (2020-03-12)
+
+**Note:** Version bump only for package @hokify/node-ts-cache-lru-redis-storage
+
+
+
+
+
 ## [0.1.3](https://github.com/havsar/node-ts-cache/compare/@hokify/node-ts-cache-lru-redis-storage@0.1.2...@hokify/node-ts-cache-lru-redis-storage@0.1.3) (2020-03-12)
 
 
