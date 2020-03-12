@@ -1,23 +1,23 @@
-import { StorageTypes } from "@hokify/node-ts-cache";
+import { SynchronousCacheType } from "@hokify/node-ts-cache";
 
 import * as NodeCache from "node-cache";
 
-export class NodeCacheStorage implements StorageTypes {
+export class NodeCacheStorage implements SynchronousCacheType {
   myCache: NodeCache;
 
   constructor(options: NodeCache.Options) {
     this.myCache = new NodeCache(options);
   }
 
-  public async getItem<T>(key: string): Promise<T | undefined> {
+  public getItem<T>(key: string): T | undefined {
     return this.myCache.get(key) || undefined;
   }
 
-  public async setItem(key: string, content: any): Promise<void> {
+  public setItem(key: string, content: any): void {
     this.myCache.set(key, content);
   }
 
-  public async clear(): Promise<void> {
+  public clear(): void {
     this.myCache.flushAll();
   }
 }

@@ -1,12 +1,13 @@
 import { JSONStringifyKeyStrategy } from "../strategy/key/json.stringify.strategy";
-import { IKeyStrategy, ICacheStrategy } from "../index";
+import { IAsyncKeyStrategy } from "../types/key.strategy.types";
+import {AsynchronousCacheType, SynchronousCacheType} from "..";
 
 const defaultKeyStrategy = new JSONStringifyKeyStrategy();
 
 export function Cache(
-  cachingStrategy: ICacheStrategy,
+  cachingStrategy: AsynchronousCacheType | SynchronousCacheType,
   options?: any,
-  keyStrategy: IKeyStrategy = defaultKeyStrategy
+  keyStrategy: IAsyncKeyStrategy = defaultKeyStrategy
 ): Function {
   return function(
     target: Object & {
@@ -31,7 +32,7 @@ export function Cache(
         target.__cache_decarator_pending_results[cacheKey] = (async () => {
           try {
             try {
-              const entry = await cachingStrategy.getItem(cacheKey);
+              const entry = await (cachingStrategy.getItem as any)(cacheKey);
               if (entry) {
                 return entry;
               }

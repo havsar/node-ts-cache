@@ -1,8 +1,7 @@
-import { StorageTypes } from "../../storage/storage.types";
-import { ICacheStrategy } from "./cache.strategy.types";
+import {AsynchronousCacheType, SynchronousCacheType} from "../../types/cache.types";
 
-export abstract class AbstractBaseStrategy implements ICacheStrategy {
-  constructor(protected storage: StorageTypes) {}
+export abstract class AbstractBaseStrategy implements AsynchronousCacheType {
+  constructor(protected storage: AsynchronousCacheType | SynchronousCacheType) {}
 
   public abstract async getItem<T>(key: string): Promise<T | undefined>;
 

@@ -62,11 +62,11 @@ If you want another key creation logic you can bypass key creation strategy to t
 import {
   Cache,
   ExpirationStrategy,
-  IKeyStrategy,
+  ISyncKeyStrategy,
   MemoryStorage
 } from "@hokify/node-ts-cache";
 
-class MyKeyStrategy implements IKeyStrategy {
+class MyKeyStrategy implements ISyncKeyStrategy {
   public getKey(
     className: string,
     methodName: string,

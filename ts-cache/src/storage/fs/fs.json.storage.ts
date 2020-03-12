@@ -1,8 +1,8 @@
-import { StorageTypes } from "../storage.types";
+import { AsynchronousCacheType } from "../../types/cache.types";
 
 import { existsSync, writeFileSync, writeFile, readFile } from "fs";
 
-export class FsJsonStorage implements StorageTypes {
+export class FsJsonStorage implements AsynchronousCacheType {
   constructor(public jsonFilePath: string) {
     if (!existsSync(this.jsonFilePath)) {
       this.createEmptyCache();

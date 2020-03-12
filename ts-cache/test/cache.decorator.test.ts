@@ -1,6 +1,7 @@
 import * as Assert from "assert";
-import { Cache, ExpirationStrategy, IKeyStrategy } from "../src";
+import { Cache, ExpirationStrategy, ISyncKeyStrategy } from "../src";
 import { MemoryStorage } from "../src/storage/memory";
+import { IAsyncKeyStrategy } from "../src/types/key.strategy.types";
 
 const storage = new MemoryStorage();
 const strategy = new ExpirationStrategy(storage);
@@ -10,7 +11,7 @@ class TestClassOne {
   callCount = 0;
 
   @Cache(storage, {}) // beware, no expirationstrategy used, therefore this is never ttled because memory storage cannot do this by its own
-  public directUser(): string[] {
+  public storageUser(): string[] {
     return data;
   }
 
@@ -30,17 +31,13 @@ class TestClassTwo {
   @Cache(strategy, { ttl: 20000 })
   public async getUsers(): Promise<string[]> {
     return new Promise<string[]>(resolve => {
-      setTimeout(() => resolve(data), 500);
+      setTimeout(() => resolve(data), 0);
     });
   }
 }
 
-class CustomJsonStrategy implements IKeyStrategy {
-  public getKey(
-    className: string,
-    methodName: string,
-    args: any[]
-  ): Promise<string> | string {
+class CustomJsonStrategy implements ISyncKeyStrategy {
+  public getKey(className: string, methodName: string, args: any[]): string {
     return `${className}:${methodName}:${JSON.stringify(args)}:foo`;
   }
 }
@@ -48,14 +45,14 @@ class CustomJsonStrategy implements IKeyStrategy {
 /**
  * This custom test key strategy only uses the method name as caching key
  */
-class CustomKeyStrategy implements IKeyStrategy {
+class CustomKeyStrategy implements IAsyncKeyStrategy {
   public getKey(
     _className: string,
     methodName: string,
     _args: any[]
   ): Promise<string> | string {
     return new Promise(resolve => {
-      setTimeout(() => resolve(methodName), 100);
+      setTimeout(() => resolve(methodName), 0);
     });
   }
 }
@@ -104,11 +101,11 @@ describe("CacheDecorator", () => {
   it("Should cache function call correctly via storage", async () => {
     const myClass = new TestClassOne();
 
-    const users = await myClass.directUser();
+    const users = await myClass.storageUser();
 
     Assert.strictEqual(data, users);
     Assert.strictEqual(
-      await storage.getItem<string[]>("TestClassOne:directUser:[]"),
+      await storage.getItem<string[]>("TestClassOne:storageUser:[]"),
       data
     );
   });

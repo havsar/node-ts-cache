@@ -1,4 +1,4 @@
-import { StorageTypes } from "../../storage/storage.types";
+import { AsynchronousCacheType, SynchronousCacheType } from "../../types/cache.types";
 import { AbstractBaseStrategy } from "./abstract.base.strategy";
 
 interface IExpiringCacheItem {
@@ -16,12 +16,12 @@ interface IOptions {
 }
 
 export class ExpirationStrategy extends AbstractBaseStrategy {
-  constructor(storage: StorageTypes) {
+  constructor(storage: AsynchronousCacheType | SynchronousCacheType) {
     super(storage);
   }
 
   public async getItem<T>(key: string): Promise<T | undefined> {
-    const item = await this.storage.getItem<IExpiringCacheItem>(key);
+    const item: IExpiringCacheItem | undefined = await (this.storage.getItem as any)(key); // <IExpiringCacheItem>
     if (item && item.meta && item.meta.ttl && this.isItemExpired(item)) {
       await this.storage.setItem(key, undefined);
       return undefined;

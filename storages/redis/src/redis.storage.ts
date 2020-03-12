@@ -1,4 +1,4 @@
-import { StorageTypes } from "@hokify/node-ts-cache";
+import { AsynchronousCacheType } from "@hokify/node-ts-cache";
 
 import * as Bluebird from "bluebird";
 import * as Redis from "redis";
@@ -8,7 +8,7 @@ import { RedisClient } from "./custom";
 Bluebird.promisifyAll(Redis.RedisClient.prototype);
 Bluebird.promisifyAll(Redis.Multi.prototype);
 
-export class RedisStorage implements StorageTypes {
+export class RedisStorage implements AsynchronousCacheType {
   private client: RedisClient;
 
   constructor(private redisOptions: ClientOpts) {

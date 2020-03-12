@@ -1,19 +1,19 @@
-import { StorageTypes } from "../storage.types";
+import { SynchronousCacheType} from "../../types/cache.types";
 
-export class MemoryStorage implements StorageTypes {
+export class MemoryStorage implements SynchronousCacheType {
   private memCache: any = {};
 
   constructor() {}
 
-  public async getItem<T>(key: string): Promise<T | undefined> {
+  public getItem<T>(key: string): T | undefined {
     return this.memCache[key];
   }
 
-  public async setItem(key: string, content: any): Promise<void> {
+  public setItem(key: string, content: any): void {
     this.memCache[key] = content;
   }
 
-  public async clear(): Promise<void> {
+  public clear(): void {
     this.memCache = {};
   }
 }

@@ -1,7 +1,7 @@
-import { StorageTypes } from "@hokify/node-ts-cache";
+import { AsynchronousCacheType } from "@hokify/node-ts-cache";
 import * as Redis from "ioredis";
 
-export class RedisIOStorage implements StorageTypes {
+export class RedisIOStorage implements AsynchronousCacheType {
   constructor(
     redisOptions: Redis.RedisOptions,
     private client = new Redis(redisOptions)

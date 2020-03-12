@@ -1,11 +1,11 @@
-import { IKeyStrategy } from "../../index";
+import { ISyncKeyStrategy } from "../../index";
 
-class JSONStringifyKeyStrategy implements IKeyStrategy {
+class JSONStringifyKeyStrategy implements ISyncKeyStrategy {
   public getKey(
     className: string,
     methodName: string,
     args: any[]
-  ): Promise<string> | string {
+  ): string {
     return `${className}:${methodName}:${JSON.stringify(args)}`;
   }
 }
