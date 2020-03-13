@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.1.4](https://github.com/havsar/node-ts-cache/compare/@hokify/node-ts-cache@5.1.3...@hokify/node-ts-cache@5.1.4) (2020-03-13)
+
+
+### Bug Fixes
+
+* **sync:** remove wrong async ([c253991](https://github.com/havsar/node-ts-cache/commit/c25399152c01643e146876b631848c2cafe45a95))
+
+
+
+
+
 ## [5.1.3](https://github.com/havsar/node-ts-cache/compare/@hokify/node-ts-cache@5.1.2...@hokify/node-ts-cache@5.1.3) (2020-03-12)
 
 **Note:** Version bump only for package @hokify/node-ts-cache
