@@ -17,7 +17,7 @@ export function SyncCache(
     const originalMethod = descriptor.value;
     const className = target.constructor.name;
 
-    descriptor.value = async function(...args: any[]) {
+    descriptor.value = function(...args: any[]) {
       const cacheKey = keyStrategy.getKey(className, methodName, args);
 
       try {
