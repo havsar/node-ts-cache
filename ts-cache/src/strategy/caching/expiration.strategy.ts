@@ -45,12 +45,12 @@ export class ExpirationStrategy extends AbstractBaseStrategy {
       ...options
     };
 
-    const meta = {
+    const meta = !mergedOptions.isCachedForever && {
       ttl: mergedOptions.ttl * 1000,
       createdAt: Date.now()
     };
 
-    if (!mergedOptions.isCachedForever && !mergedOptions.isLazy) {
+    if (meta && !mergedOptions.isLazy) {
       setTimeout(() => {
         this.unsetKey(key);
       }, meta.ttl);
