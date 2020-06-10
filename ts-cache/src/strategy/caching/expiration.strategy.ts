@@ -1,4 +1,7 @@
-import { AsynchronousCacheType, SynchronousCacheType } from "../../types/cache.types";
+import {
+  AsynchronousCacheType,
+  SynchronousCacheType
+} from "../../types/cache.types";
 import { AbstractBaseStrategy } from "./abstract.base.strategy";
 
 interface IExpiringCacheItem {
@@ -21,7 +24,8 @@ export class ExpirationStrategy extends AbstractBaseStrategy {
   }
 
   public async getItem<T>(key: string): Promise<T | undefined> {
-    const item: IExpiringCacheItem | undefined = await (this.storage.getItem as any)(key); // <IExpiringCacheItem>
+    const item: IExpiringCacheItem | undefined = await (this.storage
+      .getItem as any)(key); // <IExpiringCacheItem>
     if (item && item.meta && item.meta.ttl && this.isItemExpired(item)) {
       await this.storage.setItem(key, undefined);
       return undefined;
@@ -41,19 +45,15 @@ export class ExpirationStrategy extends AbstractBaseStrategy {
       ...options
     };
 
-    let meta = {};
+    const meta = {
+      ttl: mergedOptions.ttl * 1000,
+      createdAt: Date.now()
+    };
 
-    if (!options.isCachedForever) {
-      meta = {
-        ttl: mergedOptions.ttl * 1000,
-        createdAt: Date.now()
-      };
-
-      if (!options.isLazy) {
-        setTimeout(() => {
-          this.unsetKey(key);
-        }, mergedOptions.ttl);
-      }
+    if (!mergedOptions.isCachedForever && !mergedOptions.isLazy) {
+      setTimeout(() => {
+        this.unsetKey(key);
+      }, meta.ttl);
     }
     await this.storage.setItem(key, { meta, content });
   }
