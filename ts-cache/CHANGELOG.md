@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.1.5](https://github.com/havsar/node-ts-cache/compare/@hokify/node-ts-cache@5.1.4...@hokify/node-ts-cache@5.1.5) (2020-06-10)
+
+
+### Bug Fixes
+
+* **expiration:** logic ttl fixes ([85c2337](https://github.com/havsar/node-ts-cache/commit/85c2337d850920b0f46eb30551f7beba11ef0af0))
+
+
+
+
+
 ## [5.1.4](https://github.com/havsar/node-ts-cache/compare/@hokify/node-ts-cache@5.1.3...@hokify/node-ts-cache@5.1.4) (2020-03-13)
 
 
