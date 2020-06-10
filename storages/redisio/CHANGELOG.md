@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.6](https://github.com/havsar/node-ts-cache/compare/@hokify/node-ts-cache-redisio-storage@1.1.5...@hokify/node-ts-cache-redisio-storage@1.1.6) (2020-06-10)
+
+**Note:** Version bump only for package @hokify/node-ts-cache-redisio-storage
+
+
+
+
+
 ## [1.1.5](https://github.com/havsar/node-ts-cache/compare/@hokify/node-ts-cache-redisio-storage@1.1.4...@hokify/node-ts-cache-redisio-storage@1.1.5) (2020-06-10)
 
 **Note:** Version bump only for package @hokify/node-ts-cache-redisio-storage
