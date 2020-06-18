@@ -19,7 +19,7 @@
   "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/havsar/node-ts-cache.git"
+    "url": "git+https://github.com/hokify/node-ts-cache.git"
   },
   "keywords": [
     "node",
@@ -40,11 +40,12 @@
   "files": [
     "dist"
   ],
-  "author": "Himmet Avsar <avsar.himmet1@gmail.com>",
+  "author": "Simon Tretter <simon.tretter@hokify.com>",
+  "contributors": ["Himmet Avsar <avsar.himmet1@gmail.com>"],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/havsar/node-ts-cache/issues"
+    "url": "https://github.com/hokify/node-ts-cache/issues"
   },
-  "homepage": "https://github.com/havsar/node-ts-cache#readme",
+  "homepage": "https://github.com/hokify/node-ts-cache/tree/master/ts-cache#readme",
   "gitHead": "179ca6def52cbf51e09fc22c09f7313d6356105b"
 }

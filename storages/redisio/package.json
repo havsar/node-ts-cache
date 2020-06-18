@@ -19,7 +19,7 @@
   "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/havsar/node-ts-cache.git"
+    "url": "git+https://github.com/hokify/node-ts-cache.git"
   },
   "keywords": [
     "node",
@@ -43,16 +43,16 @@
   "author": "Simon Tretter <s.tretter@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/havsar/node-ts-cache/issues"
+    "url": "https://github.com/hokify/node-ts-cache/issues"
   },
-  "homepage": "https://github.com/havsar/node-ts-cache#readme",
+  "homepage": "https://github.com/hokify/node-ts-cache/tree/master/storages/redisio#readme",
   "dependencies": {
     "@hokify/node-ts-cache": "^5.1.6",
-    "ioredis": "^4.16.0"
+    "ioredis": "^4.17.3"
   },
   "devDependencies": {
-    "@types/ioredis": "^4.14.8",
-    "ioredis-mock": "^4.19.0"
+    "@types/ioredis": "^4.16.6",
+    "ioredis-mock": "^4.21.1"
   },
   "gitHead": "179ca6def52cbf51e09fc22c09f7313d6356105b"
 }

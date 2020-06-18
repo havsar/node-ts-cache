@@ -17,7 +17,7 @@
   "types": "dist/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/havsar/node-ts-cache.git"
+    "url": "git+https://github.com/hokify/node-ts-cache.git"
   },
   "keywords": [
     "node",
@@ -41,11 +41,11 @@
   "author": "Simon Tretter <s.tretter@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/havsar/node-ts-cache/issues"
+    "url": "https://github.com/hokify/node-ts-cache/issues"
   },
-  "homepage": "https://github.com/havsar/node-ts-cache#readme",
+  "homepage": "https://github.com/hokify/node-ts-cache/tree/master/storages/node-cache#readme",
   "dependencies": {
-    "node-cache": "^5.1.0"
+    "node-cache": "^5.1.1"
   },
   "devDependencies": {
     "@hokify/node-ts-cache": "^5.1.6",
