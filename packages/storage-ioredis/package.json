@@ -5,7 +5,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "mocha -r ts-node/register test/**/*.test.ts",
-    "tdd": "mocha -r ts-node/register -w",
+    "tdd": "mocha --require ts-node/register --watch --watch-files src, test/**/*.ts",
     "tdd-debug-brk": "mocha -r ts-node/register --inspect-brk",
     "build": "tsc -p .",
     "clean": "git clean -fdx src test",
