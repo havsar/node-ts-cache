@@ -1,5 +1,5 @@
-import { ICacheEntry, StorageTypes } from '../../core/src/storage/storage.types'
 import * as IORedis from 'ioredis'
+import { ICacheEntry, StorageTypes } from 'node-ts-cache'
 
 export default class IoRedisStorage implements StorageTypes {
 

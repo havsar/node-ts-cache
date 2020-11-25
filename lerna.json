@@ -8,5 +8,7 @@
       "message": "chore: publish"
     }
   },
-  "hoist": true
+  "hoist": true,
+  "strict": true,
+  "forceLocal": true
 }

@@ -7,9 +7,9 @@
   "scripts": {
     "test": "mocha -r ts-node/register test/**/*.test.ts",
     "tdd": "mocha --require ts-node/register --watch --watch-files src, test/**/*.ts",
-    "build": "tsc -p .",
-    "prepublishOnly": "tsc -p .",
-    "prepare": "tsc -p .",
+    "build": "tsc -p tsconfig-build.json",
+    "prepublishOnly": "npm run build",
+    "prepare": "npm run build",
     "clean": "git clean -fdx src test",
     "ts-dev": "tsc -p . -w"
   },
@@ -53,6 +53,7 @@
   },
   "dependencies": {
     "ioredis": "^4.19.2",
-    "ioredis-mock": "^5.2.0"
+    "ioredis-mock": "^5.2.0",
+    "node-ts-cache": "^4.1.0"
   }
 }

@@ -1,4 +1,4 @@
-import { IKeyStrategy } from '../../index'
+import { IKeyStrategy } from './key.strategy.types'
 
 class JSONStringifyKeyStrategy implements IKeyStrategy {
     public getKey(className: string, methodName: string, args: any[]): Promise<string> | string {

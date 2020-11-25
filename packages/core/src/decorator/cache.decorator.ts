@@ -1,6 +1,6 @@
 import { JSONStringifyKeyStrategy } from '../strategy/key/json.stringify.strategy'
 import { AbstractBaseStrategy } from '../strategy/caching/abstract.base.strategy'
-import { IKeyStrategy } from '..'
+import { IKeyStrategy } from '../strategy/key/key.strategy.types'
 
 const defaultKeyStrategy = new JSONStringifyKeyStrategy()
 

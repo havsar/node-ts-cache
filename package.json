@@ -2,11 +2,12 @@
   "name": "root",
   "private": true,
   "scripts": {
-    "bootstrap": "lerna bootstrap",
+    "bootstrap": "lerna bootstrap --strict",
     "test": "lerna run test",
     "ls": "lerna ls"
   },
   "devDependencies": {
     "lerna": "^3.22.1"
-  }
+  },
+  "dependencies": {}
 }
