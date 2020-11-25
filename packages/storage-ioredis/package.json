@@ -1,13 +1,15 @@
 {
   "name": "node-ts-cache-storage-ioredis",
   "description": "Redis storage module for node-ts-cache",
+  "version": "4.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "mocha -r ts-node/register test/**/*.test.ts",
     "tdd": "mocha --require ts-node/register --watch --watch-files src, test/**/*.ts",
-    "tdd-debug-brk": "mocha -r ts-node/register --inspect-brk",
     "build": "tsc -p .",
+    "prepublishOnly": "tsc -p .",
+    "prepare": "tsc -p .",
     "clean": "git clean -fdx src test",
     "ts-dev": "tsc -p . -w"
   },
@@ -51,6 +53,7 @@
   },
   "optionalDependencies": {},
   "dependencies": {
-    "ioredis": "^4.19.2"
+    "ioredis": "^4.19.2",
+    "ioredis-mock": "^5.2.0"
   }
 }

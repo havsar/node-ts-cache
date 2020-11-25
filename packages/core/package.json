@@ -1,6 +1,7 @@
 {
   "name": "node-ts-cache",
   "description": "Simple and extensible caching module supporting decorators",
+  "version": "4.0.0",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {

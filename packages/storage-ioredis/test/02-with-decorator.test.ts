@@ -1,7 +1,8 @@
 import IoRedisStorage from '../src'
-import { ExpirationStrategy } from '../../core/src'
+import { Cache, ExpirationStrategy } from '../../core/src'
 import * as Assert from 'assert'
 import * as IORedis from 'ioredis'
+import * as Sinon from 'sinon'
 
 const IoRedisMock: typeof IORedis = require('ioredis-mock')
 
@@ -9,63 +10,72 @@ function sleep(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms))
 }
 
-describe('01-basic', () => {
+interface User {
+    username: string
+    level: number
+}
+
+const getUsersFromBackend = Sinon.stub().resolves([
+    {username: 'max', level: 13},
+    {username: 'user-two', level: 34},
+    {username: 'user-three', level: 127}
+])
+
+describe('02-with-decorator', () => {
     const ioRedis = new IoRedisMock()
     const storage = new IoRedisStorage(ioRedis)
     const strategy = new ExpirationStrategy(storage)
 
     beforeEach(async () => {
         await strategy.clear()
+        getUsersFromBackend.resetHistory()
     })
 
-    it('Should initialize Redis storage correctly', async () => {
-        Assert(strategy !== null)
-        Assert(strategy !== undefined)
-    })
-
-    it('Should clear empty storage correctly', async () => {
-        await strategy.clear()
-    })
-
-    it('Should return undefined if an item does not exist', async () => {
-        const data = await strategy.getItem('not-existing-key')
-
-        Assert(data === undefined)
-    })
-
-    it('Should set item without error', async () => {
-        await strategy.setItem('user', {
-            name: 'max',
-            age: 18
-        }, {ttl: 1, isLazy: true})
-    })
-
-    it('Should set and get item correctly', async () => {
-        const raw = {
-            files: ['image.png', 'test.mp3'],
-            color: 'RED',
-            level: 182
+    class TestClassOne {
+        @Cache(strategy, {ttl: 0.3})
+        async getUsers(): Promise<User[]> {
+            return await getUsersFromBackend()
         }
+    }
 
-        await strategy.setItem('settings', raw, {ttl: 10, isLazy: true})
+    it('Should initialize class with decorator without issues', async () => {
+        const testClassInstance = new TestClassOne()
 
-        const data = await strategy.getItem('settings')
-
-        Assert.notStrictEqual(data, raw)
+        Assert.notStrictEqual(testClassInstance, undefined)
+        Assert.notStrictEqual(testClassInstance, null)
     })
 
-    it('Should return undefined if set item is expired', async () => {
-        const raw = {
-            username: 'max123'
-        }
+    it('Should call decorated method without issues', async () => {
+        const testClassInstance = new TestClassOne()
 
-        await strategy.setItem('user', raw, {ttl: 0.1, isLazy: true})
+        await testClassInstance.getUsers()
+    })
 
-        await sleep(200)
+    it('Should return users from cache correctly', async () => {
+        const testClassInstance = new TestClassOne()
 
-        const data = await strategy.getItem('user')
+        const users = await testClassInstance.getUsers()
 
-        Assert.strictEqual(data, undefined)
+        await sleep(500)
+
+        const usersAfter500ms = await testClassInstance.getUsers()
+
+        Assert(users == usersAfter500ms)
+    })
+
+    it('Should not call backend call twice if cached', async () => {
+        const testClassInstance = new TestClassOne()
+
+        Assert.strictEqual(getUsersFromBackend.callCount, 0)
+
+        const users = await testClassInstance.getUsers()
+
+        Assert.strictEqual(getUsersFromBackend.callCount, 1)
+
+        const usersAfter10ms = await testClassInstance.getUsers()
+
+        Assert.strictEqual(getUsersFromBackend.callCount, 1)
+        Assert.deepStrictEqual(users, usersAfter10ms)
     })
 })
 

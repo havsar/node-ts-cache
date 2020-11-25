@@ -1,15 +1,16 @@
 import IoRedisStorage from '../src'
-import * as IORedis from 'ioredis'
 import { ExpirationStrategy } from '../../core/src'
 import * as Assert from 'assert'
+import * as IORedis from 'ioredis'
+
+const IoRedisMock: typeof IORedis = require('ioredis-mock')
+
+function sleep(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms))
+}
 
 describe('01-basic', () => {
-    const ioRedis = new IORedis({
-        host: 'redis-13011.c233.eu-west-1-1.ec2.cloud.redislabs.com',
-        port: 13011,
-        db: 0,
-        password: '6G64Cg0FpdkI7c7KmCbyXlgzxDX3HwZx'
-    })
+    const ioRedis = new IoRedisMock()
     const storage = new IoRedisStorage(ioRedis)
     const strategy = new ExpirationStrategy(storage)
 
@@ -36,11 +37,35 @@ describe('01-basic', () => {
         await strategy.setItem('user', {
             name: 'max',
             age: 18
-        }, {ttl: 1})
+        }, {ttl: 1, isLazy: true})
     })
 
     it('Should set and get item correctly', async () => {
-        await strategy.setItem('df', {}, {ttl: 1})
+        const raw = {
+            files: ['image.png', 'test.mp3'],
+            color: 'RED',
+            level: 182
+        }
+
+        await strategy.setItem('settings', raw, {ttl: 10, isLazy: true})
+
+        const data = await strategy.getItem('settings')
+
+        Assert.notStrictEqual(data, raw)
+    })
+
+    it('Should return undefined if set item is expired', async () => {
+        const raw = {
+            username: 'max123'
+        }
+
+        await strategy.setItem('user', raw, {ttl: 0.1, isLazy: true})
+
+        await sleep(200)
+
+        const data = await strategy.getItem('user')
+
+        Assert.strictEqual(data, undefined)
     })
 })
 

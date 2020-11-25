@@ -1,12 +1,17 @@
+# IDE STUFF
 .idea
-node_modules
 .vscode
-**/.baseDir.ts
-.tscache
-**.tmp.txt
+
+# PACKAGE MANAGER
+**/node_modules
 npm-debug.log
+
+# TYPESCRIPT
+packages/**/.baseDir.ts
+packages/**/.tscache
+
+# CUSTOM FILES
 .git
-**/*.js
-**/*.js.map
-secret.json
-node-ts-cache*.tgz
+packages/*.js
+packages/*.js.map
+packages/**/dist
