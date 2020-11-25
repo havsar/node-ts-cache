@@ -10,10 +10,12 @@ interface IExpiringCacheItem {
 }
 
 interface IOptions {
-    ttl?: number;
-    isLazy?: boolean;
-    isCachedForever?: boolean;
+    ttl: number;
+    isLazy: boolean;
+    isCachedForever: boolean;
 }
+
+const DEFAULT_TTL_SECONDS = 60
 
 export class ExpirationStrategy extends AbstractBaseStrategy {
 
@@ -21,30 +23,31 @@ export class ExpirationStrategy extends AbstractBaseStrategy {
         super(storage)
     }
 
-    public async getItem<T>(key: string): Promise<T> {
+    public async getItem<T>(key: string): Promise<T | undefined> {
         const item = await this.storage.getItem<IExpiringCacheItem>(key)
         if (item && item.meta && item.meta.ttl && this.isItemExpired(item)) {
             await this.storage.setItem(key, undefined)
+
             return undefined
         }
         return item ? item.content : undefined
     }
 
-    public async setItem(key: string, content: any, options: IOptions): Promise<void> {
-        options = {ttl: 60, isLazy: true, isCachedForever: false, ...options}
+    public async setItem(key: string, content: any, options: Partial<IOptions>): Promise<void> {
+        const finalOptions = {ttl: DEFAULT_TTL_SECONDS, isLazy: true, isCachedForever: false, ...options}
 
         let meta = {}
 
         if (!options.isCachedForever) {
             meta = {
-                ttl: options.ttl * 1000,
+                ttl: finalOptions.ttl * 1000,
                 createdAt: Date.now()
             }
 
             if (!options.isLazy) {
                 setTimeout(() => {
                     this.unsetKey(key)
-                }, options.ttl)
+                }, finalOptions.ttl)
             }
         }
         await this.storage.setItem(key, {meta, content})

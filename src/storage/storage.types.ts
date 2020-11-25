@@ -6,7 +6,7 @@ interface ICacheEntry {
 export interface StorageTypes {
     getItem<T>(key: string): Promise<T>;
 
-    setItem(key: string, content: ICacheEntry): Promise<void>;
+    setItem(key: string, content: ICacheEntry | undefined): Promise<void>;
 
     clear(): Promise<void>;
 }

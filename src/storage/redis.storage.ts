@@ -16,7 +16,7 @@ export class RedisStorage implements StorageTypes {
     }
 
     public async getItem<T>(key: string): Promise<T> {
-        const entry: any = await this.client.getAsync(key)
+        const entry: any = await this.client.getAsync!(key)
         let finalItem = entry
         try {
             finalItem = JSON.parse(entry)
@@ -29,12 +29,12 @@ export class RedisStorage implements StorageTypes {
         if (typeof content === 'object') {
             content = JSON.stringify(content)
         } else if (content === undefined) {
-            return this.client.delAsync(key)
+            return this.client.delAsync!(key)
         }
-        return this.client.setAsync(key, content)
+        return this.client.setAsync!(key, content)
     }
 
     public async clear(): Promise<void> {
-        return this.client.flushdbAsync()
+        return this.client.flushdbAsync!()
     }
 }
