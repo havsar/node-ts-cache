@@ -1,19 +1,15 @@
 {
   "name": "node-ts-cache",
-  "version": "3.2.0",
   "description": "Simple and extensible caching module supporting decorators",
-  "main": "src/index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "test": "mocha -r ts-node/register test/**/*.test.ts",
-    "tdd": "mocha -r ts-node/register -w",
-    "tdd-debug-brk": "mocha -r ts-node/register --inspect-brk",
+    "tdd": "mocha --require ts-node/register --watch --watch-files src, test/**/*.ts",
     "build": "tsc -p .",
-    "prepublish": "tsc -p .",
-    "clean": "git clean -fdx src",
-    "prepare": "tsc -p .",
+    "clean": "git clean -fdx src test",
     "ts-dev": "tsc -p . -w"
   },
-  "types": "index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/havsar/node-ts-cache.git"

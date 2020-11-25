@@ -5,12 +5,12 @@ const strategy = new ExpirationStrategy(new MemoryStorage())
 const data = ['user', 'max', 'test']
 
 class TestClassOne {
-    @Cache(strategy, {ttl: 1000})
+    @Cache(strategy, {ttl: 1})
     public getUsers(): string[] {
         return data
     }
 
-    @Cache(strategy, {ttl: 1000})
+    @Cache(strategy, {ttl: 1})
     public getUsersPromise(): Promise<string[]> {
         return Promise.resolve(data)
     }
@@ -18,10 +18,10 @@ class TestClassOne {
 }
 
 class TestClassTwo {
-    @Cache(strategy, {ttl: 20000})
+    @Cache(strategy, {ttl: 1})
     public async getUsers(): Promise<string[]> {
         return new Promise<string[]>(resolve => {
-            setTimeout(() => resolve(data), 500)
+            setTimeout(() => resolve(data), 200)
         })
     }
 }
@@ -38,25 +38,25 @@ class CustomJsonStrategy implements IKeyStrategy {
 class CustomKeyStrategy implements IKeyStrategy {
     public getKey(_className: string, methodName: string, _args: any[]): Promise<string> | string {
         return new Promise(resolve => {
-            setTimeout(() => resolve(methodName), 100)
+            setTimeout(() => resolve(methodName), 50)
         })
     }
 }
 
 class TestClassThree {
-    @Cache(strategy, {ttl: 1000}, new CustomJsonStrategy())
+    @Cache(strategy, {ttl: 1}, new CustomJsonStrategy())
     public getUsers(): string[] {
         return data
     }
 
-    @Cache(strategy, {ttl: 1000}, new CustomJsonStrategy())
+    @Cache(strategy, {ttl: 1}, new CustomJsonStrategy())
     public getUsersPromise(): Promise<string[]> {
         return Promise.resolve(data)
     }
 }
 
 class TestClassFour {
-    @Cache(strategy, {ttl: 500}, new CustomKeyStrategy())
+    @Cache(strategy, {ttl: 1}, new CustomKeyStrategy())
     public getUsersPromise(): Promise<string[]> {
         return Promise.resolve(data)
     }
