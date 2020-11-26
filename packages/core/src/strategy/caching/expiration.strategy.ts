@@ -1,5 +1,8 @@
 import { StorageTypes } from '../../storage/storage.types'
 import { AbstractBaseStrategy } from './abstract.base.strategy'
+import Debug from 'debug'
+
+const debug = Debug('node-ts-cache')
 
 interface IExpiringCacheItem {
     content: any;
@@ -40,15 +43,17 @@ export class ExpirationStrategy extends AbstractBaseStrategy {
 
         let meta = {}
 
-        if (!options.isCachedForever) {
+        if (!finalOptions.isCachedForever) {
             meta = {
                 ttl: finalOptions.ttl * 1000,
                 createdAt: Date.now()
             }
 
-            if (!options.isLazy) {
+            if (!finalOptions.isLazy) {
                 setTimeout(() => {
                     this.unsetKey(key)
+
+                    debug(`Expired key ${key} removed from cache`)
                 }, finalOptions.ttl)
             }
         }
@@ -58,6 +63,8 @@ export class ExpirationStrategy extends AbstractBaseStrategy {
 
     public async clear(): Promise<void> {
         await this.storage.clear()
+
+        debug('Cleared cache')
     }
 
     private isItemExpired(item: IExpiringCacheItem): boolean {
