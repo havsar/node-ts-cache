@@ -1,6 +1,6 @@
 import * as Assert from "assert"
-import { MemoryStorage } from "node-ts-cache"
 import { ExpirationStrategy } from "../src"
+import { MemoryStorage } from "node-ts-cache-storage-memory"
 
 interface ITestType {
     user: {
