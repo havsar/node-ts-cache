@@ -2,7 +2,7 @@
     "name": "root",
     "private": true,
     "scripts": {
-        "bootstrap": "lerna bootstrap --strict",
+        "bootstrap": "lerna bootstrap --strict --no-ci",
         "test": "lerna run test",
         "ls": "lerna ls",
         "lint": "prettier --check .",
