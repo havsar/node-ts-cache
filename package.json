@@ -3,7 +3,8 @@
     "private": true,
     "scripts": {
         "bootstrap": "lerna bootstrap --strict --no-ci",
-        "test": "lerna run test",
+        "clean": "lerna clean -y",
+        "test": "lerna run test --no-ci",
         "ls": "lerna ls",
         "lint": "prettier --check .",
         "format": "prettier --write ."

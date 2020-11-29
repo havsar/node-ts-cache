@@ -1,7 +1,7 @@
-import IoRedisStorage from "../src"
 import * as Assert from "assert"
 import * as IORedis from "ioredis"
 import { ExpirationStrategy } from "node-ts-cache-strategy-expiration"
+import IoRedisStorage from "node-ts-cache-storage-ioredis"
 
 const IoRedisMock: typeof IORedis = require("ioredis-mock")
 

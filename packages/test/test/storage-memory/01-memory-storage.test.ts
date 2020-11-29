@@ -1,7 +1,7 @@
-import * as Assert from 'assert'
-import { MemoryStorage } from '../src'
-import { Cache } from 'node-ts-cache'
-import { ExpirationStrategy } from 'node-ts-cache-strategy-expiration'
+import * as Assert from "assert"
+import { Cache } from "node-ts-cache"
+import { ExpirationStrategy } from "node-ts-cache-strategy-expiration"
+import { MemoryStorage } from "node-ts-cache-storage-memory"
 
 describe("MemoryStorage", () => {
     it("Should add cache item correctly", async () => {
