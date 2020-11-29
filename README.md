@@ -115,6 +115,11 @@ class MyService {
 }
 ```
 
+# Debug Logging
+This project uses the [debug](https://github.com/lerna/debug) module to log useful development information like cache initialization, hit/miss, TTL expiration, ....
+
+To enable logging, use the environment variable `DEBUG=node-ts-cache`
+
 # Development & Testing
 
 This project follows the monorepo architecture using [lerna](https://github.com/lerna/lerna).

@@ -1,12 +1,13 @@
 import * as Assert from "assert"
 import * as Fs from "fs"
-import { FsJsonStorage } from "../src"
+import { NodeFsStorage } from "../src"
 
 const cacheFile = "cache.json"
 
-describe("FsJsonStorage", () => {
+describe("NodeFsStorage", () => {
     it("Should create file on storage construction", (done) => {
-        const storage = new FsJsonStorage(cacheFile)
+        const storage = new NodeFsStorage(cacheFile)
+
         storage.clear()
 
         Fs.readFileSync(cacheFile)
@@ -16,7 +17,8 @@ describe("FsJsonStorage", () => {
     })
 
     it("Should be empty cache file on storage construction", (done) => {
-        const storage = new FsJsonStorage(cacheFile)
+        const storage = new NodeFsStorage(cacheFile)
+
         storage.clear()
 
         const cache = Fs.readFileSync(cacheFile).toString()
@@ -28,16 +30,19 @@ describe("FsJsonStorage", () => {
     })
 
     it("Should add cache item correctly", async () => {
-        const storage = new FsJsonStorage(cacheFile)
+        const storage = new NodeFsStorage(cacheFile)
         const cacheKey = "test"
         const content = { username: "test", password: "test" }
 
         await storage.setItem(cacheKey, content)
+
         const cache = JSON.parse(Fs.readFileSync(cacheFile).toString())
 
         Assert.deepStrictEqual(cache, { [cacheKey]: content })
+
         const entry = await storage.getItem(cacheKey)
-        Assert.deepEqual(entry, content)
+
+        Assert.deepStrictEqual(entry, content)
 
         Fs.unlinkSync(cacheFile)
     })

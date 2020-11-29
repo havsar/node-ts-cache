@@ -1,9 +1,9 @@
-import { StorageTypes } from "./storage.types"
 import * as Bluebird from "bluebird"
+import { StorageTypes } from "node-ts-cache"
 
 const Fs = Bluebird.promisifyAll(require("fs"))
 
-export class FsJsonStorage implements StorageTypes {
+export class NodeFsStorage implements StorageTypes {
     constructor(public jsonFilePath: string) {
         if (!Fs.existsSync(this.jsonFilePath)) {
             this.createEmptyCache()
