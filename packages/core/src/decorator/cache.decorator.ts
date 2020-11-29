@@ -9,7 +9,7 @@ const defaultKeyStrategy = new JSONStringifyKeyStrategy()
 
 export function Cache(
     cachingStrategy: AbstractBaseStrategy,
-    options: unknown,
+    options: any,
     keyStrategy: IKeyStrategy = defaultKeyStrategy
 ): MethodDecorator {
     return function (
