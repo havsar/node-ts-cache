@@ -2,7 +2,12 @@ import * as Assert from "assert"
 import * as Fs from "fs"
 import { NodeFsStorage } from "../src"
 
+const MockFs = require("mock-fs")
 const cacheFile = "cache.json"
+
+MockFs({
+    [cacheFile]: ""
+})
 
 describe("NodeFsStorage", () => {
     it("Should create file on storage construction", (done) => {
