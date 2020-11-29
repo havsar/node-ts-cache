@@ -14,7 +14,7 @@ const ioRedis = new IORedis({
 const storage = new IORedisStorage(ioRedis)
 const strategy = new ExpirationStrategy(storage)
 
-export default class GithubRepoService {
+export default class GithubRepoServiceRedis {
     @Cache(strategy, { ttl: 10 }, new CustomKeyCreator())
     async findReposByUsername(username: string) {
         return Got.get(`https://api.github.com/users/${username}/repos`, {

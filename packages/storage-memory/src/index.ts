@@ -1,9 +1,10 @@
-import { StorageTypes } from "./storage.types"
+import { StorageTypes } from 'node-ts-cache'
 
 export class MemoryStorage implements StorageTypes {
     private memCache: any = {}
 
-    constructor() {}
+    constructor() {
+    }
 
     public async getItem<T>(key: string): Promise<T> {
         return this.memCache[key]

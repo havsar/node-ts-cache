@@ -1,18 +1,31 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
+import GithubRepoServiceMemory from './github-repo-service-memory'
+import GithubRepoServiceRedis from './github-repo-service-redis'
+import * as Express from 'express'
+
 require("dotenv").config()
-import GithubRepoService from "./github-repo-service"
-import * as Express from "express"
 
 const app = Express()
 
 app.use(Express.json())
 
-const githubRepoService = new GithubRepoService()
+const githubRepoServiceRedis = new GithubRepoServiceRedis()
+const githubRepoServiceMemory = new GithubRepoServiceMemory()
 
-app.get("/api/repos/:username", async (req, res) => {
+// REDIS
+app.get("/api/redis/repos/:username", async (req, res) => {
     const username = req.params.username
 
-    const users = await githubRepoService.findReposByUsername(username)
+    const users = await githubRepoServiceRedis.findReposByUsername(username)
+
+    res.json(users)
+})
+
+// MEMORY
+app.get("/api/memory/repos/:username", async (req, res) => {
+    const username = req.params.username
+
+    const users = await githubRepoServiceMemory.findReposByUsername(username)
 
     res.json(users)
 })
