@@ -1,5 +1,6 @@
 import IORedisStorage from "node-ts-cache-storage-ioredis"
-import { Cache, ExpirationStrategy } from "node-ts-cache"
+import { Cache } from "node-ts-cache"
+import { ExpirationStrategy } from "node-ts-cache-strategy-expiration"
 import * as IORedis from "ioredis"
 import Got from "got"
 import CustomKeyCreator from "./custom-key-creator"

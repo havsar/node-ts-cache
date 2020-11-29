@@ -1,5 +1,6 @@
 import * as Assert from "assert"
-import { ExpirationStrategy, MemoryStorage } from "../src"
+import { MemoryStorage } from "node-ts-cache"
+import { ExpirationStrategy } from "../src"
 
 interface ITestType {
     user: {
@@ -13,43 +14,43 @@ const data: ITestType = {
 
 describe("ExpirationStrategy", () => {
     it("Should set cache item correctly with isLazy", async () => {
-        const cacher = new ExpirationStrategy(new MemoryStorage())
+        const cache = new ExpirationStrategy(new MemoryStorage())
 
-        await cacher.setItem("test", data, { ttl: 10 })
-        const entry = await cacher.getItem<ITestType>("test")
+        await cache.setItem("test", data, { ttl: 10 })
+        const entry = await cache.getItem<ITestType>("test")
 
         Assert.deepStrictEqual(entry, data)
     })
 
-    it("Should return no item if cache expires istantly with isLazy", async () => {
-        const cacher = new ExpirationStrategy(new MemoryStorage())
+    it("Should return no item if cache expires instantly with isLazy", async () => {
+        const cache = new ExpirationStrategy(new MemoryStorage())
 
-        await cacher.setItem("test", data, { ttl: -1 })
-        const entry = await cacher.getItem<ITestType>("test")
+        await cache.setItem("test", data, { ttl: -1 })
+        const entry = await cache.getItem<ITestType>("test")
         Assert.deepStrictEqual(entry, undefined)
     })
 
     it("Should not find cache item after ttl with isLazy disabled", async () => {
-        const cacher = new ExpirationStrategy(new MemoryStorage())
+        const cache = new ExpirationStrategy(new MemoryStorage())
 
-        await cacher.setItem("test", data, { ttl: 0.001, isLazy: false })
+        await cache.setItem("test", data, { ttl: 0.001, isLazy: false })
         await wait(10)
 
-        const entry = await cacher.getItem<ITestType>("test")
+        const entry = await cache.getItem<ITestType>("test")
         Assert.deepStrictEqual(entry, undefined)
     })
 
     it("Should ignore isLazy and ttl options if isCachedForever option is provided and cache forever", async () => {
-        const cacher = new ExpirationStrategy(new MemoryStorage())
+        const cache = new ExpirationStrategy(new MemoryStorage())
 
-        await cacher.setItem("test", data, {
+        await cache.setItem("test", data, {
             ttl: 0,
             isLazy: false,
             isCachedForever: true
         })
         await wait(10)
 
-        const entry = await cacher.getItem<ITestType>("test")
+        const entry = await cache.getItem<ITestType>("test")
         Assert.deepStrictEqual(entry, data)
     })
 })

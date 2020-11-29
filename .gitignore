@@ -17,3 +17,4 @@ packages/*.js.map
 packages/**/dist
 **/.env
 **/.env.
+lerna-debug.log

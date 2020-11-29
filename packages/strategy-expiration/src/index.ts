@@ -1,10 +1,9 @@
-import { StorageTypes } from "../../storage/storage.types"
-import { AbstractBaseStrategy } from "./abstract.base.strategy"
 import Debug from "debug"
+import { AbstractBaseStrategy, ICacheEntry, StorageTypes } from "node-ts-cache"
 
 const debug = Debug("node-ts-cache")
 
-interface IExpiringCacheItem {
+interface IExpiringCacheItem extends ICacheEntry {
     content: any
     meta: {
         createdAt: number
@@ -21,7 +20,7 @@ interface IOptions {
 const DEFAULT_TTL_SECONDS = 60
 
 export class ExpirationStrategy extends AbstractBaseStrategy {
-    constructor(storage: StorageTypes) {
+    constructor(public storage: StorageTypes) {
         super(storage)
     }
 

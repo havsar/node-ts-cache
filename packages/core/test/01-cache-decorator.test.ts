@@ -1,5 +1,6 @@
 import * as Assert from "assert"
-import { Cache, ExpirationStrategy, IKeyStrategy, MemoryStorage } from "../src"
+import { Cache, IKeyStrategy, MemoryStorage } from "../src"
+import { ExpirationStrategy } from "node-ts-cache-strategy-expiration"
 
 const strategy = new ExpirationStrategy(new MemoryStorage())
 const data = ["user", "max", "test"]
