@@ -17,7 +17,6 @@ const strategy = new ExpirationStrategy(storage)
 export default class GithubRepoService {
     @Cache(strategy, {ttl: 10}, new CustomKeyCreator())
     async findReposByUsername(username: string) {
-        console.log(123)
         return Got.get(`https://api.github.com/users/${username}/repos`, {
             headers: {
                 'Accept': 'application/vnd.github.v3+json'
