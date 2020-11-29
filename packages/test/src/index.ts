@@ -1,6 +1,7 @@
-require('dotenv').config()
-import GithubRepoService from './github-repo-service'
-import * as Express from 'express'
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+require("dotenv").config()
+import GithubRepoService from "./github-repo-service"
+import * as Express from "express"
 
 const app = Express()
 
@@ -8,7 +9,7 @@ app.use(Express.json())
 
 const githubRepoService = new GithubRepoService()
 
-app.get('/api/repos/:username', async (req, res) => {
+app.get("/api/repos/:username", async (req, res) => {
     const username = req.params.username
 
     const users = await githubRepoService.findReposByUsername(username)

@@ -1,14 +1,12 @@
 {
-  "version": "4.1.0",
-  "packages": [
-    "packages/*"
-  ],
-  "command": {
-    "publish": {
-      "message": "chore: publish"
-    }
-  },
-  "hoist": true,
-  "strict": true,
-  "forceLocal": true
+    "version": "4.1.0",
+    "packages": ["packages/*"],
+    "command": {
+        "publish": {
+            "message": "chore: publish"
+        }
+    },
+    "hoist": true,
+    "strict": true,
+    "forceLocal": true
 }

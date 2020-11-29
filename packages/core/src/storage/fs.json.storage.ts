@@ -1,10 +1,9 @@
-import { StorageTypes } from './storage.types'
-import * as Bluebird from 'bluebird'
+import { StorageTypes } from "./storage.types"
+import * as Bluebird from "bluebird"
 
-const Fs = Bluebird.promisifyAll(require('fs'))
+const Fs = Bluebird.promisifyAll(require("fs"))
 
 export class FsJsonStorage implements StorageTypes {
-
     constructor(public jsonFilePath: string) {
         if (!Fs.existsSync(this.jsonFilePath)) {
             this.createEmptyCache()
@@ -34,7 +33,8 @@ export class FsJsonStorage implements StorageTypes {
     }
 
     private async getCacheObject(): Promise<any> {
-        return JSON.parse((await Fs.readFileAsync(this.jsonFilePath)).toString())
+        return JSON.parse(
+            (await Fs.readFileAsync(this.jsonFilePath)).toString()
+        )
     }
-
 }

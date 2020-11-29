@@ -1,11 +1,9 @@
-import { StorageTypes } from './storage.types'
+import { StorageTypes } from "./storage.types"
 
 export class MemoryStorage implements StorageTypes {
-
     private memCache: any = {}
 
-    constructor() {
-    }
+    constructor() {}
 
     public async getItem<T>(key: string): Promise<T> {
         return this.memCache[key]
@@ -18,5 +16,4 @@ export class MemoryStorage implements StorageTypes {
     public async clear(): Promise<void> {
         this.memCache = {}
     }
-
 }

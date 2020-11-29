@@ -1,27 +1,26 @@
-import { StorageTypes } from '../../storage/storage.types'
-import { AbstractBaseStrategy } from './abstract.base.strategy'
-import Debug from 'debug'
+import { StorageTypes } from "../../storage/storage.types"
+import { AbstractBaseStrategy } from "./abstract.base.strategy"
+import Debug from "debug"
 
-const debug = Debug('node-ts-cache')
+const debug = Debug("node-ts-cache")
 
 interface IExpiringCacheItem {
-    content: any;
+    content: any
     meta: {
-        createdAt: number;
-        ttl: number;
+        createdAt: number
+        ttl: number
     }
 }
 
 interface IOptions {
-    ttl: number;
-    isLazy: boolean;
-    isCachedForever: boolean;
+    ttl: number
+    isLazy: boolean
+    isCachedForever: boolean
 }
 
 const DEFAULT_TTL_SECONDS = 60
 
 export class ExpirationStrategy extends AbstractBaseStrategy {
-
     constructor(storage: StorageTypes) {
         super(storage)
     }
@@ -38,8 +37,17 @@ export class ExpirationStrategy extends AbstractBaseStrategy {
         return item ? item.content : undefined
     }
 
-    public async setItem(key: string, content: any, options: Partial<IOptions>): Promise<void> {
-        const finalOptions = {ttl: DEFAULT_TTL_SECONDS, isLazy: true, isCachedForever: false, ...options}
+    public async setItem(
+        key: string,
+        content: any,
+        options: Partial<IOptions>
+    ): Promise<void> {
+        const finalOptions = {
+            ttl: DEFAULT_TTL_SECONDS,
+            isLazy: true,
+            isCachedForever: false,
+            ...options
+        }
 
         let meta = {}
 
@@ -58,13 +66,13 @@ export class ExpirationStrategy extends AbstractBaseStrategy {
             }
         }
 
-        await this.storage.setItem(key, {meta, content})
+        await this.storage.setItem(key, { meta, content })
     }
 
     public async clear(): Promise<void> {
         await this.storage.clear()
 
-        debug('Cleared cache')
+        debug("Cleared cache")
     }
 
     private isItemExpired(item: IExpiringCacheItem): boolean {

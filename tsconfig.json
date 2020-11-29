@@ -1,34 +1,26 @@
 {
-  "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "noEmitOnError": true,
-    "allowUnreachableCode": false,
-    "allowUnusedLabels": false,
-    "noImplicitAny": true,
-    "noImplicitReturns": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "emitDecoratorMetadata": true,
-    "outDir": "dist",
-    "strict": true,
-    "lib": [
-      "es2015"
-    ],
-    "sourceMap": true,
-    "experimentalDecorators": true,
-    "typeRoots": [
-      "node_modules/@types"
-    ],
-    "allowJs": false,
-    "rootDirs": [
-      "packages/**"
-    ],
-    "declaration": true
-  },
-  "exclude": [
-    "node_modules"
-  ],
-  "compileOnSave": false
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "noEmitOnError": true,
+        "allowUnreachableCode": false,
+        "allowUnusedLabels": false,
+        "noImplicitAny": true,
+        "noImplicitReturns": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "emitDecoratorMetadata": true,
+        "outDir": "dist",
+        "strict": true,
+        "lib": ["es2015"],
+        "sourceMap": true,
+        "experimentalDecorators": true,
+        "typeRoots": ["node_modules/@types"],
+        "allowJs": false,
+        "rootDirs": ["packages/**"],
+        "declaration": true
+    },
+    "exclude": ["node_modules"],
+    "compileOnSave": false
 }

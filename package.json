@@ -1,13 +1,16 @@
 {
-  "name": "root",
-  "private": true,
-  "scripts": {
-    "bootstrap": "lerna bootstrap --strict",
-    "test": "lerna run test",
-    "ls": "lerna ls"
-  },
-  "devDependencies": {
-    "lerna": "^3.22.1"
-  },
-  "dependencies": {}
+    "name": "root",
+    "private": true,
+    "scripts": {
+        "bootstrap": "lerna bootstrap --strict",
+        "test": "lerna run test",
+        "ls": "lerna ls",
+        "lint": "prettier --check .",
+        "format": "prettier --write ."
+    },
+    "devDependencies": {
+        "lerna": "^3.22.1",
+        "prettier": "^2.1.2"
+    },
+    "dependencies": {}
 }
