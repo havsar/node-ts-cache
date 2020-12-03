@@ -9,7 +9,7 @@
 
 Simple and extensible caching module supporting decorators.
 
-**This is the documentation for v4 core.**
+**This is the documentation for v4 in which a couple of breaking changes were made due to improvements.**
 
 **If you are using a previous version, refer to the [v3](https://github.com/havsar/node-ts-cache/tree/v3) branch.**
 
@@ -27,11 +27,6 @@ npm install node-ts-cache
 -   `elasticsearch` https://www.npmjs.com/package/node-ts-cache-storage-elasticsearch
 -   `mongodb` https://www.npmjs.com/package/node-ts-cache-storage-mongodb
 
-# Strategies
-
--   `expiration` https://www.npmjs.com/package/node-ts-cache-storage-memory
--   `lru` https://www.npmjs.com/package/node-ts-cache-storage-node-fs
-
 # Usage
 
 ## With decorator
@@ -42,18 +37,21 @@ By default, uses all arguments to build an unique key.
 
 `@Cache(strategy, options)`
 
--   `strategy`: A supported caching [Strategy](#Strategies)
--   `options`: Options passed to the strategy for this particular method
+-   `options`:
+    -   `ttl`: _(Default: 60)_ Number of seconds to expire the cachte item
+    -   `isLazy`: _(Default: true)_ If true, expired cache entries will be deleted on touch. If false, entries will be deleted after the given _ttl_.
+    -   `isCachedForver`: _(Default: false)_ If true, cache entry has no expiration.
 
-_Note: @Cache always converts the method response to a promise because caching might be async._
+_Note: @Cache will consider the return type of the function. If the return type is a thenable, it will stay that way, otherwise not._
 
 ```ts
-import { Cache, ExpirationStrategy, MemoryStorage } from "node-ts-cache"
+import { Cache, CacheContainer } from "node-ts-cache"
+import MemoryStorage from "node-ts-cache-storage-memory"
 
-const myStrategy = new ExpirationStrategy(new MemoryStorage())
+const userCache = new CacheContainer(new MemoryStorage())
 
 class MyService {
-    @Cache(myStrategy, { ttl: 60 })
+    @Cache(userCache, { ttl: 60 })
     public async getUsers(): Promise<string[]> {
         return ["Max", "User"]
     }
@@ -63,30 +61,22 @@ class MyService {
 Cache decorator generates cache key according to class name, class method and args (with JSON.stringify).
 If you want another key creation logic you can bypass key creation strategy to the Cache decorator.
 
-```ts
-import {
-    Cache,
-    ExpirationStrategy,
-    MemoryStorage,
-    IKeyStrategy
-} from "node-ts-cache"
 
-class MyKeyStrategy implements IKeyStrategy {
-    public getKey(
-        className: string,
-        methodName: string,
-        args: any[]
-    ): Promise<string> | string {
-        // Here you can implement your own way of creating cache keys
-        return `foo bar baz`
-    }
-}
+-   `data`:
+    -   `className`: The class name for the method being decorated
+    -   `methodName`: The method name being decorated
+    -   `args`: The arguments passed to the method when called
+
+
+```ts
+import { Cache } from 'node-ts-cache'
+import MemoryStorage from "node-ts-cache-storage-memory"
 
 const myStrategy = new ExpirationStrategy(new MemoryStorage())
 const myKeyStrategy = new MyKeyStrategy()
 
 class MyService {
-    @Cache(myStrategy, { ttl: 60 }, myKeyStrategy)
+    @Cache(myStrategy, {ttl: 60, calculateKey: data => `foo bar baz`})
     public async getUsers(): Promise<string[]> {
         return ["Max", "User"]
     }
@@ -96,29 +86,27 @@ class MyService {
 ## Directly
 
 ```ts
-import { ExpirationStrategy, MemoryStorage } from "node-ts-cache"
+import { CacheContainer } from 'node-ts-cache'
+import MemoryStorage from 'node-ts-cache-storage-memory'
 
-const myCache = new ExpirationStrategy(new MemoryStorage())
+const myCache = new CacheContainer(new MemoryStorage())
 
 class MyService {
     public async getUsers(): Promise<string[]> {
         const cachedUsers = await myCache.getItem<string[]>("users")
+
         if (cachedUsers) {
             return cachedUsers
         }
 
         const newUsers = ["Max", "User"]
-        await myCache.setItem("users", newUsers, { ttl: 60 })
+
+        await myCache.setItem("users", newUsers, {ttl: 60})
 
         return newUsers
     }
 }
 ```
-
-# Debug Logging
-This project uses the [debug](https://github.com/lerna/debug) module to log useful development information like cache initialization, hit/miss, TTL expiration, ....
-
-To enable logging, use the environment variable `DEBUG=node-ts-cache`
 
 # Development & Testing
 

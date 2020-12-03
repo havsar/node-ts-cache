@@ -1,7 +1,7 @@
-import * as Assert from 'assert'
-import { MemoryStorage } from 'node-ts-cache-storage-memory'
-import { Cache } from 'node-ts-cache'
-import CacheContainer from 'node-ts-cache/dist/cache-container/cache-container'
+import * as Assert from "assert"
+import { MemoryStorage } from "node-ts-cache-storage-memory"
+import { Cache } from "node-ts-cache"
+import CacheContainer from "node-ts-cache/dist/cache-container/cache-container"
 
 const userCache = new CacheContainer(new MemoryStorage())
 const data = ["user", "max", "test"]
@@ -99,10 +99,7 @@ describe("CacheDecorator", () => {
         const users = await myClass.getUsers()
 
         Assert.strictEqual(data, users)
-        Assert.strictEqual(
-            await userCache.getItem<string[]>("getUsers"),
-            data
-        )
+        Assert.strictEqual(await userCache.getItem<string[]>("getUsers"), data)
     })
 
     it("Should cache Promise response correctly (custom key strategy)", async () => {

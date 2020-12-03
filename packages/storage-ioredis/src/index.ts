@@ -1,5 +1,5 @@
-import * as IORedis from 'ioredis'
-import { ICacheItem, IStorage } from 'node-ts-cache'
+import * as IORedis from "ioredis"
+import { ICacheItem, IStorage } from "node-ts-cache"
 
 export default class IoRedisStorage implements IStorage {
     constructor(private ioRedisInstance: IORedis.Redis) {}
