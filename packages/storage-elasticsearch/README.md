@@ -5,15 +5,14 @@ See https://github.com/luin/ioredis#connect-to-redis for available options.
 
 ```bash
 npm i node-ts-cache
-npm i node-ts-cache-storage-ioredis
-npm i ioredis
-npm i -D @types/ioredis
+npm i node-ts-cache-storage-elasticsearch
+npm i @elastic/elasticsearch
 ```
 
 ```ts
-import { Cache, CacheContainer } from 'node-ts-cache'
-import IoRedisStorage from 'node-ts-cache-storage-ioredis'
-import IoRedis from 'ioredis'
+import { Cache, CacheContainer } from "node-ts-cache"
+import IoRedisStorage from "node-ts-cache-storage-ioredis"
+import IoRedis from "ioredis"
 
 const ioRedisInstance = new IoRedis({
     port: 6379, // Redis port
@@ -25,7 +24,7 @@ const ioRedisInstance = new IoRedis({
 const userCache = new CacheContainer(new IoRedisStorage(ioRedisInstance))
 
 class MyService {
-    @Cache(userCache, {ttl: 60})
+    @Cache(userCache, { ttl: 60 })
     public async getUsers(): Promise<string[]> {
         return ["Max", "User"]
     }

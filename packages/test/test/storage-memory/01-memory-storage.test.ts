@@ -1,7 +1,6 @@
 import * as Assert from "assert"
-import { Cache } from "node-ts-cache"
+import { Cache, CacheContainer } from "node-ts-cache"
 import { MemoryStorage } from "node-ts-cache-storage-memory"
-import CacheContainer from "node-ts-cache/dist/cache-container/cache-container"
 
 describe("MemoryStorage", () => {
     it("Should add cache item correctly", async () => {

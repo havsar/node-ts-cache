@@ -1,9 +1,8 @@
-import * as Assert from 'assert'
-import * as IORedis from 'ioredis'
-import * as Sinon from 'sinon'
-import IoRedisStorage from 'node-ts-cache-storage-ioredis'
-import { Cache } from 'node-ts-cache'
-import CacheContainer from 'node-ts-cache/dist/cache-container/cache-container'
+import * as Assert from "assert"
+import * as IORedis from "ioredis"
+import * as Sinon from "sinon"
+import { IoRedisStorage } from "node-ts-cache-storage-ioredis"
+import { Cache, CacheContainer } from "node-ts-cache"
 
 const IoRedisMock: typeof IORedis = require("ioredis-mock")
 

@@ -1,6 +1,6 @@
-import * as Assert from 'assert'
-import { MemoryStorage } from 'node-ts-cache-storage-memory'
-import CacheContainer from 'node-ts-cache/dist/cache-container/cache-container'
+import * as Assert from "assert"
+import { MemoryStorage } from "node-ts-cache-storage-memory"
+import { CacheContainer } from "node-ts-cache"
 
 interface ITestType {
     user: {

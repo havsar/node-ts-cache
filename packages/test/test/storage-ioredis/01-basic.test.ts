@@ -1,7 +1,7 @@
 import * as Assert from "assert"
 import * as IORedis from "ioredis"
-import IoRedisStorage from "node-ts-cache-storage-ioredis"
-import CacheContainer from "node-ts-cache/dist/cache-container/cache-container"
+import { IoRedisStorage } from "node-ts-cache-storage-ioredis"
+import { CacheContainer } from "node-ts-cache"
 
 const IoRedisMock: typeof IORedis = require("ioredis-mock")
 

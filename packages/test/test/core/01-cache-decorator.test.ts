@@ -1,7 +1,6 @@
 import * as Assert from "assert"
 import { MemoryStorage } from "node-ts-cache-storage-memory"
-import { Cache } from "node-ts-cache"
-import CacheContainer from "node-ts-cache/dist/cache-container/cache-container"
+import { Cache, CacheContainer } from "node-ts-cache"
 
 const userCache = new CacheContainer(new MemoryStorage())
 const data = ["user", "max", "test"]

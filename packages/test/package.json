@@ -62,6 +62,7 @@
         "node-ts-cache": "^4.1.0",
         "node-ts-cache-storage-ioredis": "^4.1.0",
         "node-ts-cache-storage-memory": "^4.1.0",
-        "node-ts-cache-storage-node-fs": "^4.1.0"
+        "node-ts-cache-storage-node-fs": "^4.1.0",
+        "node-ts-cache-storage-elasticsearch": "^4.1.0"
     }
 }

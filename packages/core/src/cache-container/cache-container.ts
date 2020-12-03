@@ -1,12 +1,12 @@
-import Debug from 'debug'
-import { IStorage } from '../storage'
-import { ICacheItem, ICachingOptions } from './cache-container-types'
+import Debug from "debug"
+import { IStorage } from "../storage"
+import { ICacheItem, ICachingOptions } from "./cache-container-types"
 
 const debug = Debug("node-ts-cache")
 
 const DEFAULT_TTL_SECONDS = 60
 
-export default class CacheContainer {
+export class CacheContainer {
     constructor(private storage: IStorage) {}
 
     public async getItem<T>(key: string): Promise<T | undefined> {

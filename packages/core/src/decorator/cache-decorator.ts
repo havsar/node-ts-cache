@@ -1,6 +1,5 @@
-import Debug from 'debug'
-import { ICachingOptions } from '../cache-container'
-import CacheContainer from '../cache-container/cache-container'
+import Debug from "debug"
+import { CacheContainer, ICachingOptions } from "../cache-container"
 
 const debug = Debug("node-ts-cache")
 
@@ -16,7 +15,7 @@ const jsonCalculateKey = (data: {
 
 export function Cache(
     container: CacheContainer,
-    options: Partial<ICachingOptions>
+    options?: Partial<ICachingOptions>
 ): MethodDecorator {
     return function (
         target: Object,
@@ -27,6 +26,8 @@ export function Cache(
         const className = target.constructor.name
 
         descriptor.value = async function (...args: unknown[]) {
+            options ??= {}
+
             const keyOptions = {
                 args,
                 methodName: <string>methodName,

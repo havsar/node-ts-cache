@@ -1,7 +1,7 @@
 import * as IORedis from "ioredis"
 import { ICacheItem, IStorage } from "node-ts-cache"
 
-export default class IoRedisStorage implements IStorage {
+export class IoRedisStorage implements IStorage {
     constructor(private ioRedisInstance: IORedis.Redis) {}
 
     async clear(): Promise<void> {
