@@ -1,14 +1,14 @@
-import * as IORedis from "ioredis"
-import { ICacheEntry, StorageTypes } from "node-ts-cache"
+import * as IORedis from 'ioredis'
+import { ICacheItem, IStorage } from 'node-ts-cache'
 
-export default class IoRedisStorage implements StorageTypes {
+export default class IoRedisStorage implements IStorage {
     constructor(private ioRedisInstance: IORedis.Redis) {}
 
     async clear(): Promise<void> {
         await this.ioRedisInstance.flushdb()
     }
 
-    async getItem<T>(key: string): Promise<T | undefined> {
+    async getItem(key: string): Promise<ICacheItem | undefined> {
         const response = await this.ioRedisInstance.get(key)
 
         if (response === undefined || response === null || response === "") {
@@ -18,10 +18,7 @@ export default class IoRedisStorage implements StorageTypes {
         return JSON.parse(response)
     }
 
-    async setItem(
-        key: string,
-        content: ICacheEntry | undefined
-    ): Promise<void> {
+    async setItem(key: string, content: ICacheItem | undefined): Promise<void> {
         if (content === undefined) {
             await this.ioRedisInstance.del(key)
 

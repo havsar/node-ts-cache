@@ -1,6 +1,6 @@
-import * as Assert from "assert"
-import { MemoryStorage } from "node-ts-cache-storage-memory"
-import { ExpirationStrategy } from "node-ts-cache-strategy-expiration"
+import * as Assert from 'assert'
+import { MemoryStorage } from 'node-ts-cache-storage-memory'
+import CacheContainer from 'node-ts-cache/dist/cache-container/cache-container'
 
 interface ITestType {
     user: {
@@ -12,9 +12,9 @@ const data: ITestType = {
     user: { name: "test" }
 }
 
-describe("ExpirationStrategy", () => {
+describe("CacheContainer", () => {
     it("Should set cache item correctly with isLazy", async () => {
-        const cache = new ExpirationStrategy(new MemoryStorage())
+        const cache = new CacheContainer(new MemoryStorage())
 
         await cache.setItem("test", data, { ttl: 10 })
         const entry = await cache.getItem<ITestType>("test")
@@ -23,7 +23,7 @@ describe("ExpirationStrategy", () => {
     })
 
     it("Should return no item if cache expires instantly with isLazy", async () => {
-        const cache = new ExpirationStrategy(new MemoryStorage())
+        const cache = new CacheContainer(new MemoryStorage())
 
         await cache.setItem("test", data, { ttl: -1 })
         const entry = await cache.getItem<ITestType>("test")
@@ -31,7 +31,7 @@ describe("ExpirationStrategy", () => {
     })
 
     it("Should not find cache item after ttl with isLazy disabled", async () => {
-        const cache = new ExpirationStrategy(new MemoryStorage())
+        const cache = new CacheContainer(new MemoryStorage())
 
         await cache.setItem("test", data, { ttl: 0.001, isLazy: false })
         await wait(10)
@@ -41,7 +41,7 @@ describe("ExpirationStrategy", () => {
     })
 
     it("Should ignore isLazy and ttl options if isCachedForever option is provided and cache forever", async () => {
-        const cache = new ExpirationStrategy(new MemoryStorage())
+        const cache = new CacheContainer(new MemoryStorage())
 
         await cache.setItem("test", data, {
             ttl: 0,

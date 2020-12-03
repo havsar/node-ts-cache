@@ -1,31 +1,16 @@
-import Debug from "debug"
-import { AbstractBaseStrategy, ICacheEntry, StorageTypes } from "node-ts-cache"
+import Debug from 'debug'
+import { IStorage } from '../storage'
+import { ICacheItem, ICachingOptions } from './cache-container-types'
 
 const debug = Debug("node-ts-cache")
 
-interface IExpiringCacheItem extends ICacheEntry {
-    content: any
-    meta: {
-        createdAt: number
-        ttl: number
-    }
-}
-
-interface IOptions {
-    ttl: number
-    isLazy: boolean
-    isCachedForever: boolean
-}
-
 const DEFAULT_TTL_SECONDS = 60
 
-export class ExpirationStrategy extends AbstractBaseStrategy {
-    constructor(public storage: StorageTypes) {
-        super(storage)
-    }
+export default class CacheContainer {
+    constructor(private storage: IStorage) {}
 
     public async getItem<T>(key: string): Promise<T | undefined> {
-        const item = await this.storage.getItem<IExpiringCacheItem>(key)
+        const item = await this.storage.getItem(key)
 
         if (item?.meta?.ttl && this.isItemExpired(item)) {
             await this.unsetKey(key)
@@ -39,7 +24,7 @@ export class ExpirationStrategy extends AbstractBaseStrategy {
     public async setItem(
         key: string,
         content: any,
-        options: Partial<IOptions>
+        options: Partial<ICachingOptions>
     ): Promise<void> {
         const finalOptions = {
             ttl: DEFAULT_TTL_SECONDS,
@@ -48,7 +33,7 @@ export class ExpirationStrategy extends AbstractBaseStrategy {
             ...options
         }
 
-        let meta = {}
+        let meta: any = {}
 
         if (!finalOptions.isCachedForever) {
             meta = {
@@ -74,7 +59,7 @@ export class ExpirationStrategy extends AbstractBaseStrategy {
         debug("Cleared cache")
     }
 
-    private isItemExpired(item: IExpiringCacheItem): boolean {
+    private isItemExpired(item: ICacheItem): boolean {
         return Date.now() > item.meta.createdAt + item.meta.ttl
     }
 

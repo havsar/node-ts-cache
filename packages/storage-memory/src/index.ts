@@ -1,12 +1,11 @@
-import { StorageTypes } from 'node-ts-cache'
+import { ICacheItem, IStorage } from 'node-ts-cache'
 
-export class MemoryStorage implements StorageTypes {
+export class MemoryStorage implements IStorage {
     private memCache: any = {}
 
-    constructor() {
-    }
+    constructor() {}
 
-    public async getItem<T>(key: string): Promise<T> {
+    public async getItem(key: string): Promise<ICacheItem | undefined> {
         return this.memCache[key]
     }
 

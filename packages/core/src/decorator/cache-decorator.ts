@@ -1,16 +1,22 @@
-import { JSONStringifyKeyStrategy } from "../strategy/key/json.stringify.strategy"
-import { AbstractBaseStrategy } from "../strategy/caching/abstract.base.strategy"
-import { IKeyStrategy } from "../strategy/key/key.strategy.types"
-import Debug from "debug"
+import Debug from 'debug'
+import { ICachingOptions } from '../cache-container'
+import CacheContainer from '../cache-container/cache-container'
 
 const debug = Debug("node-ts-cache")
 
-const defaultKeyStrategy = new JSONStringifyKeyStrategy()
+const jsonCalculateKey = (data: {
+    className: string
+    methodName: string
+    args: any[]
+}) => {
+    return `${data.className}:${<string>data.methodName}:${JSON.stringify(
+        data.args
+    )}`
+}
 
 export function Cache(
-    cachingStrategy: AbstractBaseStrategy,
-    options: any,
-    keyStrategy: IKeyStrategy = defaultKeyStrategy
+    container: CacheContainer,
+    options: Partial<ICachingOptions>
 ): MethodDecorator {
     return function (
         target: Object,
@@ -21,13 +27,17 @@ export function Cache(
         const className = target.constructor.name
 
         descriptor.value = async function (...args: unknown[]) {
-            const cacheKey = await keyStrategy.getKey(
-                className,
-                <string>methodName,
-                args
-            )
+            const keyOptions = {
+                args,
+                methodName: <string>methodName,
+                className
+            }
+            const cacheKey = options.calculateKey
+                ? options.calculateKey(keyOptions)
+                : jsonCalculateKey(keyOptions)
 
-            const entry = await cachingStrategy.getItem(cacheKey)
+            const entry = await container.getItem(cacheKey)
+
             if (entry) {
                 debug(`Cache HIT ${cacheKey}`)
 
@@ -45,7 +55,7 @@ export function Cache(
                 methodResult = methodCall
             }
 
-            await cachingStrategy.setItem(cacheKey, methodResult, options)
+            await container.setItem(cacheKey, methodResult, options)
 
             return methodResult
         }

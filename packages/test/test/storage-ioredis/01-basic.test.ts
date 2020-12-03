@@ -1,7 +1,7 @@
 import * as Assert from "assert"
 import * as IORedis from "ioredis"
-import { ExpirationStrategy } from "node-ts-cache-strategy-expiration"
 import IoRedisStorage from "node-ts-cache-storage-ioredis"
+import CacheContainer from "node-ts-cache/dist/cache-container/cache-container"
 
 const IoRedisMock: typeof IORedis = require("ioredis-mock")
 
@@ -12,7 +12,7 @@ function sleep(ms: number) {
 describe("01-basic", () => {
     const ioRedis = new IoRedisMock()
     const storage = new IoRedisStorage(ioRedis)
-    const strategy = new ExpirationStrategy(storage)
+    const strategy = new CacheContainer(storage)
 
     beforeEach(async () => {
         await strategy.clear()

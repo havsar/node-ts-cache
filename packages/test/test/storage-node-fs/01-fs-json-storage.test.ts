@@ -1,6 +1,6 @@
-import * as Assert from 'assert'
-import * as Fs from 'fs'
-import { NodeFsStorage } from 'node-ts-cache-storage-node-fs'
+import * as Assert from "assert"
+import * as Fs from "fs"
+import { NodeFsStorage } from "node-ts-cache-storage-node-fs"
 
 const MockFs = require("mock-fs")
 const cacheFile = "cache.json"
