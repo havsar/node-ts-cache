@@ -24,8 +24,6 @@ npm install node-ts-cache
 -   `memory` https://www.npmjs.com/package/node-ts-cache-storage-memory
 -   `node-fs` https://www.npmjs.com/package/node-ts-cache-storage-node-fs
 -   `ioredis` https://www.npmjs.com/package/node-ts-cache-storage-ioredis
--   `elasticsearch` https://www.npmjs.com/package/node-ts-cache-storage-elasticsearch
--   `mongodb` https://www.npmjs.com/package/node-ts-cache-storage-mongodb
 
 # Usage
 
@@ -41,7 +39,7 @@ By default, uses all arguments to build an unique key.
     -   `ttl`: _(Default: 60)_ Number of seconds to expire the cachte item
     -   `isLazy`: _(Default: true)_ If true, expired cache entries will be deleted on touch. If false, entries will be deleted after the given _ttl_.
     -   `isCachedForver`: _(Default: false)_ If true, cache entry has no expiration.
-    -   `calculateKey(data => string)`: _(Default: JSON.stringify calculation)_
+    -   `calculateKey(data => string)`: _(Default: JSON.stringify combination of className, methodName and call args)_
         -   `data`:
             -   `className`: The class name for the method being decorated
             -   `methodName`: The method name being decorated

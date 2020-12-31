@@ -2,6 +2,7 @@
     "name": "node-ts-cache-storage-elasticsearch",
     "description": "Elasticsearch storage module for node-ts-cache",
     "version": "4.1.0",
+    "private": true,
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {

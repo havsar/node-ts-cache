@@ -60,9 +60,9 @@
         "got": "^11.8.0",
         "ioredis": "^4.19.2",
         "node-ts-cache": "^4.1.0",
+        "node-ts-cache-storage-elasticsearch": "^4.1.0",
         "node-ts-cache-storage-ioredis": "^4.1.0",
         "node-ts-cache-storage-memory": "^4.1.0",
-        "node-ts-cache-storage-node-fs": "^4.1.0",
-        "node-ts-cache-storage-elasticsearch": "^4.1.0"
+        "node-ts-cache-storage-node-fs": "^4.1.0"
     }
 }
