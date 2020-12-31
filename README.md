@@ -86,6 +86,10 @@ class MyService {
 }
 ```
 
+# Logging
+This project uses [debug](https://github.com/visionmedia/debug) to log useful caching information.
+Set environment variable **DEBUG=node-ts-cache** to enable logging.
+
 # Development & Testing
 
 This project follows the monorepo architecture using [lerna](https://github.com/lerna/lerna).
