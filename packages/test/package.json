@@ -2,7 +2,7 @@
     "name": "node-ts-cache-test",
     "private": true,
     "description": "Test module for node-ts-cache containing tests for all packages",
-    "version": "4.2.2",
+    "version": "4.2.3",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
@@ -59,10 +59,10 @@
         "dotenv": "^8.2.0",
         "got": "^11.8.0",
         "ioredis": "^4.19.2",
-        "node-ts-cache": "^4.2.2",
-        "node-ts-cache-storage-elasticsearch": "^4.2.2",
-        "node-ts-cache-storage-ioredis": "^4.2.2",
-        "node-ts-cache-storage-memory": "^4.2.2",
-        "node-ts-cache-storage-node-fs": "^4.2.2"
+        "node-ts-cache": "^4.2.3",
+        "node-ts-cache-storage-elasticsearch": "^4.2.3",
+        "node-ts-cache-storage-ioredis": "^4.2.3",
+        "node-ts-cache-storage-memory": "^4.2.3",
+        "node-ts-cache-storage-node-fs": "^4.2.3"
     }
 }
