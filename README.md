@@ -33,7 +33,7 @@ Caches function response using the given options.
 Works with the above listed storages.
 By default, uses all arguments to build an unique key.
 
-`@Cache(strategy, options)`
+`@Cache(container, options)`
 
 -   `options`:
     -   `ttl`: _(Default: 60)_ Number of seconds to expire the cachte item
