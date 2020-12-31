@@ -11,9 +11,9 @@ npm i -D @types/ioredis
 ```
 
 ```ts
-import { Cache, CacheContainer } from 'node-ts-cache'
-import IoRedisStorage from 'node-ts-cache-storage-ioredis'
-import IoRedis from 'ioredis'
+import { Cache, CacheContainer } from "node-ts-cache"
+import { IoRedisStorage } from "node-ts-cache-storage-ioredis"
+import IoRedis from "ioredis"
 
 const ioRedisInstance = new IoRedis({
     port: 6379, // Redis port
@@ -25,7 +25,7 @@ const ioRedisInstance = new IoRedis({
 const userCache = new CacheContainer(new IoRedisStorage(ioRedisInstance))
 
 class MyService {
-    @Cache(userCache, {ttl: 60})
+    @Cache(userCache, { ttl: 60 })
     public async getUsers(): Promise<string[]> {
         return ["Max", "User"]
     }

@@ -7,7 +7,7 @@ npm i node-ts-cache-storage-memory
 
 ```ts
 import { Cache, CacheContainer } from "node-ts-cache"
-import MemoryStorage from "node-ts-cache-storage-memory"
+import { MemoryStorage } from "node-ts-cache-storage-memory"
 
 const userCache = new CacheContainer(new MemoryStorage())
 

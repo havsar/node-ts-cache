@@ -7,7 +7,7 @@ npm i node-ts-cache-storage-node-fs
 
 ```ts
 import { Cache, CacheContainer } from "node-ts-cache"
-import NodeFsStorage from "node-ts-cache-storage-node-fs"
+import { NodeFsStorage } from "node-ts-cache-storage-node-fs"
 
 const userCache = new CacheContainer(new NodeFsStorage())
 
