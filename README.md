@@ -48,13 +48,13 @@ By default, uses all arguments to build an unique key.
 _Note: @Cache will consider the return type of the function. If the return type is a thenable, it will stay that way, otherwise not._
 
 ```ts
-import { Cache, CacheContainer } from "node-ts-cache"
-import MemoryStorage from "node-ts-cache-storage-memory"
+import { Cache, CacheContainer } from 'node-ts-cache'
+import { MemoryStorage } from 'node-ts-cache-storage-memory'
 
 const userCache = new CacheContainer(new MemoryStorage())
 
 class MyService {
-    @Cache(userCache, { ttl: 60 })
+    @Cache(userCache, {ttl: 60})
     public async getUsers(): Promise<string[]> {
         return ["Max", "User"]
     }
