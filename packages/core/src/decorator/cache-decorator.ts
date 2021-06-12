@@ -8,7 +8,7 @@ const jsonCalculateKey = (data: {
     methodName: string
     args: any[]
 }) => {
-    return `${data.className}:${<string>data.methodName}:${JSON.stringify(
+    return `${data.className}--${<string>data.methodName}--${JSON.stringify(
         data.args
     )}`
 }
