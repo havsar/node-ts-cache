@@ -4,14 +4,14 @@
     "scripts": {
         "bootstrap": "lerna bootstrap --strict --no-ci",
         "clean": "lerna clean -y",
-        "test": "lerna run test --no-ci",
+        "test": "lerna run test --no-ci --stream",
         "ls": "lerna ls",
         "lint": "prettier --check .",
         "format": "prettier --write ."
     },
     "devDependencies": {
-        "lerna": "^3.22.1",
-        "prettier": "^2.1.2"
+        "lerna": "^4.0.0",
+        "prettier": "^2.4.1"
     },
     "dependencies": {}
 }

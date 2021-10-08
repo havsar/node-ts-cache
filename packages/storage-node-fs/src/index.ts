@@ -1,5 +1,5 @@
-import * as Bluebird from 'bluebird'
-import { ICacheItem, IStorage } from 'node-ts-cache'
+import * as Bluebird from "bluebird"
+import { ICacheItem, IStorage } from "node-ts-cache"
 
 const Fs = Bluebird.promisifyAll(require("fs"))
 
