@@ -1,11 +1,10 @@
 {
     "version": "4.2.3",
-    "packages": [
-        "packages/*"
-    ],
+    "packages": ["packages/*"],
     "command": {
         "publish": {
-            "message": "chore: publish"
+            "message": "chore: publish",
+            "registry": "http://localhost:4873/"
         }
     },
     "hoist": true,
