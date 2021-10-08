@@ -36,8 +36,10 @@ export class CacheContainer {
         let meta: any = {}
 
         if (!finalOptions.isCachedForever) {
+            const ttlMilliseconds = finalOptions.ttl * 1000
+
             meta = {
-                ttl: finalOptions.ttl * 1000,
+                ttl: ttlMilliseconds,
                 createdAt: Date.now()
             }
 
@@ -46,7 +48,7 @@ export class CacheContainer {
                     this.unsetKey(key)
 
                     debug(`Expired key ${key} removed from cache`)
-                }, finalOptions.ttl)
+                }, ttlMilliseconds)
             }
         }
 
