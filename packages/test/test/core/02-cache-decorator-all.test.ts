@@ -1,9 +1,10 @@
 import { Cache, CacheContainer } from "node-ts-cache"
 import { MemoryStorage } from "node-ts-cache-storage-memory"
 import { NodeFsStorage } from "node-ts-cache-storage-node-fs"
-import * as Fs from "fs"
+// import * as Fs from "fs"
 import { IoRedisStorage } from "node-ts-cache-storage-ioredis"
 import * as IORedis from "ioredis"
+import * as Fs from "fs"
 
 const IoRedisMock: typeof IORedis = require("ioredis-mock")
 
@@ -20,7 +21,7 @@ const data = ["user", "max", "test"]
 caches.forEach((c) => testForCache(c))
 
 function testForCache(cache: CacheContainer) {
-    class TestClassOne {
+    class TestClass1 {
         @Cache(cache, { ttl: 1 })
         public getUsers(): string[] {
             return data
@@ -32,7 +33,7 @@ function testForCache(cache: CacheContainer) {
         }
     }
 
-    class TestClassTwo {
+    class TestClass2 {
         @Cache(cache, { ttl: 1 })
         public async getUsers(): Promise<string[]> {
             return new Promise<string[]>((resolve) => {
@@ -41,7 +42,7 @@ function testForCache(cache: CacheContainer) {
         }
     }
 
-    class TestClassCustomKey {
+    class TestClass3 {
         @Cache(cache, { ttl: 1, calculateKey: (data) => data.methodName })
         public getUsers(): string[] {
             return data
@@ -53,10 +54,22 @@ function testForCache(cache: CacheContainer) {
         }
     }
 
-    class TestClassFour {
+    class TestClass4 {
         @Cache(cache, { ttl: 1, calculateKey: (data) => data.methodName })
         public getUsersPromise(): Promise<string[]> {
             return Promise.resolve(data)
+        }
+    }
+
+    class TestClass5 {
+        @Cache(cache, { ttl: 10 })
+        // @ts-ignore
+        public async getUser(name: string) {
+            if (name == "name1") {
+                return { name: "LONGGTEXTTTTTTTTTT" }
+            } else if (name == "name2") {
+                return undefined
+            }
         }
     }
 
@@ -73,47 +86,47 @@ function testForCache(cache: CacheContainer) {
             } catch (e) {}
         })
 
-        it("Should decorate function with ExpirationStrategy correctly", async () => {
-            const myClass = new TestClassOne()
+        it("Should decorate function with ExpirationStrategy", async () => {
+            const myClass = new TestClass1()
             await myClass.getUsersPromise()
         })
 
-        it("Should cache function call correctly", async () => {
-            const myClass = new TestClassOne()
+        it("Should cache function call", async () => {
+            const myClass = new TestClass1()
 
             const users = await myClass.getUsers()
 
             expect(data).toStrictEqual(users)
             expect(
-                await cache.getItem<string[]>("TestClassOne:getUsers:[]")
+                await cache.getItem<string[]>("TestClass1:getUsers:[]")
             ).toStrictEqual(data)
         })
 
-        it("Should cache Promise response correctly", async () => {
-            const myClass = new TestClassOne()
+        it("Should cache Promise response", async () => {
+            const myClass = new TestClass1()
 
             await myClass.getUsersPromise().then(async (response) => {
                 expect(data).toStrictEqual(response)
                 expect(
                     await cache.getItem<string[]>(
-                        "TestClassOne:getUsersPromise:[]"
+                        "TestClass1:getUsersPromise:[]"
                     )
                 ).toStrictEqual(data)
             })
         })
 
-        it("Should cache async response correctly", async () => {
-            const myClass = new TestClassTwo()
+        it("Should cache async response", async () => {
+            const myClass = new TestClass2()
 
             const users = await myClass.getUsers()
             expect(data).toStrictEqual(users)
             expect(
-                await cache.getItem<string[]>("TestClassTwo:getUsers:[]")
+                await cache.getItem<string[]>("TestClass2:getUsers:[]")
             ).toStrictEqual(data)
         })
 
-        it("Should cache function call correctly (custom key strategy)", async () => {
-            const myClass = new TestClassCustomKey()
+        it("Should cache function call (custom key strategy)", async () => {
+            const myClass = new TestClass3()
 
             const users = await myClass.getUsers()
 
@@ -123,8 +136,8 @@ function testForCache(cache: CacheContainer) {
             )
         })
 
-        it("Should cache Promise response correctly (custom key strategy)", async () => {
-            const myClass = new TestClassCustomKey()
+        it("Should cache Promise response (custom key strategy)", async () => {
+            const myClass = new TestClass3()
 
             await myClass.getUsersPromise().then(async (response) => {
                 expect(data).toStrictEqual(response)
@@ -134,8 +147,8 @@ function testForCache(cache: CacheContainer) {
             })
         })
 
-        it("Should cache users with async custom key strategy correctly", async () => {
-            const myClass = new TestClassFour()
+        it("Should cache users with async custom key strategy", async () => {
+            const myClass = new TestClass4()
 
             await myClass.getUsersPromise().then(async (response) => {
                 expect(data).toStrictEqual(response)
@@ -143,6 +156,32 @@ function testForCache(cache: CacheContainer) {
                     await cache.getItem<string[]>("getUsersPromise")
                 ).toStrictEqual(data)
             })
+        })
+
+        it("#27 should cache string parameter and value", async () => {
+            const myClass = new TestClass5()
+
+            const response1 = await myClass.getUser("name1")
+            const response2 = await myClass.getUser("name2")
+            const response3 = await myClass.getUser("namex")
+
+            expect({ name: "LONGGTEXTTTTTTTTTT" }).toStrictEqual(response1)
+            expect(undefined).toStrictEqual(response2)
+            expect(undefined).toStrictEqual(response3)
+        })
+
+        it("#27 test parallel access", async () => {
+            const myClass = new TestClass5()
+
+            const [response1, response2, response3] = await Promise.all([
+                myClass.getUser("name1"),
+                myClass.getUser("name2"),
+                myClass.getUser("namexxx")
+            ])
+
+            expect({ name: "LONGGTEXTTTTTTTTTT" }).toStrictEqual(response1)
+            expect(undefined).toStrictEqual(response2)
+            expect(undefined).toStrictEqual(response3)
         })
     })
 }
