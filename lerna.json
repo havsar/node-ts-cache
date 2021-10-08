@@ -1,12 +1,9 @@
 {
     "version": "4.3.2",
-    "packages": [
-        "packages/*"
-    ],
+    "packages": ["packages/*"],
     "command": {
         "publish": {
-            "message": "chore: publish",
-            "registry": "http://localhost:4873/"
+            "message": "chore: publish"
         }
     },
     "hoist": true,
