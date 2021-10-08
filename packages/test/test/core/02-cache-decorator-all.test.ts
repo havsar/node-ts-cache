@@ -1,10 +1,9 @@
 import { Cache, CacheContainer } from "node-ts-cache"
 import { MemoryStorage } from "node-ts-cache-storage-memory"
+import * as Fs from "fs"
 import { NodeFsStorage } from "node-ts-cache-storage-node-fs"
-// import * as Fs from "fs"
 import { IoRedisStorage } from "node-ts-cache-storage-ioredis"
 import * as IORedis from "ioredis"
-import * as Fs from "fs"
 
 const IoRedisMock: typeof IORedis = require("ioredis-mock")
 
@@ -105,14 +104,12 @@ function testForCache(cache: CacheContainer) {
         it("Should cache Promise response", async () => {
             const myClass = new TestClass1()
 
-            await myClass.getUsersPromise().then(async (response) => {
-                expect(data).toStrictEqual(response)
-                expect(
-                    await cache.getItem<string[]>(
-                        "TestClass1:getUsersPromise:[]"
-                    )
-                ).toStrictEqual(data)
-            })
+            const response = await myClass.getUsersPromise()
+
+            expect(data).toStrictEqual(response)
+            expect(
+                await cache.getItem<string[]>("TestClass1:getUsersPromise:[]")
+            ).toStrictEqual(data)
         })
 
         it("Should cache async response", async () => {
@@ -139,12 +136,12 @@ function testForCache(cache: CacheContainer) {
         it("Should cache Promise response (custom key strategy)", async () => {
             const myClass = new TestClass3()
 
-            await myClass.getUsersPromise().then(async (response) => {
-                expect(data).toStrictEqual(response)
-                expect(
-                    await cache.getItem<string[]>("getUsersPromise")
-                ).toStrictEqual(data)
-            })
+            const response = await myClass.getUsersPromise()
+
+            expect(data).toStrictEqual(response)
+            expect(
+                await cache.getItem<string[]>("getUsersPromise")
+            ).toStrictEqual(data)
         })
 
         it("Should cache users with async custom key strategy", async () => {

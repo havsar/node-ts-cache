@@ -18,7 +18,11 @@ export function Cache(
     options?: Partial<ICachingOptions>
 ): MethodDecorator {
     return function (
-        target: Object,
+        target: Object & {
+            __node_ts_cache_method_run_queue?: {
+                [key: string]: Promise<any> | undefined
+            }
+        },
         methodName: string | symbol,
         descriptor: TypedPropertyDescriptor<any>
     ) {
@@ -37,33 +41,57 @@ export function Cache(
                 ? options.calculateKey(keyOptions)
                 : jsonCalculateKey(keyOptions)
 
-            const entry = await container.getItem(cacheKey)
+            const runOriginalMethod = async () => {
+                const methodCall = originalMethod.apply(this, args)
 
-            if (entry) {
-                debug(`Cache HIT ${cacheKey}`)
+                const isAsync =
+                    methodCall?.constructor?.name === "AsyncFunction" ||
+                    methodCall?.constructor?.name === "Promise"
 
-                return entry
+                if (isAsync) {
+                    return await methodCall
+                } else {
+                    return methodCall
+                }
             }
 
-            debug(`Cache MISS ${cacheKey}`)
-
-            const methodCall = originalMethod.apply(this, args)
-
-            let methodResult
-            if (methodCall && methodCall.then) {
-                methodResult = await methodCall
-            } else {
-                methodResult = methodCall
+            if (!target.__node_ts_cache_method_run_queue) {
+                target.__node_ts_cache_method_run_queue = {}
             }
 
-            await container.setItem(cacheKey, methodResult, options)
+            if (target.__node_ts_cache_method_run_queue[cacheKey]) {
+                debug(`Method is already enqueued ${cacheKey}`)
 
-            return methodResult
+                return target.__node_ts_cache_method_run_queue[cacheKey]
+            }
+
+            target.__node_ts_cache_method_run_queue[cacheKey] = (async () => {
+                try {
+                    const entry = await container.getItem(cacheKey)
+
+                    if (entry) {
+                        debug(`Cache HIT ${cacheKey}`)
+
+                        return entry
+                    }
+
+                    debug(`Cache MISS ${cacheKey}`)
+
+                    const methodResult = await runOriginalMethod()
+
+                    await container.setItem(cacheKey, methodResult, options)
+
+                    return methodResult
+                } finally {
+                    target.__node_ts_cache_method_run_queue![cacheKey] =
+                        undefined
+                }
+            })()
+
+            return target.__node_ts_cache_method_run_queue[cacheKey]
         }
 
-        debug(
-            `Added caching support for method ${className}:${methodName.toString()}`
-        )
+        debug(`Added caching for method ${className}:${methodName.toString()}`)
 
         return descriptor
     }
