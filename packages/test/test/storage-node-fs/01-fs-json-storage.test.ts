@@ -1,13 +1,9 @@
-import * as Assert from "assert"
 import * as Fs from "fs"
+import * as Assert from "assert"
+import * as Path from "path"
 import { NodeFsStorage } from "node-ts-cache-storage-node-fs"
 
-const MockFs = require("mock-fs")
-const cacheFile = "cache.json"
-
-MockFs({
-    [cacheFile]: ""
-})
+const cacheFile = Path.join(__dirname, "cache-test.json")
 
 describe("NodeFsStorage", () => {
     it("Should create file on storage construction", (done) => {
