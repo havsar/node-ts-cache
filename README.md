@@ -1,5 +1,5 @@
-[![Travis CI](https://img.shields.io/travis/havsar/node-ts-cache.svg)](https://travis-ci.org/havsar/node-ts-cache)
-[![David](https://img.shields.io/david/havsar/node-ts-cache.svg)](https://david-dm.org/havsar/node-ts-cache)
+[![CI](https://github.com/havsar/node-ts-cache/actions/workflows/ci.yml/badge.svg)](https://github.com/havsar/node-ts-cache/actions/workflows/ci.yml)
+[![CI](https://github.com/havsar/node-ts-cache/actions/workflows/ci.yml/badge.svg?branch=development)](https://github.com/havsar/node-ts-cache/actions/workflows/ci.yml)
 [![npm](https://img.shields.io/npm/v/node-ts-cache.svg)](https://www.npmjs.org/package/node-ts-cache)
 [![The MIT License](https://img.shields.io/npm/l/node-ts-cache.svg)](http://opensource.org/licenses/MIT)
 
@@ -9,21 +9,21 @@
 
 Simple and extensible caching module supporting decorators.
 
-**This is the documentation for v4 in which a couple of breaking changes were made due to improvements.**
-
-**If you are using a previous version, refer to the [v3](https://github.com/havsar/node-ts-cache/tree/v3) branch.**
-
 # Install
 
 ```bash
 npm install node-ts-cache
 ```
 
+_Note: The underlying storage layer must be installed separately._
+
 # Storages
 
--   `memory` https://www.npmjs.com/package/node-ts-cache-storage-memory
--   `node-fs` https://www.npmjs.com/package/node-ts-cache-storage-node-fs
--   `ioredis` https://www.npmjs.com/package/node-ts-cache-storage-ioredis
+| Storage                                                               	| Install                                         	|
+|-----------------------------------------------------------------------	|-------------------------------------------------	|
+| [memory](https://www.npmjs.com/package/node-ts-cache-storage-memory)  	| ```npm install node-ts-cache-storage-memory```  	|
+| [node-fs](https://www.npmjs.com/package/node-ts-cache-storage-node-fs) 	| ```npm install node-ts-cache-storage-node-fs``` 	|
+| [ioredis](https://www.npmjs.com/package/node-ts-cache-storage-ioredis) 	| ```npm install node-ts-cache-storage-ioredis``` 	|
 
 # Usage
 
