@@ -5,5 +5,7 @@ export interface IStorage {
 
     setItem(key: string, content: ICacheItem | undefined): Promise<void>
 
+    removeItem(key: string): Promise<ICacheItem | undefined>
+    
     clear(): Promise<void>
 }
