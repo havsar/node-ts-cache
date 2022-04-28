@@ -22,6 +22,17 @@ export class NodeFsStorage implements IStorage {
         await this.setCache(cache)
     }
 
+    public async removeItem(key: string): Promise<ICacheItem | undefined> {
+        const cache = await this.getCacheObject()
+        const result = cache[key]
+        if(result)
+        {
+            delete cache[key];
+            await this.setCache(cache)
+        }
+        return result;
+    }
+    
     public async clear(): Promise<void> {
         await this.createEmptyCache()
     }
