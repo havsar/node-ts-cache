@@ -55,6 +55,32 @@ export class CacheContainer {
         await this.storage.setItem(key, { meta, content })
     }
 
+    public async removeItem<T>(
+        key: string,
+        returnData: true
+    ): Promise<T | undefined>
+    public async removeItem<T>(
+        key: string,
+        returnData: false
+    ): Promise<undefined | void>
+    public async removeItem<T>(
+        key: string,
+        returnData: boolean = true
+    ): Promise<T | undefined | void> {
+        const item = await this.storage.getItem(key)
+        if (item?.meta?.ttl && this.isItemExpired(item)) {
+            await this.storage.removeItem(key)
+            return undefined
+        }
+
+        await this.storage.removeItem(key);
+            
+        if(returnData)
+            return item.content
+        
+        return;
+    }
+    
     public async clear(): Promise<void> {
         await this.storage.clear()
 
