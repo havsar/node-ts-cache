@@ -20,6 +20,10 @@ export class MemoryStorage implements IStorage {
         return result;
     }
     
+    public async getAll(): Promise<any> {
+        return this.memCache;
+    }
+    
     public async clear(): Promise<void> {
         this.memCache = {}
     }
