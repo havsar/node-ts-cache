@@ -33,6 +33,10 @@ export class NodeFsStorage implements IStorage {
         return result;
     }
     
+    public async getAll(): Promise<any> {
+        return await this.getCacheObject()
+    }
+    
     public async clear(): Promise<void> {
         await this.createEmptyCache()
     }
