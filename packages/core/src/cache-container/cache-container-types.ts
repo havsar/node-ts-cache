@@ -16,3 +16,7 @@ export interface ICachingOptions {
         args: any[]
     }) => string
 }
+
+export interface ICacheRemoveOptions {
+    returnData?: boolean
+}
