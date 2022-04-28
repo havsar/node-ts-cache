@@ -13,6 +13,13 @@ export class MemoryStorage implements IStorage {
         this.memCache[key] = content
     }
 
+    public async removeItem(key: string): Promise<ICacheItem | undefined> {
+        const result = this.memCache[key];
+        if(result)
+            delete this.memCache[key];
+        return result;
+    }
+    
     public async clear(): Promise<void> {
         this.memCache = {}
     }
