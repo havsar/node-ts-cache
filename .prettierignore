@@ -1,9 +1,0 @@
-dist
-node_modules
-.idea
-package-lock.json
-LICENSE
-README.md
-.prettierignore
-.prettierrc.yml
-**/dist

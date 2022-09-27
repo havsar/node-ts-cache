@@ -1,5 +1,5 @@
 import Debug from "debug"
-import { CacheContainer, ICachingOptions } from "../cache-container"
+import type { CacheContainer, ICachingOptions } from "../cache-container"
 
 const debug = Debug("node-ts-cache")
 

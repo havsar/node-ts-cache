@@ -3,11 +3,10 @@ import { MemoryStorage } from "node-ts-cache-storage-memory"
 import * as Fs from "fs"
 import { NodeFsStorage } from "node-ts-cache-storage-node-fs"
 import { IoRedisStorage } from "node-ts-cache-storage-ioredis"
-import * as IORedis from "ioredis"
+import type { default as IORedis } from "ioredis"
+const IoRedisMock: typeof IORedis = require('ioredis-mock')
 
-const IoRedisMock: typeof IORedis = require("ioredis-mock")
-
-const fsCacheFile = "user-cache.json"
+const fsCacheFile = "user-cache-decorator.json"
 
 const caches = [
     new CacheContainer(new MemoryStorage()),

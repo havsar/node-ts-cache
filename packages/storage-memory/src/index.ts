@@ -1,4 +1,4 @@
-import { ICacheItem, IStorage } from "node-ts-cache"
+import type { ICacheItem, IStorage } from "node-ts-cache"
 
 export class MemoryStorage implements IStorage {
     private memCache: any = {}

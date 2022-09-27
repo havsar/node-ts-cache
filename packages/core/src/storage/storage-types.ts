@@ -1,4 +1,4 @@
-import { ICacheItem } from "../cache-container"
+import type { ICacheItem } from "../cache-container"
 
 export interface IStorage {
     getItem(key: string): Promise<ICacheItem | undefined>

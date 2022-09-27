@@ -1,8 +1,8 @@
-import * as IORedis from "ioredis"
-import { ICacheItem, IStorage } from "node-ts-cache"
+import type { Redis } from "ioredis"
+import type { ICacheItem, IStorage } from "node-ts-cache"
 
 export class IoRedisStorage implements IStorage {
-    constructor(private ioRedisInstance: IORedis.Redis) {}
+    constructor(private ioRedisInstance: Redis) {}
 
     async clear(): Promise<void> {
         await this.ioRedisInstance.flushdb()

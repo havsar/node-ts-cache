@@ -1,5 +1,5 @@
-import { Client } from "@elastic/elasticsearch"
-import { ICacheItem, IStorage } from "node-ts-cache"
+import type { Client } from "@elastic/elasticsearch"
+import type { ICacheItem, IStorage } from "node-ts-cache"
 
 export class ElasticSearchStorage implements IStorage {
     constructor(

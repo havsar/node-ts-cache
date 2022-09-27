@@ -1,11 +1,13 @@
-import * as Bluebird from "bluebird"
-import { ICacheItem, IStorage } from "node-ts-cache"
-
-const Fs = Bluebird.promisifyAll(require("fs"))
+import fs from "fs"
+import type { ICacheItem, IStorage } from "node-ts-cache"
 
 export class NodeFsStorage implements IStorage {
     constructor(public jsonFilePath: string) {
-        if (!Fs.existsSync(this.jsonFilePath)) {
+        let exists: boolean = false;
+        fs.open(jsonFilePath, 'r', function (error) {
+            exists = !!error;
+        });
+        if (!exists) {
             this.createEmptyCache()
         }
     }
@@ -27,16 +29,16 @@ export class NodeFsStorage implements IStorage {
     }
 
     private createEmptyCache(): void {
-        Fs.writeFileSync(this.jsonFilePath, JSON.stringify({}))
+        fs.writeFileSync(this.jsonFilePath, JSON.stringify({}))
     }
 
     private async setCache(newCache: any): Promise<void> {
-        await Fs.writeFileAsync(this.jsonFilePath, JSON.stringify(newCache))
+        await fs.promises.writeFile(this.jsonFilePath, JSON.stringify(newCache))
     }
 
     private async getCacheObject(): Promise<any> {
         return JSON.parse(
-            (await Fs.readFileAsync(this.jsonFilePath)).toString()
+            (await fs.promises.readFile(this.jsonFilePath)).toString()
         )
     }
 }

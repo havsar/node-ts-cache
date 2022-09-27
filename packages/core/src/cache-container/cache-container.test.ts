@@ -1,4 +1,3 @@
-import * as Assert from "assert"
 import { MemoryStorage } from "node-ts-cache-storage-memory"
 import { CacheContainer } from "node-ts-cache"
 
@@ -19,7 +18,7 @@ describe("CacheContainer", () => {
         await cache.setItem("test", data, { ttl: 10 })
         const entry = await cache.getItem<ITestType>("test")
 
-        Assert.deepStrictEqual(entry, data)
+        expect(entry).toStrictEqual(data)
     })
 
     it("Should return no item if cache expires instantly with isLazy", async () => {
@@ -27,7 +26,7 @@ describe("CacheContainer", () => {
 
         await cache.setItem("test", data, { ttl: -1 })
         const entry = await cache.getItem<ITestType>("test")
-        Assert.deepStrictEqual(entry, undefined)
+        expect(entry).toStrictEqual(undefined)
     })
 
     it("Should not find cache item after ttl with isLazy disabled", async () => {
@@ -37,7 +36,7 @@ describe("CacheContainer", () => {
         await wait(10)
 
         const entry = await cache.getItem<ITestType>("test")
-        Assert.deepStrictEqual(entry, undefined)
+        expect(entry).toStrictEqual(undefined)
     })
 
     it("Should ignore isLazy and ttl options if isCachedForever option is provided and cache forever", async () => {
@@ -51,7 +50,7 @@ describe("CacheContainer", () => {
         await wait(10)
 
         const entry = await cache.getItem<ITestType>("test")
-        Assert.deepStrictEqual(entry, data)
+        expect(entry).toStrictEqual(data)
     })
 })
 

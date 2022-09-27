@@ -1,6 +1,6 @@
 import Debug from "debug"
-import { IStorage } from "../storage"
-import { ICacheItem, ICachingOptions } from "./cache-container-types"
+import type { IStorage } from "../storage"
+import type { ICacheItem, ICachingOptions } from "./cache-container-types"
 
 const debug = Debug("node-ts-cache")
 

@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "target": "ES5",
+        "target": "ES2022",
         "module": "CommonJS",
         "moduleResolution": "Node",
         "noEmitOnError": true,
@@ -11,14 +11,17 @@
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "emitDecoratorMetadata": true,
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
         "outDir": "dist",
         "strict": true,
-        "lib": ["ES2015"],
+        "lib": ["ES2020"],
         "sourceMap": true,
         "experimentalDecorators": true,
         "allowJs": false,
         "rootDirs": ["packages/**"],
-        "declaration": true
+        "declaration": true,
+        "importsNotUsedAsValues": "error"
     },
     "exclude": ["node_modules"],
     "compileOnSave": false

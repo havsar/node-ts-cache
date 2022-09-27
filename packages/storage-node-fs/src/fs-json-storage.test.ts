@@ -1,9 +1,8 @@
-import * as Fs from "fs"
-import * as Assert from "assert"
-import * as Path from "path"
+import fs from "fs"
+import path from "path"
 import { NodeFsStorage } from "node-ts-cache-storage-node-fs"
 
-const cacheFile = Path.join(__dirname, "cache-test.json")
+const cacheFile = path.join(__dirname, "cache-test.json")
 
 describe("NodeFsStorage", () => {
     it("Should create file on storage construction", (done) => {
@@ -11,9 +10,9 @@ describe("NodeFsStorage", () => {
 
         storage.clear()
 
-        Fs.readFileSync(cacheFile)
+        fs.readFileSync(cacheFile)
 
-        Fs.unlinkSync(cacheFile)
+        fs.unlinkSync(cacheFile)
         done()
     })
 
@@ -22,11 +21,11 @@ describe("NodeFsStorage", () => {
 
         storage.clear()
 
-        const cache = Fs.readFileSync(cacheFile).toString()
+        const cache = fs.readFileSync(cacheFile).toString()
 
-        Assert.strictEqual(cache, "{}")
+        expect(cache).toStrictEqual("{}")
 
-        Fs.unlinkSync(cacheFile)
+        fs.unlinkSync(cacheFile)
         done()
     })
 
@@ -37,14 +36,14 @@ describe("NodeFsStorage", () => {
 
         await storage.setItem(cacheKey, content)
 
-        const cache = JSON.parse(Fs.readFileSync(cacheFile).toString())
+        const cache = JSON.parse(fs.readFileSync(cacheFile).toString())
 
-        Assert.deepStrictEqual(cache, { [cacheKey]: content })
+        expect(cache).toStrictEqual({ [cacheKey]: content })
 
         const entry = await storage.getItem(cacheKey)
 
-        Assert.deepStrictEqual(entry, content)
+        expect(entry).toStrictEqual(content)
 
-        Fs.unlinkSync(cacheFile)
+        fs.unlinkSync(cacheFile)
     })
 })
