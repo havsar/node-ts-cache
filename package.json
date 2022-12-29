@@ -2,6 +2,7 @@
     "name": "node-ts-cache",
     "private": true,
     "scripts": {
+        "build": "npm run build --workspaces --if-present",
         "test": "npm run test --workspaces --no-ci --stream --if-present",
         "lint": "prettier --check .",
         "format": "prettier --write ."
