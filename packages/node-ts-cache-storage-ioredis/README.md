@@ -12,22 +12,22 @@ npm i -D @types/ioredis
 
 ```ts
 import { Cache, CacheContainer } from "node-ts-cache"
-import { IoRedisStorage } from "node-ts-cache-storage-ioredis"
+import { IoRedisStorage } from ""
 import IoRedis from "ioredis"
 
 const ioRedisInstance = new IoRedis({
-    port: 6379, // Redis port
-    host: "127.0.0.1", // Redis host
-    family: 4, // 4 (IPv4) or 6 (IPv6)
-    password: "auth",
-    db: 0
+  port: 6379, // Redis port
+  host: "127.0.0.1", // Redis host
+  family: 4, // 4 (IPv4) or 6 (IPv6)
+  password: "auth",
+  db: 0
 })
 const userCache = new CacheContainer(new IoRedisStorage(ioRedisInstance))
 
 class MyService {
-    @Cache(userCache, { ttl: 60 })
-    public async getUsers(): Promise<string[]> {
-        return ["Max", "User"]
-    }
+  @Cache(userCache, { ttl: 60 })
+  public async getUsers(): Promise<string[]> {
+    return ["Max", "User"]
+  }
 }
 ```

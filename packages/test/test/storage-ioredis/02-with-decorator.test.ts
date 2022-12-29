@@ -1,7 +1,6 @@
-import * as Assert from "assert"
 import * as IORedis from "ioredis"
 import * as Sinon from "sinon"
-import { IoRedisStorage } from "node-ts-cache-storage-ioredis"
+import { IoRedisStorage } from "../../../node-ts-cache-storage-ioredis"
 import { Cache, CacheContainer } from "node-ts-cache"
 
 const IoRedisMock: typeof IORedis = require("ioredis-mock")
@@ -41,8 +40,8 @@ describe("02-with-decorator", () => {
     it("Should initialize class with decorator without issues", async () => {
         const testClassInstance = new TestClassOne()
 
-        Assert.notStrictEqual(testClassInstance, undefined)
-        Assert.notStrictEqual(testClassInstance, null)
+        expect(testClassInstance).not.toBeUndefined()
+        expect(testClassInstance).not.toBeNull()
     })
 
     it("Should call decorated method without issues", async () => {
@@ -60,21 +59,21 @@ describe("02-with-decorator", () => {
 
         const usersAfter500ms = await testClassInstance.getUsers()
 
-        Assert(users == usersAfter500ms)
+        expect(users).toStrictEqual(usersAfter500ms)
     })
 
     it("Should not call backend call twice if cached", async () => {
         const testClassInstance = new TestClassOne()
 
-        Assert.strictEqual(getUsersFromBackend.callCount, 0)
+        expect(getUsersFromBackend.callCount).toEqual(0)
 
         const users = await testClassInstance.getUsers()
 
-        Assert.strictEqual(getUsersFromBackend.callCount, 1)
+        expect(getUsersFromBackend.callCount).toEqual(1)
 
         const usersAfter10ms = await testClassInstance.getUsers()
 
-        Assert.strictEqual(getUsersFromBackend.callCount, 1)
-        Assert.deepStrictEqual(users, usersAfter10ms)
+        expect(getUsersFromBackend.callCount).toEqual(1)
+        expect(users).toStrictEqual(usersAfter10ms)
     })
 })

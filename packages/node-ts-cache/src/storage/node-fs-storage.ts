@@ -1,5 +1,6 @@
-import * as Bluebird from "bluebird"
-import { ICacheItem, IStorage } from "node-ts-cache"
+import * as Bluebird from "bluebird";
+import { IStorage } from "./storage-types";
+import { ICacheItem } from "../cache-container";
 
 const Fs = Bluebird.promisifyAll(require("fs"))
 
@@ -38,5 +39,13 @@ export class NodeFsStorage implements IStorage {
         return JSON.parse(
             (await Fs.readFileAsync(this.jsonFilePath)).toString()
         )
+    }
+
+    public async unset(key: string): Promise<void> {
+        const cache = await this.getCacheObject()
+
+        delete cache[key]
+
+        await this.setCache(cache)
     }
 }

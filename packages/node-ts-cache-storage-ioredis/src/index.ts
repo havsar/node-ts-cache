@@ -19,12 +19,10 @@ export class IoRedisStorage implements IStorage {
     }
 
     async setItem(key: string, content: ICacheItem | undefined): Promise<void> {
-        if (content === undefined) {
-            await this.ioRedisInstance.del(key)
-
-            return
-        }
-
         await this.ioRedisInstance.set(key, JSON.stringify(content))
+    }
+
+    public async unset(key: string): Promise<void> {
+        await this.ioRedisInstance.del(key)
     }
 }

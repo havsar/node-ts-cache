@@ -1,6 +1,5 @@
-# IDE STUFF
+# IDE
 .idea
-.vscode
 
 # PACKAGE MANAGER
 **/node_modules

@@ -1,6 +1,5 @@
-import * as Assert from "assert"
 import * as IORedis from "ioredis"
-import { IoRedisStorage } from "node-ts-cache-storage-ioredis"
+import { IoRedisStorage } from "../../../node-ts-cache-storage-ioredis"
 import { CacheContainer } from "node-ts-cache"
 
 const IoRedisMock: typeof IORedis = require("ioredis-mock")
@@ -19,8 +18,8 @@ describe("01-basic", () => {
     })
 
     it("Should initialize Redis storage correctly", async () => {
-        Assert(strategy !== null)
-        Assert(strategy !== undefined)
+        expect(strategy).not.toBeNull()
+        expect(strategy).not.toBeUndefined()
     })
 
     it("Should clear empty storage correctly", async () => {
@@ -30,7 +29,7 @@ describe("01-basic", () => {
     it("Should return undefined if an item does not exist", async () => {
         const data = await strategy.getItem("not-existing-key")
 
-        Assert(data === undefined)
+        expect(data).toBeUndefined()
     })
 
     it("Should set item without error", async () => {
@@ -55,7 +54,7 @@ describe("01-basic", () => {
 
         const data = await strategy.getItem("settings")
 
-        Assert.notStrictEqual(data, raw)
+        expect(data).toStrictEqual(raw)
     })
 
     it("Should return undefined if set item is expired", async () => {
@@ -69,6 +68,6 @@ describe("01-basic", () => {
 
         const data = await strategy.getItem("user")
 
-        Assert.strictEqual(data, undefined)
+        expect(data).toBeUndefined()
     })
 })

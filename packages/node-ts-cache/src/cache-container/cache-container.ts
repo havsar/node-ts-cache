@@ -13,7 +13,7 @@ export class CacheContainer {
         const item = await this.storage.getItem(key)
 
         if (item?.meta?.ttl && this.isItemExpired(item)) {
-            await this.unsetKey(key)
+            await this.unset(key)
 
             return undefined
         }
@@ -45,7 +45,7 @@ export class CacheContainer {
 
             if (!finalOptions.isLazy) {
                 setTimeout(() => {
-                    this.unsetKey(key)
+                    this.unset(key)
 
                     debug(`Expired key ${key} removed from cache`)
                 }, ttlMilliseconds)
@@ -55,17 +55,25 @@ export class CacheContainer {
         await this.storage.setItem(key, { meta, content })
     }
 
+    public async unset(key: string): Promise<void> {
+        await this.storage.unset(key)
+
+        debug(`Unset key ${key}`)
+    }
+
     public async clear(): Promise<void> {
         await this.storage.clear()
 
         debug("Cleared cache")
     }
 
-    private isItemExpired(item: ICacheItem): boolean {
-        return Date.now() > item.meta.createdAt + item.meta.ttl
+    public async has(key: string): Promise<boolean> {
+        const item = await this.storage.getItem(key)
+
+        return item !== undefined
     }
 
-    private async unsetKey(key: string): Promise<void> {
-        await this.storage.setItem(key, undefined)
+    private isItemExpired(item: ICacheItem): boolean {
+        return Date.now() > item.meta.createdAt + item.meta.ttl
     }
 }

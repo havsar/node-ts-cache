@@ -1,9 +1,12 @@
-import { Cache, CacheContainer } from "node-ts-cache"
+import {
+    Cache,
+    CacheContainer,
+    MemoryStorage,
+    NodeFsStorage
+} from "node-ts-cache"
 import * as _ from "lodash"
 import * as Fs from "fs"
-import { NodeFsStorage } from "node-ts-cache-storage-node-fs"
-import { IoRedisStorage } from "node-ts-cache-storage-ioredis"
-import { MemoryStorage } from "node-ts-cache-storage-memory"
+import { IoRedisStorage } from "../../../node-ts-cache-storage-ioredis"
 import * as IORedis from "ioredis"
 
 const IoRedisMock: typeof IORedis = require("ioredis-mock")

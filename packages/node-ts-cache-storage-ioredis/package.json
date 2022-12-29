@@ -5,11 +5,8 @@
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "scripts": {
-        "build": "tsc -p tsconfig-build.json",
-        "prepublishOnly": "npm run build",
-        "prepare": "npm run build",
-        "clean": "git clean -fdx src test",
-        "ts-dev": "tsc -p . -w"
+        "ts-dev": "tsc -p . -w",
+        "build": "tsc -p ."
     },
     "repository": {
         "type": "git",

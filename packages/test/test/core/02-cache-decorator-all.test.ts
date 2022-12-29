@@ -1,8 +1,11 @@
-import { Cache, CacheContainer } from "node-ts-cache"
-import { MemoryStorage } from "node-ts-cache-storage-memory"
+import {
+    Cache,
+    CacheContainer,
+    MemoryStorage,
+    NodeFsStorage
+} from "node-ts-cache"
 import * as Fs from "fs"
-import { NodeFsStorage } from "node-ts-cache-storage-node-fs"
-import { IoRedisStorage } from "node-ts-cache-storage-ioredis"
+import { IoRedisStorage } from "../../../node-ts-cache-storage-ioredis"
 import * as IORedis from "ioredis"
 
 const IoRedisMock: typeof IORedis = require("ioredis-mock")
@@ -79,7 +82,7 @@ function testForCache(cache: CacheContainer) {
             await cache.clear()
         })
 
-        afterEach(async () => {
+        afterAll(async () => {
             try {
                 await Fs.unlinkSync(fsCacheFile)
             } catch (e) {}

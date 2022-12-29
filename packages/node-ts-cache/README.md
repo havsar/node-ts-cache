@@ -19,11 +19,11 @@ _Note: The underlying storage layer must be installed separately._
 
 # Storages
 
-| Storage                                                               	| Install                                         	|
-|-----------------------------------------------------------------------	|-------------------------------------------------	|
-| [memory](https://www.npmjs.com/package/node-ts-cache-storage-memory)  	| ```npm install node-ts-cache-storage-memory```  	|
-| [node-fs](https://www.npmjs.com/package/node-ts-cache-storage-node-fs) 	| ```npm install node-ts-cache-storage-node-fs``` 	|
-| [ioredis](https://www.npmjs.com/package/node-ts-cache-storage-ioredis) 	| ```npm install node-ts-cache-storage-ioredis``` 	|
+| Storage                                                                | Install                                     |
+| ---------------------------------------------------------------------- | ------------------------------------------- |
+| [memory](https://www.npmjs.com/package/node-ts-cache-storage-memory)   | `npm install node-ts-cache-storage-memory`  |
+| [node-fs](https://www.npmjs.com/package/node-ts-cache-storage-node-fs) | `npm install node-ts-cache-storage-node-fs` |
+| [ioredis](https://www.npmjs.com/package/node-ts-cache-storage-ioredis) | `npm install node-ts-cache-storage-ioredis` |
 
 # Usage
 
@@ -48,13 +48,13 @@ By default, uses all arguments to build an unique key.
 _Note: @Cache will consider the return type of the function. If the return type is a thenable, it will stay that way, otherwise not._
 
 ```ts
-import { Cache, CacheContainer } from 'node-ts-cache'
-import { MemoryStorage } from 'node-ts-cache-storage-memory'
+import { Cache, CacheContainer } from "node-ts-cache"
+import { MemoryStorage } from "node-ts-cache-storage-memory"
 
 const userCache = new CacheContainer(new MemoryStorage())
 
 class MyService {
-    @Cache(userCache, {ttl: 60})
+    @Cache(userCache, { ttl: 60 })
     public async getUsers(): Promise<string[]> {
         return ["Max", "User"]
     }
@@ -64,8 +64,8 @@ class MyService {
 ## Directly
 
 ```ts
-import { CacheContainer } from 'node-ts-cache'
-import { MemoryStorage } from 'node-ts-cache-storage-memory'
+import { CacheContainer } from "node-ts-cache"
+import { MemoryStorage } from "node-ts-cache-storage-memory"
 
 const myCache = new CacheContainer(new MemoryStorage())
 
@@ -79,7 +79,7 @@ class MyService {
 
         const newUsers = ["Max", "User"]
 
-        await myCache.setItem("users", newUsers, {ttl: 60})
+        await myCache.setItem("users", newUsers, { ttl: 60 })
 
         return newUsers
     }
@@ -87,6 +87,7 @@ class MyService {
 ```
 
 # Logging
+
 This project uses [debug](https://github.com/visionmedia/debug) to log useful caching information.
 Set environment variable **DEBUG=node-ts-cache** to enable logging.
 

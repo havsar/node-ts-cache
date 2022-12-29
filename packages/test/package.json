@@ -1,5 +1,5 @@
 {
-    "name": "node-ts-cache-test",
+    "name": "test",
     "private": true,
     "description": "Test module for node-ts-cache containing tests for all packages",
     "version": "4.4.0",
@@ -65,9 +65,6 @@
         "lodash": "^4.17.21",
         "memfs": "^3.3.0",
         "node-ts-cache": "^4.4.0",
-        "node-ts-cache-storage-elasticsearch": "^4.4.0",
-        "node-ts-cache-storage-ioredis": "^4.4.0",
-        "node-ts-cache-storage-memory": "^4.4.0",
-        "node-ts-cache-storage-node-fs": "^4.4.0"
+        "node-ts-cache-storage-ioredis": "^4.4.0"
     }
 }

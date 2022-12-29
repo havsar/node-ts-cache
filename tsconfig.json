@@ -11,15 +11,15 @@
         "noUnusedLocals": true,
         "noUnusedParameters": true,
         "emitDecoratorMetadata": true,
-        "outDir": "dist",
+        "outDir": "./dist",
         "strict": true,
         "lib": ["ES2015"],
         "sourceMap": true,
         "experimentalDecorators": true,
         "allowJs": false,
-        "rootDirs": ["packages/**"],
         "declaration": true
     },
+    "include": ["./src"],
     "exclude": ["node_modules"],
     "compileOnSave": false
 }

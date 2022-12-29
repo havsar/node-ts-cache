@@ -1,6 +1,4 @@
-import * as Assert from "assert"
-import { Cache, CacheContainer } from "node-ts-cache"
-import { MemoryStorage } from "node-ts-cache-storage-memory"
+import { Cache, CacheContainer, MemoryStorage } from "node-ts-cache"
 
 describe("MemoryStorage", () => {
     it("Should add cache item correctly", async () => {
@@ -10,7 +8,9 @@ describe("MemoryStorage", () => {
 
         await storage.setItem(key, content)
 
-        Assert.strictEqual(await storage.getItem(key), content)
+        const item = await storage.getItem(key)
+
+        expect(item).toStrictEqual(content)
     })
 
     it("Should work with a simple string", async () => {
@@ -20,7 +20,9 @@ describe("MemoryStorage", () => {
 
         await storage.setItem(key, content)
 
-        Assert.strictEqual(await storage.getItem(key), content)
+        const item = await storage.getItem(key)
+
+        expect(item).toStrictEqual(content)
     })
 
     it("Should work with multiple entries", async () => {
@@ -29,8 +31,11 @@ describe("MemoryStorage", () => {
         await storage.setItem("k1", "c1")
         await storage.setItem("k2", "c2")
 
-        Assert.strictEqual(await storage.getItem("k1"), "c1")
-        Assert.strictEqual(await storage.getItem("k1"), "c1")
+        const k1Item = await storage.getItem("k1")
+        const k2Item = await storage.getItem("k2")
+
+        expect(k1Item).toStrictEqual("c1")
+        expect(k2Item).toStrictEqual("c2")
     })
 
     it("Should work with decorator", async () => {
@@ -47,6 +52,6 @@ describe("MemoryStorage", () => {
 
         const users = await instance.getUsers()
 
-        Assert.strictEqual(origData, users)
+        expect(origData).toStrictEqual(users)
     })
 })

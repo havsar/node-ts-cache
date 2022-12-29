@@ -1,17 +1,18 @@
 {
-    "name": "root",
+    "name": "node-ts-cache",
     "private": true,
     "scripts": {
-        "bootstrap": "lerna bootstrap --strict --no-ci",
-        "clean": "lerna clean -y",
-        "test": "lerna run test --no-ci --stream",
-        "ls": "lerna ls",
+        "test": "npm run test --workspaces --no-ci --stream --if-present",
         "lint": "prettier --check .",
         "format": "prettier --write ."
     },
     "devDependencies": {
-        "lerna": "^4.0.0",
         "prettier": "^2.4.1"
     },
-    "dependencies": {}
+    "dependencies": {},
+    "workspaces": [
+        "packages/node-ts-cache",
+        "packages/node-ts-cache-storage-ioredis",
+        "packages/test"
+    ]
 }

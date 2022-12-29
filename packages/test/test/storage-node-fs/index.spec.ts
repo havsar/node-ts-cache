@@ -1,7 +1,6 @@
 import * as Fs from "fs"
-import * as Assert from "assert"
 import * as Path from "path"
-import { NodeFsStorage } from "node-ts-cache-storage-node-fs"
+import { NodeFsStorage } from "node-ts-cache"
 
 const cacheFile = Path.join(__dirname, "cache-test.json")
 
@@ -24,7 +23,7 @@ describe("NodeFsStorage", () => {
 
         const cache = Fs.readFileSync(cacheFile).toString()
 
-        Assert.strictEqual(cache, "{}")
+        expect(cache).toStrictEqual("{}")
 
         Fs.unlinkSync(cacheFile)
         done()
@@ -39,11 +38,11 @@ describe("NodeFsStorage", () => {
 
         const cache = JSON.parse(Fs.readFileSync(cacheFile).toString())
 
-        Assert.deepStrictEqual(cache, { [cacheKey]: content })
+        expect(cache).toStrictEqual({ [cacheKey]: content })
 
         const entry = await storage.getItem(cacheKey)
 
-        Assert.deepStrictEqual(entry, content)
+        expect(entry).toStrictEqual(content)
 
         Fs.unlinkSync(cacheFile)
     })
